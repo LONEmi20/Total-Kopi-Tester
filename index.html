@@ -5,13 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Total Kopi | Slogan Total Kopi</title>
     
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
     
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -85,17 +82,15 @@
 </head>
 <body class="bg-coffee-beige text-coffee-dark font-sans antialiased overflow-x-hidden">
 
-    <!-- Navbar -->
     <nav class="fixed w-full z-50 transition-all duration-300 bg-coffee-dark/95 backdrop-blur-md shadow-lg" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
+
                 <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer" onclick="window.location.hash = '#home'">
                     <img src="assets/images/TotalKopi-icon.jpg" alt="Logo Total Kopi" class="w-10 h-10 rounded-full border-2 border-accent-gold object-cover transition-transform hover:rotate-12">
                     <span class="font-serif font-bold text-white text-2xl tracking-wide uppercase hover:text-accent-gold transition-colors">Total Kopi</span>
                 </div>
 
-                <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8 text-coffee-cream">
                     <a href="#home" class="nav-link font-medium text-sm tracking-wide uppercase hover:text-accent-gold transition-colors">Home</a>
                     <a href="#shop" class="nav-link font-medium text-sm tracking-wide uppercase hover:text-accent-gold transition-colors">Shop</a>
@@ -103,25 +98,21 @@
                     <a href="#quiz" class="nav-link font-medium text-sm tracking-wide uppercase hover:text-accent-gold transition-colors">Quiz</a>
                     <a href="#contact" class="nav-link font-medium text-sm tracking-wide uppercase hover:text-accent-gold transition-colors">Contact Us</a>
                     
-                    <!-- Search -->
                     <div class="relative group">
                         <div class="flex items-center bg-white/10 rounded-full px-3 py-1.5 border border-white/20 focus-within:border-accent-gold transition-all">
                             <i class="fas fa-search text-coffee-cream text-sm"></i>
                             <input type="text" id="searchInput" placeholder="Cari minuman..." class="bg-transparent border-none outline-none ml-2 w-32 focus:w-48 transition-all duration-300 text-sm text-white placeholder-coffee-cream/70">
                         </div>
-                        <!-- Search Results -->
                         <div id="searchResults" class="absolute top-full right-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-coffee-cream opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 max-h-60 overflow-y-auto hidden z-[100]">
                         </div>
                     </div>
 
-                    <!-- Cart Button Desktop -->
                     <button onclick="toggleCart()" class="relative text-coffee-cream hover:text-accent-gold transition-colors flex items-center">
                         <i class="fas fa-shopping-cart text-lg"></i>
                         <span id="cart-badge-desktop" class="absolute -top-2 -right-2 bg-accent-gold text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-sm hidden">0</span>
                     </button>
                 </div>
 
-                <!-- Mobile Menu Button & Cart -->
                 <div class="md:hidden flex items-center space-x-5 text-coffee-cream">
                     <button onclick="toggleCart()" class="relative">
                         <i class="fas fa-shopping-cart text-xl"></i>
@@ -134,7 +125,6 @@
             </div>
         </div>
 
-        <!-- Mobile Menu Panel -->
         <div id="mobile-menu" class="hidden md:hidden bg-coffee-dark border-t border-white/10">
             <div class="px-4 pt-2 pb-6 space-y-2 text-center">
                 <a href="#home" class="mobile-nav-link block px-3 py-2 text-coffee-cream hover:bg-coffee-espresso rounded-md uppercase text-sm font-medium">Home</a>
@@ -146,12 +136,10 @@
         </div>
     </nav>
 
-    <!-- MAIN CONTENT PAGES (Dinamis berubah sesuai menu yang diklik) -->
     <main class="pt-20 min-h-screen flex flex-col justify-between">
         
-        <!-- ================= PAGE: HOME ================= -->
         <div id="page-home" class="page-section active">
-            <!-- Hero Section -->
+>
             <section class="relative pt-20 pb-20 lg:pt-32 lg:pb-32 overflow-hidden bg-coffee-dark">
                 <!-- Background Image -->
                 <div class="absolute inset-0 z-0">
@@ -181,19 +169,16 @@
             <section class="py-16 bg-white relative -mt-10 z-20 rounded-t-[3rem] shadow-[0_-10px_40px_rgba(0,0,0,0.1)]">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <!-- Card 1 -->
                         <div class="bg-coffee-beige rounded-2xl p-8 text-center card-hover reveal cursor-pointer border border-coffee-cream" onclick="window.location.hash = '#shop'">
                             <div class="w-16 h-16 mx-auto bg-coffee-dark text-white rounded-full flex items-center justify-center text-2xl mb-4 shadow-md">😃</div>
                             <h3 class="font-bold text-xl mb-2 text-coffee-espresso">Coffee</h3>
                             <p class="text-sm text-gray-600">Kopi untuk kamu yang ingin menikmati cita rasa dan aroma kopi asli.</p>
                         </div>
-                        <!-- Card 2 -->
                         <div class="bg-coffee-beige rounded-2xl p-8 text-center card-hover reveal cursor-pointer border border-coffee-cream" style="transition-delay: 100ms;" onclick="window.location.hash = '#shop'">
                             <div class="w-16 h-16 mx-auto bg-coffee-dark text-white rounded-full flex items-center justify-center text-2xl mb-4 shadow-md">😃</div>
                             <h3 class="font-bold text-xl mb-2 text-coffee-espresso">Non Coffee</h3>
                             <p class="text-sm text-gray-600">Pilihan minuman segar tanpa kopi untuk menemani harimu.</p>
                         </div>
-                        <!-- Card 3 -->
                         <div class="bg-coffee-beige rounded-2xl p-8 text-center card-hover reveal cursor-pointer border border-coffee-cream" style="transition-delay: 200ms;" onclick="window.location.hash = '#shop'">
                             <div class="w-16 h-16 mx-auto bg-coffee-dark text-white rounded-full flex items-center justify-center text-2xl mb-4 shadow-md">😃</div>
                             <h3 class="font-bold text-xl mb-2 text-coffee-espresso">Japanese Coffee</h3>
@@ -203,7 +188,6 @@
                 </div>
             </section>
 
-            <!-- Hook Belum Tahu Mau Ngopi Apa (Dipindah ke Home) -->
             <section class="bg-coffee-mocha py-20 text-center relative overflow-hidden">
                 <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1550989460-0adf9ea622e2?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center bg-fixed"></div>
                 <div class="max-w-4xl mx-auto px-4 relative z-10 reveal">
@@ -216,7 +200,7 @@
             </section>
         </div>
 
-        <!-- ================= PAGE: SHOP ================= -->
+        <!-- PAGE: SHOP  -->
         <div id="page-shop" class="page-section">
             <section class="py-24 bg-coffee-beige">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -234,7 +218,7 @@
             </section>
         </div>
 
-        <!-- ================= PAGE: GALLERY ================= -->
+        <!-- PAGE: GALLERY -->
         <div id="page-gallery" class="page-section">
             <section class="py-24 bg-coffee-dark text-white">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -247,31 +231,31 @@
                     <!-- Masonry Grid -->
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[250px]">
                         <div class="col-span-2 row-span-2 overflow-hidden rounded-2xl group cursor-pointer reveal" onclick="openLightbox(this)">
-                            <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800&q=80" alt="Barista" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <img src="assets/images/TotalKopi-icon.jpg" alt="Barista" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <i class="fas fa-search-plus text-4xl text-white"></i>
                             </div>
                         </div>
                         <div class="overflow-hidden rounded-2xl group cursor-pointer reveal" onclick="openLightbox(this)" style="transition-delay: 100ms;">
-                            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" alt="Coffee Beans" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <img src="assets/images/TotalKopi-icon.jpg" alt="Coffee Beans" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <i class="fas fa-search-plus text-3xl text-white"></i>
                             </div>
                         </div>
                         <div class="overflow-hidden rounded-2xl group cursor-pointer reveal" onclick="openLightbox(this)" style="transition-delay: 200ms;">
-                            <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=600&q=80" alt="Latte Art" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <img src="assets/images/TotalKopi-icon.jpg" alt="Latte Art" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <i class="fas fa-search-plus text-3xl text-white"></i>
                             </div>
                         </div>
                         <div class="overflow-hidden rounded-2xl group cursor-pointer reveal" onclick="openLightbox(this)" style="transition-delay: 300ms;">
-                            <img src="https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&w=600&q=80" alt="Cafe Interior" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <img src="assets/images/TotalKopi-icon.jpg" alt="Cafe Interior" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <i class="fas fa-search-plus text-3xl text-white"></i>
                             </div>
                         </div>
                         <div class="col-span-2 overflow-hidden rounded-2xl group cursor-pointer reveal" onclick="openLightbox(this)" style="transition-delay: 400ms;">
-                            <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=800&q=80" alt="Cold Brew" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <img src="assets/images/TotalKopi-icon.jpg" alt="Cold Brew" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <i class="fas fa-search-plus text-4xl text-white"></i>
                             </div>
@@ -524,7 +508,7 @@
     <div id="toast-container" class="fixed bottom-6 right-6 z-[300] flex flex-col gap-3 pointer-events-none"></div>
 
     <script>
-        // --- KONFIGURASI APLIKASI ---
+       
         const CONFIG = {
             whatsappNumber: "6281234567890", 
             gojekLink: "https://gofood.co.id/",
@@ -535,86 +519,69 @@
             hours: "Senin - Minggu: 07:00 - 21:00 WIB"
         };
 
-        // --- DATABASE PRODUK ---
         const products = [
-            // COFFEE
-            { id: 1, name: "Kopi Bahagia", price: 15000, category: "Coffee", img : "https://images.unsplash.com/photo-1579992357154-faf4bde95b3d?auto=format&fit=crop&w=600&q=80", desc: "Signature iced coffee dengan gula aren pilihan yang pas manisnya, memberikan kebahagiaan di setiap tegukan." },
-            { id: 2, name: "Americano", price: 15000, category: "Coffee", img: "https://images.unsplash.com/photo-1551030173-122aabc4489c?auto=format&fit=crop&w=600&q=80", desc: "Kopi hitam pekat dari espresso berkualitas. Cocok untuk pecinta kopi sejati yang mencari tendangan kafein ekstra." },
-            { id: 3, name: "Ice Latte", price: 15000, category: "Coffee", img: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=600&q=80", desc: "Perpaduan harmonis antara espresso tebal dan susu segar dingin. Lembut dan menyegarkan." },
-            { id: 4, name: "Hot Latte", price: 20000, category: "Coffee", img: "https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&w=600&q=80", desc: "Espresso hangat dibalut buih susu lembut (microfoam). Sempurna untuk menemani pagimu." },
-            { id: 5, name: "Butterscotch", price: 18000, category: "Coffee", img: "https://images.unsplash.com/photo-1572442388796-11668a67ef84?auto=format&fit=crop&w=600&q=80", desc: "Kopi susu dengan tambahan sirup butterscotch yang wangi dan creamy. Favorit banyak orang." },
-            { id: 6, name: "Caramel Macchiato", price: 18000, category: "Coffee", img: "https://images.unsplash.com/photo-1485808191679-5f86510681a2?auto=format&fit=crop&w=600&q=80", desc: "Vanilla latte dengan tuangan espresso murni di atasnya, disempurnakan dengan saus karamel lezat." },
-            // NON COFFEE
-            { id: 7, name: "Ice Chocolate", price: 18000, category: "Non Coffee", img: "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=600&q=80", desc: "Minuman cokelat belgia yang pekat dan creamy. Tidak terlalu manis, pas untuk menaikkan mood." },
-            { id: 8, name: "Ice Matcha", price: 18000, category: "Non Coffee", img: "https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=600&q=80", desc: "Matcha premium khas Jepang berpadu dengan susu segar. Cita rasa otentik yang menenangkan." },
-            { id: 9, name: "Lemon Tea", price: 10000, category: "Non Coffee", img: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=600&q=80", desc: "Es teh segar dengan perasan jeruk lemon asli. Solusi dahaga di cuaca panas." },
-            { id: 10, name: "Lychee Tea", price: 15000, category: "Non Coffee", img: "https://images.unsplash.com/photo-1514361892635-6b07e31e75f9?auto=format&fit=crop&w=600&q=80", desc: "Teh hitam pilihan dengan sirup leci dan buah leci asli yang segar." },
-            // JAPANESE COFFEE
-            { id: 11, name: "Tropical Black", price: 20000, category: "Japanese Coffee", img: "https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=600&q=80", desc: "Cold brew kopi bernuansa tropis dengan notes buah-buahan cerah. Disajikan dingin menyegarkan." },
-            { id: 12, name: "Passion Black", price: 25000, category: "Japanese Coffee", img: "https://images.unsplash.com/photo-1495474472201-35368d7f6b0e?auto=format&fit=crop&w=600&q=80", desc: "Japanese iced coffee dengan profil rasa yang kuat, bold, namun tetap bersih di mulut (clean aftertaste)." }
+            { id: 1, name: "Kopi Bahagia", price: 15000, category: "Coffee", img : "assets/images/TotalKopi-icon.jpg", desc: "Signature iced coffee dengan gula aren pilihan yang pas manisnya, memberikan kebahagiaan di setiap tegukan." },
+            { id: 2, name: "Americano", price: 15000, category: "Coffee", img: "assets/images/TotalKopi-icon.jpg", desc: "Kopi hitam pekat dari espresso berkualitas. Cocok untuk pecinta kopi sejati yang mencari tendangan kafein ekstra." },
+            { id: 3, name: "Ice Latte", price: 15000, category: "Coffee", img: "assets/images/TotalKopi-icon.jpg", desc: "Perpaduan harmonis antara espresso tebal dan susu segar dingin. Lembut dan menyegarkan." },
+            { id: 4, name: "Hot Latte", price: 20000, category: "Coffee", img: "assets/images/TotalKopi-icon.jpg", desc: "Espresso hangat dibalut buih susu lembut (microfoam). Sempurna untuk menemani pagimu." },
+            { id: 5, name: "Butterscotch", price: 18000, category: "Coffee", img: "assets/images/TotalKopi-icon.jpg", desc: "Kopi susu dengan tambahan sirup butterscotch yang wangi dan creamy. Favorit banyak orang." },
+            { id: 6, name: "Caramel Macchiato", price: 18000, category: "Coffee", img: "assets/images/TotalKopi-icon.jpg", desc: "Vanilla latte dengan tuangan espresso murni di atasnya, disempurnakan dengan saus karamel lezat." },
+            { id: 7, name: "Ice Chocolate", price: 18000, category: "Non Coffee", img: "assets/images/TotalKopi-icon.jpg", desc: "Minuman cokelat belgia yang pekat dan creamy. Tidak terlalu manis, pas untuk menaikkan mood." },
+            { id: 8, name: "Ice Matcha", price: 18000, category: "Non Coffee", img: "assets/images/TotalKopi-icon.jpg", desc: "Matcha premium khas Jepang berpadu dengan susu segar. Cita rasa otentik yang menenangkan." },
+            { id: 9, name: "Lemon Tea", price: 10000, category: "Non Coffee", img: "assets/images/TotalKopi-icon.jpg", desc: "Es teh segar dengan perasan jeruk lemon asli. Solusi dahaga di cuaca panas." },
+            { id: 10, name: "Lychee Tea", price: 15000, category: "Non Coffee", img: "assets/images/TotalKopi-icon.jpg", desc: "Teh hitam pilihan dengan sirup leci dan buah leci asli yang segar." },
+
+            { id: 11, name: "Tropical Black", price: 20000, category: "Japanese Coffee", img: "assets/images/TotalKopi-icon.jpg", desc: "Cold brew kopi bernuansa tropis dengan notes buah-buahan cerah. Disajikan dingin menyegarkan." },
+            { id: 12, name: "Passion Black", price: 25000, category: "Japanese Coffee", img: "assets/images/TotalKopi-icon.jpg", desc: "Japanese iced coffee dengan profil rasa yang kuat, bold, namun tetap bersih di mulut (clean aftertaste)." }
         ];
 
-        // --- STATE & INISIALISASI ---
         let cart = JSON.parse(localStorage.getItem('totalKopiCart')) || [];
         let currentModalProduct = null;
         let currentModalQty = 1;
 
-        // Init App pada Load
         document.addEventListener('DOMContentLoaded', () => {
             renderMenu();
             initContactInfo();
             renderCart();
             setupSearch();
-            handleRouting(); // Set initial page SPA
+            handleRouting();
         });
 
-        // --- SINGLE PAGE APPLICATION (SPA) ROUTING ---
         function handleRouting() {
-            // 1. Ambil hash dari URL, default ke #home jika URL bersih
             let hash = window.location.hash || '#home';
             let targetPageId = 'page-' + hash.substring(1);
             
-            // 2. Sembunyikan semua halaman
             document.querySelectorAll('.page-section').forEach(page => {
                 page.classList.remove('active');
             });
             
-            // 3. Reset warna aktif pada navbar (Desktop & Mobile)
             document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
                 link.classList.remove('text-accent-gold', 'font-bold');
             });
 
-            // 4. Tampilkan halaman yang dituju
             const targetPage = document.getElementById(targetPageId);
             if (targetPage) {
                 targetPage.classList.add('active');
             } else {
-                // Jika user mengetik sembarangan (contoh: #ngawur), kembalikan ke home
                 document.getElementById('page-home').classList.add('active');
                 hash = '#home';
             }
 
-            // 5. Beri warna pada link navbar yang sedang aktif
             document.querySelectorAll(`a[href="${hash}"]`).forEach(link => {
                 if(link.classList.contains('nav-link') || link.classList.contains('mobile-nav-link')) {
                     link.classList.add('text-accent-gold', 'font-bold');
                 }
             });
 
-            // 6. Gulir halaman ke atas dengan instan
             window.scrollTo(0, 0);
 
-            // 7. Tutup mobile menu jika terbuka
             document.getElementById('mobile-menu').classList.add('hidden');
 
-            // 8. Jalankan ulang efek "reveal" khusus untuk halaman yang baru terbuka
             setTimeout(initScrollReveal, 50); 
         }
 
-        // Jalankan handleRouting setiap kali user mengklik menu/merubah hash di URL
         window.addEventListener('hashchange', handleRouting);
 
-        // --- RENDER MENU PRODUK ---
         function renderMenu() {
             const container = document.getElementById('shop-menu-container');
             if (!container) return;
@@ -665,7 +632,6 @@
             });
         }
 
-        // --- FUNGSI KERANJANG (CART) ---
         function saveCart() {
             localStorage.setItem('totalKopiCart', JSON.stringify(cart));
             renderCart();
@@ -806,7 +772,6 @@
             window.open(waUrl, '_blank');
         }
 
-        // --- FUNGSI MODAL PRODUK ---
         function openProductModal(productId) {
             const product = products.find(p => p.id === productId);
             if (!product) return;
@@ -851,7 +816,7 @@
                 modal.classList.add('hidden');
                 modal.classList.remove('flex');
             }, 300);
-            document.body.style.overflow = ''; // Jika di SPA, ini aman
+            document.body.style.overflow = '';
         }
 
         function changeModalQty(change) {
@@ -860,7 +825,6 @@
             document.getElementById('modal-qty').innerText = currentModalQty;
         }
 
-        // --- COFFEE QUIZ LOGIC ---
         const quizQuestions = [
             {
                 q: "Kamu ingin minuman dengan kopi atau tanpa kopi?",
@@ -986,7 +950,6 @@
 
         renderQuiz();
 
-        // --- SEARCH, TOAST, LIGHTBOX & LAINNYA ---
         function setupSearch() {
             const searchInput = document.getElementById('searchInput');
             const searchResults = document.getElementById('searchResults');
@@ -1104,7 +1067,6 @@
                 const windowHeight = window.innerHeight;
                 const elementVisible = 100;
                 
-                // HANYA cari .reveal di dalam page yang sedang aktif saja!
                 const reveals = document.querySelectorAll('.page-section.active .reveal');
 
                 reveals.forEach(reveal => {
@@ -1114,7 +1076,6 @@
                     }
                 });
 
-                // Sticky Navbar Logic
                 const navbar = document.getElementById('navbar');
                 if (window.scrollY > 50) {
                     navbar.classList.add('py-2', 'shadow-md');
