@@ -3,113 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOTAL KOPI - Modern & Premium Coffee</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome untuk Ikon -->
+    <title>Total Kopi | Penuh Kebahagiaan</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'coffee-dark': '#2c1e16',
-                        'coffee-espresso': '#4a3525',
-                        'coffee-mocha': '#7c5f4b',
-                        'coffee-latte': '#d4bda5',
-                        'coffee-cream': '#f5eee6',
-                        'coffee-beige': '#fdfbf7',
-                        'accent-gold': '#d4af37'
+                        'coffee-dark': '#2C1E16',
+                        'coffee-espresso': '#4A3320',
+                        'coffee-mocha': '#7A5C43',
+                        'coffee-latte': '#C4A484',
+                        'coffee-cream': '#EFE5D9',
+                        'coffee-beige': '#FDFBF7',
+                        'accent-gold': '#D4AF37'
                     },
                     fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        serif: ['"Playfair Display"', 'serif'],
-                    },
-                    animation: {
-                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-                        'slide-in-right': 'slideInRight 0.8s ease-out forwards',
-                        'float': 'float 6s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(30px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        slideInRight: {
-                            '0%': { opacity: '0', transform: 'translateX(30px)' },
-                            '100%': { opacity: '1', transform: 'translateX(0)' },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-15px)' },
-                        }
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
                     }
                 }
             }
         }
     </script>
+
     <style>
-        /* Custom Styles for aesthetics */
-        body {
-            background-color: #fdfbf7; /* coffee-beige */
-            color: #2c1e16; /* coffee-dark */
-        }
-        
-        .glass-nav {
-            background: rgba(253, 251, 247, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(212, 189, 165, 0.3);
-            transition: all 0.3s ease;
-        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #EFE5D9; }
+        ::-webkit-scrollbar-thumb { background: #7A5C43; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4A3320; }
 
-        .glass-nav.scrolled {
-            background: rgba(44, 30, 22, 0.95); /* coffee-dark */
-            color: #f5eee6;
-        }
-
-        .glass-nav.scrolled .nav-link {
-            color: #f5eee6;
-        }
-
-        .glass-nav.scrolled .nav-link::after {
-            background-color: #d4af37; /* gold accent for dark nav */
-        }
-        
-        .glass-nav.scrolled .logo-text {
-            color: #f5eee6;
-        }
-
-        .nav-link {
-            position: relative;
-            color: #2c1e16;
-            transition: color 0.3s ease;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: #4a3525;
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .hero-pattern {
-            background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23d4bda5" fill-opacity="0.15"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
-        }
-
-        /* Scroll reveal utility */
+        /* Scroll Reveal Animation */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -120,317 +53,206 @@
             transform: translateY(0);
         }
 
-        .product-card {
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        /* Micro-interactions */
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
         }
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        .product-card:hover .product-img {
-            transform: scale(1.05);
-        }
-        .product-img {
-            transition: transform 0.6s ease;
-        }
-
-        /* Button Hover Effects */
+        
         .btn-primary {
-            background-color: #4a3525;
-            color: #f5eee6;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 100%;
-            background-color: #2c1e16;
-            transition: all 0.4s ease;
-            z-index: -1;
-        }
-        .btn-primary:hover::before {
-            width: 100%;
-        }
-
-        .btn-outline {
-            border: 1px solid #4a3525;
-            color: #4a3525;
+            background-color: #2C1E16;
+            color: white;
             transition: all 0.3s ease;
         }
-        .btn-outline:hover {
-            background-color: #4a3525;
-            color: #f5eee6;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #fdfbf7; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #d4bda5; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #7c5f4b; 
+        .btn-primary:hover {
+            background-color: #7A5C43;
+            box-shadow: 0 4px 15px rgba(122, 92, 67, 0.4);
         }
     </style>
 </head>
-<body class="font-sans antialiased overflow-x-hidden">
+<body class="bg-coffee-beige text-coffee-dark font-sans antialiased overflow-x-hidden">
 
     <!-- Navbar -->
-    <nav id="navbar" class="glass-nav fixed w-full z-50 top-0 transition-all duration-300 py-4">
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-coffee-dark/95 backdrop-blur-md shadow-lg" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center">
-                <!-- Logo & Brand Name -->
-                <div class="flex items-center cursor-pointer">
-                    <!-- Custom SVG Coffee Bean Logo -->
-                    <svg class="h-8 w-8 text-coffee-espresso transition-colors duration-300" id="nav-logo-icon" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12,2C6.48,2,2,6.48,2,12c0,5.52,4.48,10,10,10s10-4.48,10-10C22,6.48,17.52,2,12,2z M12,20c-4.41,0-8-3.59-8-8 c0-4.41,3.59-8,8-8s8,3.59,8,8C20,16.41,16.41,20,12,20z"/>
-                        <path d="M14.65,7.35c-2.4-2.4-5.91-2.9-8.79-1.29l0.71,1.23c2.25-1.25,5-0.87,6.87,1l3.54,3.54l1.24-0.72L14.65,7.35z"/>
-                        <path d="M9.35,16.65c2.4,2.4,5.91,2.9,8.79,1.29l-0.71-1.23c-2.25,1.25-5,0.87-6.87-1l-3.54-3.54l-1.24,0.72L9.35,16.65z"/>
-                    </svg>
-                    <span class="logo-text ml-3 font-serif font-bold text-xl tracking-wider text-coffee-dark uppercase transition-colors duration-300">Total Kopi</span>
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-10 h-10 rounded-full border-2 border-accent-gold flex items-center justify-center text-accent-gold">
+                        <i class="fas fa-coffee text-lg"></i>
+                    </div>
+                    <span class="font-serif font-bold text-white text-2xl tracking-wide uppercase">Total Kopi</span>
                 </div>
 
                 <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="nav-link font-medium text-sm tracking-wide uppercase">Home</a>
-                    <a href="#shop" class="nav-link font-medium text-sm tracking-wide uppercase">Shop</a>
-                    <a href="#gallery" class="nav-link font-medium text-sm tracking-wide uppercase">Gallery</a>
-                    <a href="#quiz" class="nav-link font-medium text-sm tracking-wide uppercase">Quiz</a>
-                    <a href="#contact" class="nav-link font-medium text-sm tracking-wide uppercase">Contact Us</a>
+                <div class="hidden md:flex items-center space-x-8 text-coffee-cream">
+                    <a href="#home" class="nav-link font-medium text-sm tracking-wide uppercase hover:text-accent-gold transition-colors">Home</a>
+                    <a href="#shop" class="nav-link font-medium text-sm tracking-wide uppercase hover:text-accent-gold transition-colors">Shop</a>
+                    <a href="#gallery" class="nav-link font-medium text-sm tracking-wide uppercase hover:text-accent-gold transition-colors">Gallery</a>
+                    <a href="#quiz" class="nav-link font-medium text-sm tracking-wide uppercase hover:text-accent-gold transition-colors">Quiz</a>
+                    <a href="#contact" class="nav-link font-medium text-sm tracking-wide uppercase hover:text-accent-gold transition-colors">Contact Us</a>
                     
-                    <!-- Search Bar -->
+                    <!-- Search -->
                     <div class="relative group">
-                        <div class="flex items-center bg-white/50 rounded-full px-3 py-1.5 border border-coffee-latte/50 focus-within:border-coffee-espresso transition-all">
-                            <i class="fas fa-search text-coffee-mocha text-sm"></i>
-                            <input type="text" id="searchInput" placeholder="Cari kopi..." class="bg-transparent border-none outline-none ml-2 w-32 focus:w-48 transition-all duration-300 text-sm placeholder-coffee-mocha/70 text-coffee-dark">
+                        <div class="flex items-center bg-white/10 rounded-full px-3 py-1.5 border border-white/20 focus-within:border-accent-gold transition-all">
+                            <i class="fas fa-search text-coffee-cream text-sm"></i>
+                            <input type="text" id="searchInput" placeholder="Cari kopi..." class="bg-transparent border-none outline-none ml-2 w-32 focus:w-48 transition-all duration-300 text-sm text-white placeholder-coffee-cream/70">
                         </div>
-                        <!-- Search Results Dropdown -->
-                        <div id="searchResults" class="absolute top-full right-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-coffee-cream opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 z-50 max-h-60 overflow-y-auto hidden">
-                            <!-- Hasil pencarian akan diisi oleh JS -->
+                        <!-- Search Results -->
+                        <div id="searchResults" class="absolute top-full right-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-coffee-cream opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-300 max-h-60 overflow-y-auto hidden">
                         </div>
                     </div>
+
+                    <!-- Cart Button Desktop -->
+                    <button onclick="toggleCart()" class="relative text-coffee-cream hover:text-accent-gold transition-colors flex items-center">
+                        <i class="fas fa-shopping-cart text-lg"></i>
+                        <span id="cart-badge-desktop" class="absolute -top-2 -right-2 bg-accent-gold text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-sm hidden">0</span>
+                    </button>
                 </div>
 
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-coffee-dark focus:outline-none">
+                <!-- Mobile Menu Button & Cart -->
+                <div class="md:hidden flex items-center space-x-5 text-coffee-cream">
+                    <button onclick="toggleCart()" class="relative">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cart-badge-mobile" class="absolute -top-2 -right-2 bg-accent-gold text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-sm hidden">0</span>
+                    </button>
+                    <button id="mobile-menu-btn" class="focus:outline-none">
                         <i class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Mobile Menu (Hidden by default) -->
-        <div id="mobile-menu" class="hidden md:hidden bg-coffee-cream border-t border-coffee-latte/30 absolute w-full left-0 top-full shadow-lg">
-            <div class="px-4 pt-2 pb-6 space-y-1">
-                <a href="#home" class="block px-3 py-3 text-base font-medium text-coffee-dark hover:bg-coffee-latte/20 rounded-md">Home</a>
-                <a href="#shop" class="block px-3 py-3 text-base font-medium text-coffee-dark hover:bg-coffee-latte/20 rounded-md">Shop</a>
-                <a href="#gallery" class="block px-3 py-3 text-base font-medium text-coffee-dark hover:bg-coffee-latte/20 rounded-md">Gallery</a>
-                <a href="#quiz" class="block px-3 py-3 text-base font-medium text-coffee-dark hover:bg-coffee-latte/20 rounded-md">Quiz</a>
-                <a href="#contact" class="block px-3 py-3 text-base font-medium text-coffee-dark hover:bg-coffee-latte/20 rounded-md">Contact Us</a>
-                <div class="px-3 py-3">
-                    <div class="flex items-center bg-white rounded-md px-3 py-2 border border-coffee-latte">
-                        <i class="fas fa-search text-coffee-mocha text-sm"></i>
-                        <input type="text" id="mobileSearchInput" placeholder="Cari kopi (Misal: Latte)..." class="bg-transparent border-none outline-none ml-2 w-full text-sm">
-                    </div>
-                     <div id="mobileSearchResults" class="mt-2 w-full bg-white rounded-lg shadow border border-coffee-cream hidden">
-                            <!-- Hasil pencarian mobile -->
-                    </div>
-                </div>
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-coffee-dark border-t border-white/10">
+            <div class="px-4 pt-2 pb-6 space-y-2 text-center">
+                <a href="#home" class="block px-3 py-2 text-coffee-cream hover:bg-coffee-espresso rounded-md uppercase text-sm">Home</a>
+                <a href="#shop" class="block px-3 py-2 text-coffee-cream hover:bg-coffee-espresso rounded-md uppercase text-sm">Shop</a>
+                <a href="#gallery" class="block px-3 py-2 text-coffee-cream hover:bg-coffee-espresso rounded-md uppercase text-sm">Gallery</a>
+                <a href="#quiz" class="block px-3 py-2 text-coffee-cream hover:bg-coffee-espresso rounded-md uppercase text-sm">Quiz</a>
+                <a href="#contact" class="block px-3 py-2 text-coffee-cream hover:bg-coffee-espresso rounded-md uppercase text-sm">Contact Us</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative pt-24 pb-12 lg:pt-32 lg:pb-24 min-h-screen flex items-center bg-coffee-cream overflow-hidden">
-        <!-- Background Pattern -->
-        <div class="absolute inset-0 hero-pattern opacity-50 z-0"></div>
+    <section id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-coffee-dark">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=1920&q=80" alt="Coffee Background" class="w-full h-full object-cover opacity-30">
+            <div class="absolute inset-0 bg-gradient-to-t from-coffee-dark via-coffee-dark/80 to-transparent"></div>
+        </div>
         
-        <!-- Decorative blobs -->
-        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-coffee-latte opacity-20 blur-3xl z-0 animate-float"></div>
-        <div class="absolute bottom-10 left-10 w-72 h-72 rounded-full bg-coffee-mocha opacity-10 blur-2xl z-0 animate-float" style="animation-delay: 2s;"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                
-                <!-- Text Content -->
-                <div class="text-center lg:text-left order-2 lg:order-1">
-                    <p class="text-coffee-mocha font-medium tracking-widest uppercase mb-3 animate-fade-in-up" style="animation-delay: 0.1s;">Est. 2026</p>
-                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-coffee-dark leading-tight mb-6 animate-fade-in-up" style="animation-delay: 0.3s;">
-                        Total Kopi — <br>
-                        <span class="text-coffee-espresso italic">Slogannya apa?</span>
-                    </h1>
-                    <p class="text-lg text-gray-600 mb-8 max-w-lg mx-auto lg:mx-0 font-light animate-fade-in-up" style="animation-delay: 0.5s;">
-                        Ini nanti bisa ditarok apa-apa
-                    </p>
-                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start mt-4 sm:space-y-0 sm:space-x-6 animate-fade-in-up" style="animation-delay: 0.7s;">
-                        <a href="#shop" class="btn-primary w-full sm:w-auto px-8 py-3 rounded-full font-medium tracking-wide shadow-lg flex items-center justify-center mb-4 sm:mb-0">
-                            Lihat Menu <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                        </a>
-                        <div class="relative w-full sm:w-auto">
-                            <p class="absolute -top-6 left-1/2 transform -translate-x-1/2 whitespace-nowrap text-xs font-medium text-coffee-mocha">Tidak Tahu Mau Pilih Apa?</p>
-                            <a href="#quiz" class="btn-outline w-full sm:w-auto px-8 py-3 rounded-full font-medium tracking-wide bg-transparent flex items-center justify-center">
-                                Cari Kopimu
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Image/Visual -->
-                <div class="order-1 lg:order-2 relative animate-slide-in-right">
-                    <!-- Main Hero Image (Placeholder for aesthetic coffee shot) -->
-                    <div class="relative rounded-t-full rounded-b-3xl overflow-hidden shadow-2xl aspect-[3/4] max-w-md mx-auto transform rotate-2 hover:rotate-0 transition-transform duration-500 border-8 border-white">
-                        <img src="https://images.unsplash.com/photo-1559525839-b184a4d698c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Specialty Coffee Pour" class="w-full h-full object-cover">
-                        <!-- Overlay gradient -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-coffee-dark/60 to-transparent"></div>
-                    </div>
-                    
-                    <!-- Floating badge -->
-                    <div class="absolute bottom-10 -left-6 bg-white p-4 rounded-2xl shadow-xl animate-float backdrop-blur-sm bg-white/90 border border-coffee-cream">
-                        <div class="flex items-center space-x-3">
-                            <div class="bg-coffee-latte p-2 rounded-full text-coffee-dark">
-                                <i class="fas fa-star text-sm"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-gray-500 font-medium">Premium Grade</p>
-                                <p class="text-coffee-dark font-bold font-serif">100% Arabica</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 drop-shadow-lg reveal">
+                Total Kopi <br> <span class="text-accent-gold text-4xl md:text-5xl italic font-light">— Penuh Kebahagiaan.</span>
+            </h1>
+            <p class="mt-4 text-xl md:text-2xl text-coffee-cream max-w-3xl mx-auto font-light reveal mb-10">
+                Setiap tegukan adalah cerita. Temukan secangkir kebahagiaanmu hari ini bersama koleksi minuman terbaik kami.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center reveal">
+                <a href="#shop" class="btn-primary px-8 py-4 rounded-full font-bold tracking-wide uppercase text-sm shadow-lg w-full sm:w-auto">
+                    Lihat Menu
+                </a>
+                <a href="#quiz" class="bg-transparent border border-accent-gold text-accent-gold hover:bg-accent-gold hover:text-white px-8 py-4 rounded-full font-bold tracking-wide uppercase text-sm transition-colors w-full sm:w-auto">
+                    Bingung Pilih Apa?
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Category Preview Section (New) -->
-    <section class="py-16 bg-white relative z-20 rounded-t-[3rem] shadow-[0_-10px_40px_rgba(0,0,0,0.03)] -mt-8 border-t border-coffee-latte/20">
+    <!-- Category Preview -->
+    <section class="py-16 bg-white relative -mt-10 z-20 rounded-t-[3rem] shadow-[0_-10px_40px_rgba(0,0,0,0.1)]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <!-- Coffee Preview -->
-                <div class="p-6 reveal">
-                    <div class="w-16 h-16 mx-auto bg-coffee-cream rounded-full flex items-center justify-center text-coffee-espresso mb-4 shadow-sm">
-                        <i class="fas fa-coffee text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-serif font-bold text-coffee-dark mb-2">Coffee</h3>
-                    <p class="text-sm text-gray-600 font-light">Kopi untuk kamu yang ingin menikmati cita rasa kopi.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-coffee-beige rounded-2xl p-8 text-center card-hover reveal cursor-pointer border border-coffee-cream" onclick="document.getElementById('shop').scrollIntoView({behavior: 'smooth'})">
+                    <div class="w-16 h-16 mx-auto bg-coffee-dark text-white rounded-full flex items-center justify-center text-2xl mb-4 shadow-md">☕</div>
+                    <h3 class="font-bold text-xl mb-2 text-coffee-espresso">Coffee</h3>
+                    <p class="text-sm text-gray-600">Kopi untuk kamu yang ingin menikmati cita rasa dan aroma kopi asli.</p>
                 </div>
-                <!-- Non Coffee Preview -->
-                <div class="p-6 reveal" style="transition-delay: 100ms;">
-                    <div class="w-16 h-16 mx-auto bg-coffee-cream rounded-full flex items-center justify-center text-coffee-espresso mb-4 shadow-sm">
-                        <i class="fas fa-mug-hot text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-serif font-bold text-coffee-dark mb-2">Non Coffee</h3>
-                    <p class="text-sm text-gray-600 font-light">Pilihan minuman tanpa kopi untuk menemani harimu.</p>
+                <!-- Card 2 -->
+                <div class="bg-coffee-beige rounded-2xl p-8 text-center card-hover reveal cursor-pointer border border-coffee-cream" style="transition-delay: 100ms;" onclick="document.getElementById('shop').scrollIntoView({behavior: 'smooth'})">
+                    <div class="w-16 h-16 mx-auto bg-coffee-dark text-white rounded-full flex items-center justify-center text-2xl mb-4 shadow-md">🥤</div>
+                    <h3 class="font-bold text-xl mb-2 text-coffee-espresso">Non Coffee</h3>
+                    <p class="text-sm text-gray-600">Pilihan minuman segar tanpa kopi untuk menemani harimu.</p>
                 </div>
-                <!-- Japanese Coffee Preview -->
-                <div class="p-6 reveal" style="transition-delay: 200ms;">
-                    <div class="w-16 h-16 mx-auto bg-coffee-cream rounded-full flex items-center justify-center text-coffee-espresso mb-4 shadow-sm">
-                        <i class="fas fa-leaf text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-serif font-bold text-coffee-dark mb-2">Japanese Coffee</h3>
-                    <p class="text-sm text-gray-600 font-light">Pilihan kopi dengan karakter dan penyajian yang berbeda.</p>
+                <!-- Card 3 -->
+                <div class="bg-coffee-beige rounded-2xl p-8 text-center card-hover reveal cursor-pointer border border-coffee-cream" style="transition-delay: 200ms;" onclick="document.getElementById('shop').scrollIntoView({behavior: 'smooth'})">
+                    <div class="w-16 h-16 mx-auto bg-coffee-dark text-white rounded-full flex items-center justify-center text-2xl mb-4 shadow-md">🍵</div>
+                    <h3 class="font-bold text-xl mb-2 text-coffee-espresso">Japanese Coffee</h3>
+                    <p class="text-sm text-gray-600">Pilihan kopi dengan karakter dan teknik penyajian unik khas Jepang.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Brand Story Section -->
-    <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto reveal">
-                <i class="fas fa-seedling text-3xl text-coffee-mocha mb-4"></i>
-                <h2 class="text-3xl md:text-4xl font-serif font-bold text-coffee-dark mb-6">Filosofi Total Kopi</h2>
-                <p class="text-gray-600 leading-relaxed font-light text-lg">
-                    Kami percaya bahwa setiap biji kopi memiliki cerita. Dari perkebunan dataran tinggi yang sejuk hingga proses pemanggangan yang teliti, kami menjaga kualitas untuk menghadirkan pengalaman "Total" dalam setiap sesapan. Tidak ada kompromi untuk rasa yang otentik.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Shop Section -->
-    <section id="shop" class="py-24 bg-coffee-cream">
+    <!-- Shop / Menu Section -->
+    <section id="shop" class="py-24 bg-coffee-beige">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 reveal">
                 <h2 class="text-4xl font-serif font-bold text-coffee-dark mb-4">Temukan Favoritmu</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto text-lg">Pilih minuman dari berbagai pilihan Total Kopi.</p>
+                <div class="w-24 h-1 bg-accent-gold mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">Pilih minuman dari berbagai pilihan Total Kopi yang diracik khusus untukmu.</p>
             </div>
 
             <!-- Product Container (Rendered by JS) -->
-            <div id="shop-menu-container">
+            <div id="shop-menu-container" class="space-y-16">
                 <!-- Produk dimuat di sini oleh JavaScript -->
             </div>
         </div>
     </section>
 
-    <!-- Product Modal -->
-    <div id="product-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-300">
-        <div class="bg-white rounded-3xl overflow-hidden max-w-4xl w-full mx-4 shadow-2xl transform scale-95 transition-transform duration-300 max-h-[90vh] overflow-y-auto" id="modal-content-panel">
-            <!-- Isi modal dimuat di sini -->
+    <!-- Hook Belum Tahu Mau Ngopi Apa -->
+    <section class="bg-coffee-mocha py-20 text-center relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1550989460-0adf9ea622e2?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center bg-fixed"></div>
+        <div class="max-w-4xl mx-auto px-4 relative z-10 reveal">
+            <h2 class="text-3xl md:text-5xl font-serif font-bold text-coffee-cream mb-6">Belum Tahu Mau Ngopi Apa?</h2>
+            <p class="text-white text-lg md:text-xl mb-10 max-w-2xl mx-auto font-light">Tenang, Total Kopi bantu pilihkan yang paling pas untuk seleramu hari ini.</p>
+            <a href="#quiz" class="inline-block bg-white text-coffee-mocha hover:bg-coffee-cream px-10 py-4 rounded-full font-bold tracking-wider uppercase transition-colors shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
+                CARI KOPIKU &rarr;
+            </a>
         </div>
-    </div>
+    </section>
 
-    <!-- Quiz Section (Interactive) -->
-    <section id="quiz" class="py-24 bg-coffee-dark relative overflow-hidden">
-        <!-- Background decoration -->
-        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-            <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="w-full h-full text-coffee-latte fill-current">
-                <path d="M0 0 C 50 100 80 100 100 0 Z"></path>
-            </svg>
-        </div>
-
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center text-white">
-            <div class="mb-10 reveal">
-                <h2 class="text-4xl font-serif font-bold mb-4">Bingung Mau Minum Apa?</h2>
-                <p class="text-coffee-cream/80 text-lg">Ikuti quiz singkat ini dan temukan kopi yang paling cocok dengan selera dan mood Anda saat ini.</p>
+    <!-- Coffee Quiz Section -->
+    <section id="quiz" class="py-24 bg-white">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-4xl font-serif font-bold text-coffee-dark mb-4">Bingung Pilih Minuman?</h2>
+                <div class="w-24 h-1 bg-accent-gold mx-auto mb-6"></div>
+                <p class="text-gray-600 text-lg">Jawab 3 pertanyaan singkat dan kami akan membantu menemukan minuman yang cocok untukmu.</p>
             </div>
 
-            <div class="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl reveal">
+            <div class="bg-coffee-beige rounded-3xl p-8 md:p-12 shadow-lg border border-coffee-cream reveal">
                 <!-- Quiz Container -->
-                <div id="quiz-container">
-                    <!-- Question 1 -->
-                    <div id="q1" class="quiz-step">
-                        <h3 class="text-2xl font-serif mb-8 text-coffee-cream">Apa mood Anda hari ini?</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <button onclick="nextStep(2, 'sweet')" class="py-4 px-6 rounded-xl border border-coffee-mocha/50 hover:bg-coffee-mocha/30 transition-all text-left flex items-center group">
-                                <span class="bg-white/10 p-3 rounded-full mr-4 group-hover:bg-coffee-espresso transition-colors"><i class="fas fa-sun text-coffee-latte"></i></span>
-                                <div>
-                                    <div class="font-bold text-white">Butuh yang manis</div>
-                                    <div class="text-sm text-coffee-cream/60">Untuk menaikkan mood</div>
-                                </div>
-                            </button>
-                            <button onclick="nextStep(2, 'strong')" class="py-4 px-6 rounded-xl border border-coffee-mocha/50 hover:bg-coffee-mocha/30 transition-all text-left flex items-center group">
-                                <span class="bg-white/10 p-3 rounded-full mr-4 group-hover:bg-coffee-espresso transition-colors"><i class="fas fa-bolt text-coffee-latte"></i></span>
-                                <div>
-                                    <div class="font-bold text-white">Butuh energi ekstra</div>
-                                    <div class="text-sm text-coffee-cream/60">Harus fokus bekerja</div>
-                                </div>
-                            </button>
-                        </div>
+                <div id="quiz-container" class="text-center">
+                    <div id="quiz-progress" class="text-sm font-bold text-accent-gold mb-6 uppercase tracking-wider">Pertanyaan 1 dari 3</div>
+                    <h3 id="quiz-question" class="text-2xl font-bold text-coffee-espresso mb-8 min-h-[60px]">Kamu ingin minuman dengan kopi atau tanpa kopi?</h3>
+                    
+                    <div id="quiz-options" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Options generated by JS -->
                     </div>
+                </div>
 
-                    <!-- Result (Hidden initially) -->
-                    <div id="quiz-result" class="hidden text-center">
-                        <div class="w-24 h-24 bg-coffee-mocha rounded-full flex items-center justify-center mx-auto mb-6">
-                            <i class="fas fa-coffee text-4xl text-coffee-cream"></i>
-                        </div>
-                        <h3 class="text-xl text-coffee-latte mb-2 uppercase tracking-widest text-sm font-bold">Rekomendasi Anda:</h3>
-                        <h2 id="result-title" class="text-4xl font-serif font-bold text-white mb-4">Caramel Macchiato</h2>
-                        <p id="result-desc" class="text-coffee-cream/80 mb-8 max-w-md mx-auto">Perpaduan manisnya karamel dan espresso yang lembut cocok untuk menaikkan mood Anda hari ini.</p>
-                        <div class="flex justify-center space-x-4">
-                            <button onclick="resetQuiz()" class="btn-outline border-white/30 text-white hover:bg-white/10 px-6 py-2 rounded-full text-sm">Coba Lagi</button>
-                            <a href="#shop" class="bg-coffee-latte text-coffee-dark hover:bg-white transition-colors px-6 py-2 rounded-full font-bold text-sm">Pesan Ini</a>
-                        </div>
+                <!-- Quiz Result (Hidden initially) -->
+                <div id="quiz-result" class="hidden text-center">
+                    <h3 class="text-xl font-bold text-accent-gold mb-2 uppercase tracking-wider">☕ Kopi yang Cocok Untukmu</h3>
+                    <h2 id="result-name" class="text-3xl font-serif font-bold text-coffee-dark mb-4">Nama Produk</h2>
+                    <p id="result-desc" class="text-gray-600 mb-8 max-w-md mx-auto italic">Deskripsi hasil.</p>
+                    
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-coffee-cream inline-block mb-8 max-w-sm w-full">
+                        <img id="result-img" src="" alt="Produk" class="w-full h-48 object-cover rounded-xl mb-4">
+                        <div class="font-bold text-xl text-coffee-espresso mb-1">Rp <span id="result-price">0</span></div>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button id="btn-result-add" class="btn-primary px-6 py-3 rounded-full font-bold shadow-md">
+                            Tambah ke Keranjang
+                        </button>
+                        <button onclick="resetQuiz()" class="px-6 py-3 rounded-full font-bold border border-coffee-latte text-coffee-mocha hover:bg-coffee-latte/10 transition-colors">
+                            Coba Quiz Lagi
+                        </button>
                     </div>
                 </div>
             </div>
@@ -438,405 +260,813 @@
     </section>
 
     <!-- Gallery Section -->
-    <section id="gallery" class="py-24 bg-white">
+    <section id="gallery" class="py-24 bg-coffee-dark text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 reveal">
-                <h2 class="text-4xl font-serif font-bold text-coffee-dark mb-4">Momen di Total Kopi</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Suasana hangat, tempat nyaman, dan secangkir kopi sempurna untuk menemani waktu Anda.</p>
+                <h2 class="text-4xl font-serif font-bold mb-4">Di Balik Secangkir Total Kopi</h2>
+                <div class="w-24 h-1 bg-accent-gold mx-auto mb-6"></div>
+                <p class="text-coffee-cream/80 max-w-2xl mx-auto text-lg">Momen-momen berharga dan dedikasi kami dalam setiap sajian.</p>
             </div>
 
-            <!-- Masonry-ish Grid -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="col-span-2 row-span-2 relative rounded-2xl overflow-hidden group reveal">
-                    <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cafe interior" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 min-h-[300px]">
-                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300"></div>
+            <!-- Masonry Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[200px]">
+                <div class="col-span-2 row-span-2 overflow-hidden rounded-2xl group cursor-pointer reveal" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800&q=80" alt="Barista" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i class="fas fa-search-plus text-3xl text-white"></i>
+                    </div>
                 </div>
-                <div class="relative rounded-2xl overflow-hidden group reveal" style="transition-delay: 100ms;">
-                    <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Barista pouring" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="overflow-hidden rounded-2xl group cursor-pointer reveal" onclick="openLightbox(this)" style="transition-delay: 100ms;">
+                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" alt="Coffee Beans" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                 </div>
-                <div class="relative rounded-2xl overflow-hidden group reveal" style="transition-delay: 200ms;">
-                    <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Coffee beans" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="overflow-hidden rounded-2xl group cursor-pointer reveal" onclick="openLightbox(this)" style="transition-delay: 200ms;">
+                    <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=600&q=80" alt="Latte Art" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                 </div>
-                <div class="col-span-2 relative rounded-2xl overflow-hidden group reveal" style="transition-delay: 300ms;">
-                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Friends having coffee" class="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="overflow-hidden rounded-2xl group cursor-pointer reveal" onclick="openLightbox(this)" style="transition-delay: 300ms;">
+                    <img src="https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&w=600&q=80" alt="Cafe Interior" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                 </div>
-            </div>
-            
-            <div class="text-center mt-12 reveal">
-                <a href="#" class="inline-flex items-center text-coffee-espresso font-medium hover:text-coffee-mocha">
-                    <i class="fab fa-instagram mr-2 text-xl"></i> Follow Instagram Kami @totalkopi
-                </a>
+                <div class="col-span-2 overflow-hidden rounded-2xl group cursor-pointer reveal" onclick="openLightbox(this)" style="transition-delay: 400ms;">
+                    <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=800&q=80" alt="Cold Brew" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Contact & Footer Section -->
-    <section id="contact" class="bg-coffee-beige pt-20 border-t border-coffee-latte/30">
+    <section id="contact" class="bg-coffee-cream pt-24 border-t border-coffee-latte/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 reveal">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-serif font-bold text-coffee-dark mb-4">Mau Ngopi? Temui Kami.</h2>
+                <div class="w-24 h-1 bg-accent-gold mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">Pesan minuman favoritmu atau temukan Total Kopi di platform pilihanmu.</p>
+            </div>
+
+            <!-- Platform Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 reveal">
+                <!-- WhatsApp -->
+                <a href="#" id="link-wa-card" target="_blank" class="bg-white p-8 rounded-3xl shadow-sm border border-coffee-latte/20 text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group flex flex-col items-center">
+                    <div class="w-16 h-16 bg-[#25D366]/10 text-[#25D366] rounded-full flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-coffee-dark mb-2">WhatsApp</h3>
+                    <p class="text-gray-500 text-sm mb-8 flex-grow">Pesan langsung, cepat, dan mudah melalui admin WhatsApp kami.</p>
+                    <span class="inline-block px-6 py-2 rounded-full border border-[#25D366] text-[#25D366] font-medium group-hover:bg-[#25D366] group-hover:text-white transition-colors w-full">Chat Sekarang</span>
+                </a>
                 
-                <!-- Contact Info -->
-                <div>
-                    <h2 class="text-3xl font-serif font-bold text-coffee-dark mb-6">Mampir ke Kedai Kami</h2>
-                    <p class="text-gray-600 mb-8 font-light">Buka setiap hari untuk menyajikan kopi terbaik bagi Anda. Ada pertanyaan? Jangan ragu untuk menghubungi kami.</p>
-                    
-                    <div class="space-y-6">
-                        <div class="flex items-start">
-                            <div class="bg-white p-3 rounded-full shadow-sm mr-4 text-coffee-mocha">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-coffee-dark">Lokasi</h4>
-                                <p class="text-sm text-gray-500">Jl. Kopi Kenangan No. 99, Jakarta Selatan</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="bg-white p-3 rounded-full shadow-sm mr-4 text-coffee-mocha">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-coffee-dark">Jam Buka</h4>
-                                <p class="text-sm text-gray-500">Senin - Minggu: 07:00 - 22:00 WIB</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="bg-white p-3 rounded-full shadow-sm mr-4 text-coffee-mocha">
-                                <i class="fas fa-phone-alt"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-coffee-dark">Hubungi Kami</h4>
-                                <p class="text-sm text-gray-500">+62 812 3456 7890</p>
-                            </div>
+                <!-- Gojek -->
+                <a href="#" id="link-gojek-card" target="_blank" class="bg-white p-8 rounded-3xl shadow-sm border border-coffee-latte/20 text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group flex flex-col items-center">
+                    <div class="w-16 h-16 bg-[#00AA13]/10 text-[#00AA13] rounded-full flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-motorcycle"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-coffee-dark mb-2">Gojek</h3>
+                    <p class="text-gray-500 text-sm mb-8 flex-grow">Lagi mager? Pesan Total Kopi via GoFood sekarang juga.</p>
+                    <span class="inline-block px-6 py-2 rounded-full border border-[#00AA13] text-[#00AA13] font-medium group-hover:bg-[#00AA13] group-hover:text-white transition-colors w-full">Pesan di Gojek</span>
+                </a>
+
+                <!-- Grab -->
+                <a href="#" id="link-grab-card" target="_blank" class="bg-white p-8 rounded-3xl shadow-sm border border-coffee-latte/20 text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group flex flex-col items-center">
+                    <div class="w-16 h-16 bg-[#00B14F]/10 text-[#00B14F] rounded-full flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-coffee-dark mb-2">Grab</h3>
+                    <p class="text-gray-500 text-sm mb-8 flex-grow">Promo menanti! Pesan minuman favoritmu via GrabFood.</p>
+                    <span class="inline-block px-6 py-2 rounded-full border border-[#00B14F] text-[#00B14F] font-medium group-hover:bg-[#00B14F] group-hover:text-white transition-colors w-full">Pesan di Grab</span>
+                </a>
+            </div>
+
+            <!-- Store Info -->
+            <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-coffee-latte/20 reveal flex flex-col md:flex-row gap-8 justify-between items-center">
+                <div class="flex-1 space-y-6 w-full">
+                    <div class="flex items-start">
+                        <div class="text-accent-gold mt-1 mr-4 text-xl w-6 text-center"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <h4 class="font-bold text-coffee-dark">Alamat Kedai</h4>
+                            <p id="info-address" class="text-gray-600 font-light">Jl. Kopi Kenangan No. 99, Jakarta</p>
                         </div>
                     </div>
-                </div>
-
-                <!-- Contact Form -->
-                <div class="bg-white p-8 rounded-3xl shadow-sm border border-coffee-latte/20">
-                    <h3 class="text-2xl font-serif font-bold text-coffee-dark mb-6">Kirim Pesan</h3>
-                    <form onsubmit="event.preventDefault(); alert('Terima kasih! Pesan Anda telah terkirim (Simulasi).');">
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
-                                <input type="text" class="w-full px-4 py-2 bg-coffee-beige border border-coffee-latte/50 rounded-xl focus:outline-none focus:border-coffee-mocha focus:ring-1 focus:ring-coffee-mocha transition-colors" required>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                                <input type="email" class="w-full px-4 py-2 bg-coffee-beige border border-coffee-latte/50 rounded-xl focus:outline-none focus:border-coffee-mocha focus:ring-1 focus:ring-coffee-mocha transition-colors" required>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Pesan</label>
-                                <textarea rows="4" class="w-full px-4 py-2 bg-coffee-beige border border-coffee-latte/50 rounded-xl focus:outline-none focus:border-coffee-mocha focus:ring-1 focus:ring-coffee-mocha transition-colors" required></textarea>
-                            </div>
-                            <button type="submit" class="w-full btn-primary py-3 rounded-xl font-medium tracking-wide">Kirim Pesan</button>
+                    <div class="flex items-start">
+                        <div class="text-accent-gold mt-1 mr-4 text-xl w-6 text-center"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <h4 class="font-bold text-coffee-dark">Jam Operasional</h4>
+                            <p id="info-hours" class="text-gray-600 font-light">Senin - Minggu: 07:00 - 22:00</p>
                         </div>
-                    </form>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="text-accent-gold mt-1 mr-4 text-xl w-6 text-center"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <h4 class="font-bold text-coffee-dark">Email</h4>
+                            <p id="info-email" class="text-gray-600 font-light">halo@totalkopi.com</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Footer Bottom -->
-        <div class="bg-coffee-dark text-coffee-cream/70 py-8">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
-                <div class="flex items-center mb-4 md:mb-0">
-                    <svg class="h-6 w-6 text-coffee-latte mr-2" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12,2C6.48,2,2,6.48,2,12c0,5.52,4.48,10,10,10s10-4.48,10-10C22,6.48,17.52,2,12,2z M12,20c-4.41,0-8-3.59-8-8 c0-4.41,3.59-8,8-8s8,3.59,8,8C20,16.41,16.41,20,12,20z"/>
-                        <path d="M14.65,7.35c-2.4-2.4-5.91-2.9-8.79-1.29l0.71,1.23c2.25-1.25,5-0.87,6.87,1l3.54,3.54l1.24-0.72L14.65,7.35z"/>
-                        <path d="M9.35,16.65c2.4,2.4,5.91,2.9,8.79,1.29l-0.71-1.23c-2.25,1.25-5,0.87-6.87-1l-3.54-3.54l-1.24,0.72L9.35,16.65z"/>
-                    </svg>
-                    <span class="font-serif font-bold text-white tracking-wider uppercase">Total Kopi</span>
+        <footer class="bg-coffee-dark text-coffee-cream/70 py-12 border-t border-white/10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                    <!-- Brand -->
+                    <div class="text-center md:text-left">
+                        <div class="flex items-center justify-center md:justify-start mb-2">
+                            <i class="fas fa-coffee text-accent-gold mr-3 text-xl"></i>
+                            <span class="font-serif font-bold text-white text-2xl tracking-wider uppercase">TOTAL KOPI</span>
+                        </div>
+                        <p class="text-accent-gold/80 italic tracking-wide font-serif">"Penuh Kebahagiaan."</p>
+                    </div>
+
+                    <!-- Nav Links -->
+                    <div class="flex flex-wrap justify-center gap-6 text-sm font-medium">
+                        <a href="#home" class="hover:text-white transition-colors uppercase tracking-wide">Home</a>
+                        <a href="#shop" class="hover:text-white transition-colors uppercase tracking-wide">Shop</a>
+                        <a href="#gallery" class="hover:text-white transition-colors uppercase tracking-wide">Gallery</a>
+                        <a href="#quiz" class="hover:text-white transition-colors uppercase tracking-wide">Quiz</a>
+                        <a href="#contact" class="hover:text-white transition-colors uppercase tracking-wide">Contact Us</a>
+                    </div>
+
+                    <!-- Social Icons -->
+                    <div class="flex space-x-6">
+                        <a href="#" id="footer-ig" target="_blank" class="hover:text-white transition-colors text-xl" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" id="footer-wa" target="_blank" class="hover:text-white transition-colors text-xl" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" id="footer-gojek" target="_blank" class="hover:text-white transition-colors text-xl" title="Gojek"><i class="fas fa-motorcycle"></i></a>
+                        <a href="#" id="footer-grab" target="_blank" class="hover:text-white transition-colors text-xl" title="Grab"><i class="fas fa-shopping-bag"></i></a>
+                    </div>
                 </div>
-                <p class="text-sm">&copy; 2026 Total Kopi. All rights reserved.</p>
-                <div class="flex space-x-4 mt-4 md:mt-0">
-                    <a href="#" class="hover:text-white transition-colors"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="hover:text-white transition-colors"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="hover:text-white transition-colors"><i class="fab fa-facebook-f"></i></a>
+                
+                <div class="mt-12 pt-8 border-t border-white/10 text-center text-sm font-light">
+                    <p>&copy; 2026 Total Kopi. All Rights Reserved.</p>
                 </div>
             </div>
-        </div>
+        </footer>
     </section>
 
+    <!-- Product Detail Modal -->
+    <div id="product-modal" class="fixed inset-0 z-[150] hidden items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-3xl w-11/12 max-w-3xl overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 flex flex-col md:flex-row relative">
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 text-2xl z-10 w-8 h-8 flex items-center justify-center bg-white/50 rounded-full backdrop-blur-md">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="w-full md:w-1/2 h-64 md:h-auto relative">
+                <img id="modal-img" src="" alt="Produk" class="w-full h-full object-cover">
+            </div>
+            <div class="w-full md:w-1/2 p-8 md:p-10 flex flex-col justify-center bg-coffee-beige">
+                <span id="modal-category" class="text-accent-gold font-bold text-sm tracking-wider uppercase mb-2 block">Kategori</span>
+                <h3 id="modal-title" class="text-3xl font-serif font-bold text-coffee-dark mb-2">Nama Produk</h3>
+                <p id="modal-price" class="text-xl text-coffee-espresso font-semibold mb-4">Rp 0</p>
+                <p id="modal-desc" class="text-gray-600 mb-8 leading-relaxed">Deskripsi produk detail ada di sini.</p>
+                
+                <div class="flex items-center gap-4 mb-6">
+                    <span class="text-sm font-bold text-gray-500 uppercase">Quantity:</span>
+                    <div class="flex items-center bg-white rounded-lg border border-coffee-latte/30 shadow-sm">
+                        <button onclick="changeModalQty(-1)" class="w-10 h-10 flex items-center justify-center text-coffee-mocha hover:bg-gray-50 transition-colors">-</button>
+                        <span id="modal-qty" class="w-10 text-center font-bold text-coffee-dark">1</span>
+                        <button onclick="changeModalQty(1)" class="w-10 h-10 flex items-center justify-center text-coffee-mocha hover:bg-gray-50 transition-colors">+</button>
+                    </div>
+                </div>
+
+                <button id="modal-add-btn" class="w-full btn-primary py-4 rounded-xl font-bold tracking-wide flex items-center justify-center gap-2 shadow-lg">
+                    <i class="fas fa-shopping-cart"></i> Tambah ke Keranjang
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox for Gallery -->
+    <div id="lightbox" class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/90 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white hover:text-accent-gold text-4xl focus:outline-none transition-colors">
+            <i class="fas fa-times"></i>
+        </button>
+        <img id="lightbox-img" src="" alt="Gallery Image" class="max-w-[90%] max-h-[90vh] object-contain rounded-lg shadow-2xl transform scale-95 transition-transform duration-300">
+    </div>
+
+    <!-- Cart Sidebar Drawer -->
+    <div id="cart-overlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[250] hidden opacity-0 transition-opacity duration-300" onclick="toggleCart()"></div>
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full max-w-md bg-coffee-beige shadow-2xl z-[260] transform translate-x-full transition-transform duration-300 flex flex-col">
+        <!-- Header -->
+        <div class="px-6 py-5 border-b border-coffee-latte/30 flex justify-between items-center bg-white">
+            <h2 class="text-2xl font-serif font-bold text-coffee-dark flex items-center gap-3">
+                <i class="fas fa-shopping-cart text-coffee-mocha"></i> Keranjangmu
+            </h2>
+            <button onclick="toggleCart()" class="text-gray-400 hover:text-coffee-espresso transition-colors text-2xl w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <!-- Cart Items -->
+        <div id="cart-items" class="flex-grow overflow-y-auto p-6 space-y-4">
+            <!-- Items diisi oleh JS -->
+            <div class="text-center text-gray-500 py-20 hidden flex-col items-center justify-center h-full" id="empty-cart-msg">
+                <i class="fas fa-box-open text-5xl text-coffee-latte mb-4"></i>
+                <p>Keranjangmu masih kosong.</p>
+                <button onclick="toggleCart(); document.getElementById('shop').scrollIntoView({behavior: 'smooth'});" class="mt-4 text-coffee-mocha font-bold underline">Lihat Menu</button>
+            </div>
+        </div>
+
+        <!-- Footer / Checkout -->
+        <div class="p-6 bg-white border-t border-coffee-latte/30 shadow-[0_-10px_20px_rgba(0,0,0,0.03)]">
+            <div class="flex justify-between items-center mb-6">
+                <span class="text-gray-600 font-medium">Total Pesanan</span>
+                <span id="cart-total-price" class="text-2xl font-bold text-coffee-espresso">Rp 0</span>
+            </div>
+            <button onclick="checkoutToWhatsApp()" id="checkout-btn" class="w-full btn-primary py-4 rounded-xl font-bold tracking-wide flex items-center justify-center gap-3 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed bg-[#25D366] hover:bg-[#1ebd5a]">
+                <i class="fab fa-whatsapp text-2xl"></i> Pesan melalui WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-[300] flex flex-col gap-3 pointer-events-none"></div>
+
     <script>
-        // Database Produk (Updated)
+        // --- KONFIGURASI APLIKASI ---
+        const CONFIG = {
+            whatsappNumber: "6281234567890", 
+            gojekLink: "https://gofood.co.id/",
+            grabLink: "https://food.grab.com/",
+            instagramLink: "https://instagram.com/totalkopi",
+            email: "halo@totalkopi.com",
+            address: "Jl. Kopi Kenangan No. 99, Jakarta Selatan",
+            hours: "Senin - Minggu: 07:00 - 22:00 WIB"
+        };
+
+        // --- DATABASE PRODUK ---
         const products = [
             // COFFEE
-            { id: 1, name: "Kopi Bahagia", category: "Coffee", price: 15000, desc: "Kopi susu signature dengan paduan rasa manis yang pas untuk menemani harimu.", img: "https://images.unsplash.com/photo-1593351415075-3bac9f45c877?auto=format&fit=crop&w=600&q=80" },
-            { id: 2, name: "Americano", category: "Coffee", price: 15000, desc: "Espresso murni berkualitas dicampur dengan air. Sangat pas untuk pecinta kopi hitam.", img: "https://images.unsplash.com/photo-1551030173-122aabc4489c?auto=format&fit=crop&w=600&q=80" },
-            { id: 3, name: "Ice Latte", category: "Coffee", price: 15000, desc: "Perpaduan klasik espresso dan susu segar dengan es yang menyejukkan.", img: "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=600&q=80" },
-            { id: 4, name: "Hot Latte", category: "Coffee", price: 20000, desc: "Sajian hangat espresso dengan steamed milk dan foam lembut di atasnya.", img: "https://images.unsplash.com/photo-1561882468-9110e03e0f78?auto=format&fit=crop&w=600&q=80" },
-            { id: 5, name: "Butterscotch", category: "Coffee", price: 18000, desc: "Kopi susu creamy yang berpadu sempurna dengan manisnya sirup butterscotch.", img: "https://images.unsplash.com/photo-1600275669439-14e40452d20b?auto=format&fit=crop&w=600&q=80" },
-            { id: 6, name: "Caramel Macchiato", category: "Coffee", price: 18000, desc: "Susu vanilla lembut dilapisi dengan tembakan espresso kuat dan sirup karamel.", img: "https://images.unsplash.com/photo-1485808191679-5f86510681a2?auto=format&fit=crop&w=600&q=80" },
+            { id: 1, name: "Kopi Bahagia", price: 15000, category: "Coffee", img: "https://images.unsplash.com/photo-1579992357154-faf4bde95b3d?auto=format&fit=crop&w=600&q=80", desc: "Signature iced coffee dengan gula aren pilihan yang pas manisnya, memberikan kebahagiaan di setiap tegukan." },
+            { id: 2, name: "Americano", price: 15000, category: "Coffee", img: "https://images.unsplash.com/photo-1551030173-122aabc4489c?auto=format&fit=crop&w=600&q=80", desc: "Kopi hitam pekat dari espresso berkualitas. Cocok untuk pecinta kopi sejati yang mencari tendangan kafein ekstra." },
+            { id: 3, name: "Ice Latte", price: 15000, category: "Coffee", img: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=600&q=80", desc: "Perpaduan harmonis antara espresso tebal dan susu segar dingin. Lembut dan menyegarkan." },
+            { id: 4, name: "Hot Latte", price: 20000, category: "Coffee", img: "https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&w=600&q=80", desc: "Espresso hangat dibalut buih susu lembut (microfoam). Sempurna untuk menemani pagimu." },
+            { id: 5, name: "Butterscotch", price: 18000, category: "Coffee", img: "https://images.unsplash.com/photo-1572442388796-11668a67ef84?auto=format&fit=crop&w=600&q=80", desc: "Kopi susu dengan tambahan sirup butterscotch yang wangi dan creamy. Favorit banyak orang." },
+            { id: 6, name: "Caramel Macchiato", price: 18000, category: "Coffee", img: "https://images.unsplash.com/photo-1485808191679-5f86510681a2?auto=format&fit=crop&w=600&q=80", desc: "Vanilla latte dengan tuangan espresso murni di atasnya, disempurnakan dengan saus karamel lezat." },
             // NON COFFEE
-            { id: 7, name: "Ice Chocolate", category: "Non Coffee", price: 18000, desc: "Cokelat premium yang pekat dan creamy, disajikan dingin menyegarkan.", img: "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=600&q=80" },
-            { id: 8, name: "Ice Matcha", category: "Non Coffee", price: 18000, desc: "Matcha asli berkualitas tinggi dipadukan dengan susu segar.", img: "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80" },
-            { id: 9, name: "Lemon Tea", category: "Non Coffee", price: 10000, desc: "Teh seduh segar berpadu dengan sensasi asam manis dari buah lemon asli.", img: "https://images.unsplash.com/photo-1629063523588-444ea595e1ee?auto=format&fit=crop&w=600&q=80" },
-            { id: 10, name: "Lychee Tea", category: "Non Coffee", price: 15000, desc: "Es teh manis yang harum dipadukan dengan kesegaran buah leci utuh.", img: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=600&q=80" },
+            { id: 7, name: "Ice Chocolate", price: 18000, category: "Non Coffee", img: "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=600&q=80", desc: "Minuman cokelat belgia yang pekat dan creamy. Tidak terlalu manis, pas untuk menaikkan mood." },
+            { id: 8, name: "Ice Matcha", price: 18000, category: "Non Coffee", img: "https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=600&q=80", desc: "Matcha premium khas Jepang berpadu dengan susu segar. Cita rasa otentik yang menenangkan." },
+            { id: 9, name: "Lemon Tea", price: 10000, category: "Non Coffee", img: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=600&q=80", desc: "Es teh segar dengan perasan jeruk lemon asli. Solusi dahaga di cuaca panas." },
+            { id: 10, name: "Lychee Tea", price: 15000, category: "Non Coffee", img: "https://images.unsplash.com/photo-1514361892635-6b07e31e75f9?auto=format&fit=crop&w=600&q=80", desc: "Teh hitam pilihan dengan sirup leci dan buah leci asli yang segar." },
             // JAPANESE COFFEE
-            { id: 11, name: "Tropical Black", category: "Japanese Coffee", price: 20000, desc: "Es kopi hitam bergaya Jepang dengan infusi buah tropis yang asam dan menyegarkan.", img: "https://images.unsplash.com/photo-1517701550927-30cfcb64d4c5?auto=format&fit=crop&w=600&q=80" },
-            { id: 12, name: "Passion Black", category: "Japanese Coffee", price: 25000, desc: "Perpaduan elegan es kopi hitam dengan rasa markisa yang unik dan kompleks.", img: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=600&q=80" }
+            { id: 11, name: "Tropical Black", price: 20000, category: "Japanese Coffee", img: "https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=600&q=80", desc: "Cold brew kopi bernuansa tropis dengan notes buah-buahan cerah. Disajikan dingin menyegarkan." },
+            { id: 12, name: "Passion Black", price: 25000, category: "Japanese Coffee", img: "https://images.unsplash.com/photo-1495474472201-35368d7f6b0e?auto=format&fit=crop&w=600&q=80", desc: "Japanese iced coffee dengan profil rasa yang kuat, bold, namun tetap bersih di mulut (clean aftertaste)." }
         ];
 
+        // --- STATE & INISIALISASI ---
+        let cart = JSON.parse(localStorage.getItem('totalKopiCart')) || [];
+        let currentModalProduct = null;
+        let currentModalQty = 1;
+
+        // Init App pada Load
         document.addEventListener('DOMContentLoaded', () => {
-            // Navbar Scroll Effect
-            const navbar = document.getElementById('navbar');
-            const logoIcon = document.getElementById('nav-logo-icon');
+            renderMenu();
+            initContactInfo();
+            renderCart();
+            setupSearch();
             
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                    navbar.classList.remove('py-4');
-                    navbar.classList.add('py-2');
-                    logoIcon.classList.remove('text-coffee-espresso');
-                    logoIcon.classList.add('text-accent-gold');
-                } else {
-                    navbar.classList.remove('scrolled');
-                    navbar.classList.remove('py-2');
-                    navbar.classList.add('py-4');
-                    logoIcon.classList.add('text-coffee-espresso');
-                    logoIcon.classList.remove('text-accent-gold');
+            // Re-run scroll reveal to catch newly rendered items
+            setTimeout(initScrollReveal, 100); 
+        });
+
+        // --- RENDER MENU PRODUK ---
+        function renderMenu() {
+            const container = document.getElementById('shop-menu-container');
+            if (!container) return;
+            
+            container.innerHTML = ''; // Bersihkan
+
+            const categories = ['Coffee', 'Non Coffee', 'Japanese Coffee'];
+            const icons = {'Coffee': '☕', 'Non Coffee': '🥤', 'Japanese Coffee': '🍵'};
+
+            categories.forEach((cat, index) => {
+                const categoryProducts = products.filter(p => p.category === cat);
+                if (categoryProducts.length > 0) {
+                    
+                    const catSection = document.createElement('div');
+                    catSection.className = 'mb-12';
+                    catSection.innerHTML = `
+                        <div class="flex items-center gap-4 mb-8 reveal">
+                            <span class="text-3xl">${icons[cat]}</span>
+                            <h3 class="text-3xl font-serif font-bold text-coffee-espresso uppercase tracking-wider">${cat}</h3>
+                            <div class="h-px bg-coffee-latte/50 flex-grow"></div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            ${categoryProducts.map(p => `
+                                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group border border-gray-100 reveal cursor-pointer flex flex-col" onclick="openProductModal(${p.id})">
+                                    <div class="relative h-64 overflow-hidden">
+                                        <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-coffee-mocha rounded-full uppercase tracking-wider shadow-sm">
+                                            ${p.category}
+                                        </div>
+                                    </div>
+                                    <div class="p-6 flex flex-col flex-grow">
+                                        <div class="flex justify-between items-start mb-2">
+                                            <h4 class="text-xl font-bold text-coffee-dark group-hover:text-coffee-mocha transition-colors">${p.name}</h4>
+                                            <span class="font-bold text-coffee-espresso whitespace-nowrap ml-4">Rp ${p.price.toLocaleString('id-ID')}</span>
+                                        </div>
+                                        <p class="text-gray-500 text-sm mb-6 flex-grow line-clamp-2">${p.desc}</p>
+                                        <button onclick="event.stopPropagation(); addToCart(${p.id}, 1)" class="w-full bg-coffee-beige text-coffee-dark hover:bg-coffee-dark hover:text-white border border-coffee-latte py-3 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2">
+                                            <i class="fas fa-plus"></i> Tambah
+                                        </button>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    container.appendChild(catSection);
                 }
             });
+        }
 
-            // Mobile Menu Toggle
-            const mobileBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
+        // --- FUNGSI KERANJANG (CART) ---
+        function saveCart() {
+            localStorage.setItem('totalKopiCart', JSON.stringify(cart));
+            renderCart();
+        }
+
+        function toggleCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            const overlay = document.getElementById('cart-overlay');
             
-            mobileBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-                // Ubah icon burger/close
-                const icon = mobileBtn.querySelector('i');
-                if(mobileMenu.classList.contains('hidden')){
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                } else {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
-                }
-            });
+            if (sidebar.classList.contains('translate-x-full')) {
+                sidebar.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+                setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                sidebar.classList.add('translate-x-full');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+                document.body.style.overflow = '';
+            }
+        }
 
-            // Tutup menu mobile saat link diklik
-            const mobileLinks = mobileMenu.querySelectorAll('a');
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    mobileBtn.querySelector('i').classList.remove('fa-times');
-                    mobileBtn.querySelector('i').classList.add('fa-bars');
-                });
-            });
+        function addToCart(productId, qty = 1) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
 
-            // Scroll Reveal Animation
-            const reveals = document.querySelectorAll('.reveal');
-            
-            function reveal() {
-                const windowHeight = window.innerHeight;
-                const elementVisible = 150;
-                
-                reveals.forEach((element) => {
-                    const elementTop = element.getBoundingClientRect().top;
-                    if (elementTop < windowHeight - elementVisible) {
-                        element.classList.add('active');
-                    }
+            const existingItem = cart.find(item => item.id === product.id);
+            if (existingItem) {
+                existingItem.qty += qty;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    img: product.img,
+                    qty: qty
                 });
             }
             
-            window.addEventListener('scroll', reveal);
-            reveal(); // Trigger on load
-
-            // Render Produk di halaman
-            renderShop();
-
-            // Fitur Pencarian (Desktop & Mobile)
-            setupSearch('searchInput', 'searchResults');
-            setupSearch('mobileSearchInput', 'mobileSearchResults');
-        });
-
-        // Render Shop Menu function
-        function renderShop() {
-            const shopContainer = document.getElementById('shop-menu-container');
-            if(!shopContainer) return;
-
-            const categories = ["Coffee", "Non Coffee", "Japanese Coffee"];
-            let html = '';
-
-            categories.forEach(cat => {
-                const catProducts = products.filter(p => p.category === cat);
-                if(catProducts.length === 0) return;
-
-                html += `
-                    <div class="mb-16 reveal">
-                        <h3 class="text-2xl md:text-3xl font-serif font-bold text-coffee-espresso mb-8 flex items-center justify-center md:justify-start">
-                            <span class="w-12 h-1 bg-accent-gold mr-4 hidden md:block"></span> ${cat.toUpperCase()}
-                        </h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                `;
-
-                catProducts.forEach(product => {
-                    html += `
-                        <div class="product-card bg-white rounded-2xl overflow-hidden shadow-sm border border-coffee-latte/30 cursor-pointer flex flex-col h-full" onclick="openProductModal(${product.id})">
-                            <div class="relative h-56 overflow-hidden">
-                                <img src="${product.img}" alt="${product.name}" class="product-img w-full h-full object-cover">
-                                <div class="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-[10px] font-bold text-coffee-dark uppercase tracking-wider">${product.category}</div>
-                            </div>
-                            <div class="p-6 flex flex-col flex-grow">
-                                <div class="flex-grow">
-                                    <h3 class="text-xl font-serif font-bold text-coffee-dark mb-2">${product.name}</h3>
-                                    <p class="text-sm text-gray-500 mb-4 line-clamp-2">${product.desc}</p>
-                                </div>
-                                <div class="flex justify-between items-center mt-auto pt-4 border-t border-gray-100">
-                                    <span class="text-lg font-bold text-coffee-espresso">Rp ${product.price.toLocaleString('id-ID')}</span>
-                                    <button class="bg-coffee-espresso text-white p-3 rounded-full hover:bg-coffee-mocha transition-colors shadow-md" title="Tambah ke Keranjang" onclick="event.stopPropagation(); alert('${product.name} ditambahkan ke keranjang!');">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
-
-                html += `</div></div>`;
-            });
-
-            shopContainer.innerHTML = html;
+            saveCart();
+            showToast(`✓ Berhasil menambahkan ${qty} ${product.name} ke keranjang`);
         }
 
-        // Modal Functions
-        function openProductModal(id) {
-            const product = products.find(p => p.id === id);
-            if(!product) return;
+        function updateCartQty(id, change) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty += change;
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.id !== id); 
+                }
+                saveCart();
+            }
+        }
+
+        function renderCart() {
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const badgeDesktop = document.getElementById('cart-badge-desktop');
+            const badgeMobile = document.getElementById('cart-badge-mobile');
+            
+            [badgeDesktop, badgeMobile].forEach(badge => {
+                if(badge) {
+                    badge.innerText = totalItems;
+                    if(totalItems > 0) badge.classList.remove('hidden');
+                    else badge.classList.add('hidden');
+                }
+            });
+
+            const container = document.getElementById('cart-items');
+            const emptyMsg = document.getElementById('empty-cart-msg');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            const totalPriceEl = document.getElementById('cart-total-price');
+
+            if (!container) return;
+            
+            Array.from(container.children).forEach(child => {
+                if (child.id !== 'empty-cart-msg') child.remove();
+            });
+
+            let totalPrice = 0;
+
+            if (cart.length === 0) {
+                emptyMsg.classList.remove('hidden');
+                emptyMsg.classList.add('flex');
+                checkoutBtn.disabled = true;
+                totalPriceEl.innerText = 'Rp 0';
+            } else {
+                emptyMsg.classList.add('hidden');
+                emptyMsg.classList.remove('flex');
+                checkoutBtn.disabled = false;
+                
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.qty;
+                    totalPrice += itemTotal;
+                    
+                    const div = document.createElement('div');
+                    div.className = 'flex gap-4 items-center bg-white p-3 rounded-2xl border border-gray-100 shadow-sm relative group';
+                    div.innerHTML = `
+                        <img src="${item.img}" alt="${item.name}" class="w-20 h-20 object-cover rounded-xl border border-gray-100">
+                        <div class="flex-grow">
+                            <h4 class="font-bold text-coffee-dark leading-tight">${item.name}</h4>
+                            <div class="text-sm text-gray-500 mb-2">Rp ${item.price.toLocaleString('id-ID')}</div>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center bg-coffee-beige rounded-lg border border-coffee-latte/30">
+                                    <button onclick="updateCartQty(${item.id}, -1)" class="w-8 h-8 flex items-center justify-center text-coffee-mocha hover:bg-coffee-latte/50 transition-colors">-</button>
+                                    <span class="w-8 text-center text-sm font-bold text-coffee-dark">${item.qty}</span>
+                                    <button onclick="updateCartQty(${item.id}, 1)" class="w-8 h-8 flex items-center justify-center text-coffee-mocha hover:bg-coffee-latte/50 transition-colors">+</button>
+                                </div>
+                                <span class="font-bold text-coffee-espresso">Rp ${itemTotal.toLocaleString('id-ID')}</span>
+                            </div>
+                        </div>
+                        <button onclick="updateCartQty(${item.id}, -999)" class="absolute -top-2 -right-2 bg-red-100 text-red-500 w-6 h-6 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-500 hover:text-white shadow-sm">
+                            <i class="fas fa-times text-xs"></i>
+                        </button>
+                    `;
+                    container.appendChild(div);
+                });
+                
+                totalPriceEl.innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+            }
+        }
+
+        function checkoutToWhatsApp() {
+            if(cart.length === 0) return;
+
+            let text = "Halo Total Kopi, saya ingin memesan:\n\n";
+            let total = 0;
+            
+            cart.forEach(item => {
+                const subtotal = item.price * item.qty;
+                total += subtotal;
+                text += `- ${item.name} x${item.qty} — Rp${subtotal.toLocaleString('id-ID')}\n`;
+            });
+            
+            text += `\n*Total: Rp${total.toLocaleString('id-ID')}*\n\nTerima kasih.`;
+            
+            const encodedText = encodeURIComponent(text);
+            const waUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodedText}`;
+            window.open(waUrl, '_blank');
+        }
+
+        // --- FUNGSI MODAL PRODUK ---
+        function openProductModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            currentModalProduct = product;
+            currentModalQty = 1;
+            document.getElementById('modal-qty').innerText = 1;
+
+            document.getElementById('modal-img').src = product.img;
+            document.getElementById('modal-category').innerText = product.category;
+            document.getElementById('modal-title').innerText = product.name;
+            document.getElementById('modal-price').innerText = `Rp ${product.price.toLocaleString('id-ID')}`;
+            document.getElementById('modal-desc').innerText = product.desc;
+            
+            document.getElementById('modal-add-btn').onclick = () => {
+                addToCart(product.id, currentModalQty);
+                closeProductModal();
+            };
 
             const modal = document.getElementById('product-modal');
-            const content = document.getElementById('modal-content-panel');
-
-            content.innerHTML = `
-                <div class="relative flex flex-col md:flex-row">
-                    <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 bg-white/80 backdrop-blur-md text-coffee-dark w-10 h-10 rounded-full flex items-center justify-center hover:bg-coffee-espresso hover:text-white transition-all shadow-md">
-                        <i class="fas fa-times text-lg"></i>
-                    </button>
-                    <div class="md:w-1/2 h-64 md:h-auto min-h-[300px] relative">
-                        <img src="${product.img}" alt="${product.name}" class="w-full h-full object-cover">
-                    </div>
-                    <div class="md:w-1/2 p-8 md:p-12 flex flex-col justify-center bg-coffee-beige">
-                        <div class="text-xs font-bold text-accent-gold tracking-widest uppercase mb-3">${product.category}</div>
-                        <h2 class="text-3xl md:text-4xl font-serif font-bold text-coffee-dark mb-3">${product.name}</h2>
-                        <div class="text-2xl font-bold text-coffee-espresso mb-6">Rp ${product.price.toLocaleString('id-ID')}</div>
-                        <p class="text-gray-600 mb-8 leading-relaxed text-lg">${product.desc}</p>
-                        <button class="w-full btn-primary py-4 rounded-xl font-medium tracking-wide flex items-center justify-center space-x-3 text-lg" onclick="alert('${product.name} ditambahkan ke keranjang!'); closeProductModal();">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span>Tambah ke Keranjang</span>
-                        </button>
-                    </div>
-                </div>
-            `;
-
+            const modalContent = modal.querySelector('div');
+            
             modal.classList.remove('hidden');
-            // Trigger reflow for animation
-            void modal.offsetWidth;
-            modal.classList.remove('opacity-0');
-            content.classList.remove('scale-95');
-            document.body.style.overflow = 'hidden'; // Mencegah scrolling pada background
+            modal.classList.add('flex');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+            document.body.style.overflow = 'hidden';
         }
 
         function closeProductModal() {
             const modal = document.getElementById('product-modal');
-            const content = document.getElementById('modal-content-panel');
-
+            const modalContent = modal.querySelector('div');
+            
             modal.classList.add('opacity-0');
-            content.classList.add('scale-95');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
             
             setTimeout(() => {
                 modal.classList.add('hidden');
-                document.body.style.overflow = ''; // Mengembalikan scrolling background
+                modal.classList.remove('flex');
             }, 300);
+            document.body.style.overflow = '';
         }
 
-        // Close modal when clicking outside content
-        document.getElementById('product-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeProductModal();
+        function changeModalQty(change) {
+            currentModalQty += change;
+            if (currentModalQty < 1) currentModalQty = 1;
+            document.getElementById('modal-qty').innerText = currentModalQty;
+        }
+
+        // --- COFFEE QUIZ LOGIC ---
+        const quizQuestions = [
+            {
+                q: "Kamu ingin minuman dengan kopi atau tanpa kopi?",
+                options: [
+                    { text: "Dengan Kopi", value: "coffee" },
+                    { text: "Tanpa Kopi", value: "non-coffee" }
+                ]
+            },
+            {   // Index 1 untuk "coffee"
+                q: "Kamu lebih suka rasa kopi seperti apa?",
+                options: [
+                    { text: "Manis & Creamy", value: "sweet" },
+                    { text: "Strong & Bold", value: "strong" },
+                    { text: "Segar & Unik", value: "fresh" }
+                ]
+            },
+            {   // Index 2 untuk "non-coffee"
+                q: "Kamu lebih suka rasa seperti apa?",
+                options: [
+                    { text: "Cokelat", value: "choco" },
+                    { text: "Creamy & Matcha", value: "matcha" },
+                    { text: "Segar & Fruity", value: "fruity" }
+                ]
+            },
+            {   // Index 3
+                q: "Kamu ingin menikmatinya seperti apa?",
+                options: [
+                    { text: "Dingin", value: "cold" },
+                    { text: "Hangat", value: "hot" },
+                    { text: "Bebas, yang penting enak!", value: "any" }
+                ]
             }
-        });
+        ];
 
-        // Fungsi Setup Pencarian (Updated for Modals)
-        function setupSearch(inputId, resultsContainerId) {
-            const input = document.getElementById(inputId);
-            const container = document.getElementById(resultsContainerId);
+        let currentQ = 0;
+        let answers = [];
+
+        function renderQuiz() {
+            const qObj = quizQuestions[currentQ];
+            document.getElementById('quiz-question').innerText = qObj.q;
             
-            if(!input || !container) return;
+            // Progress Text
+            let stepNum = answers.length + 1;
+            document.getElementById('quiz-progress').innerText = `Pertanyaan ${stepNum} dari 3`;
 
-            input.addEventListener('input', function() {
-                const query = this.value.toLowerCase();
-                container.innerHTML = '';
-                
-                if (query.length > 0) {
-                    const filtered = products.filter(p => p.name.toLowerCase().includes(query));
-                    
-                    if (filtered.length > 0) {
-                        container.classList.remove('hidden');
-                        filtered.forEach(product => {
-                            const item = document.createElement('a');
-                            item.href = "#";
-                            item.className = 'block px-4 py-3 hover:bg-coffee-cream transition-colors border-b border-gray-100 last:border-0 cursor-pointer';
-                            item.innerHTML = `
-                                <div class="font-bold text-coffee-dark text-sm">${product.name}</div>
-                                <div class="text-xs text-gray-500">${product.category} - Rp ${product.price.toLocaleString('id-ID')}</div>
-                            `;
-                            // Buka modal saat diklik dari search
-                            item.addEventListener('click', (e) => {
-                                e.preventDefault();
-                                openProductModal(product.id);
-                                input.value = '';
-                                container.classList.add('hidden');
-                                // Tutup mobile menu jika sedang terbuka
-                                document.getElementById('mobile-menu').classList.add('hidden');
-                                document.getElementById('mobile-menu-btn').querySelector('i').classList.remove('fa-times');
-                                document.getElementById('mobile-menu-btn').querySelector('i').classList.add('fa-bars');
-                            });
-                            container.appendChild(item);
-                        });
-                    } else {
-                        container.classList.remove('hidden');
-                        container.innerHTML = '<div class="px-4 py-3 text-sm text-gray-500 text-center">Menu tidak ditemukan</div>';
-                    }
-                } else {
-                    container.classList.add('hidden');
-                }
-            });
-
-            // Tutup hasil pencarian jika klik di luar
-            document.addEventListener('click', function(e) {
-                if (!input.contains(e.target) && !container.contains(e.target)) {
-                    container.classList.add('hidden');
-                }
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+            
+            qObj.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'bg-white border-2 border-coffee-cream hover:border-accent-gold text-coffee-dark font-medium py-4 px-6 rounded-2xl transition-all duration-300 hover:shadow-md';
+                btn.innerText = opt.text;
+                btn.onclick = () => handleAnswer(opt.value);
+                optionsContainer.appendChild(btn);
             });
         }
 
-        // Quiz Logic
-        function nextStep(stepNumber, answer) {
-            // Sembunyikan semua step
-            document.getElementById('q1').style.display = 'none';
+        function handleAnswer(val) {
+            answers.push(val);
             
-            // Logika sederhana untuk hasil quiz
-            const resultDiv = document.getElementById('quiz-result');
-            const resultTitle = document.getElementById('result-title');
-            const resultDesc = document.getElementById('result-desc');
-            
-            if (answer === 'sweet') {
-                resultTitle.innerText = "Caramel Macchiato";
-                resultDesc.innerText = "Perpaduan manisnya karamel dan espresso yang lembut, sempurna untuk menaikkan mood Anda dan memberikan senyuman.";
-            } else if (answer === 'strong') {
-                resultTitle.innerText = "Double Espresso / V60";
-                resultDesc.innerText = "Cita rasa kopi yang kuat dan murni. Cocok untuk memberikan tendangan energi ekstra agar Anda fokus sepanjang hari.";
+            if (answers.length === 1) {
+                // Branching based on Coffee / Non-Coffee
+                currentQ = (val === 'coffee') ? 1 : 2;
+            } else if (answers.length === 2) {
+                // Always go to final question
+                currentQ = 3;
+            } else if (answers.length === 3) {
+                showResult();
+                return; // Stop
             }
+            renderQuiz();
+        }
+
+        function showResult() {
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('quiz-result').classList.remove('hidden');
             
-            // Tampilkan hasil
-            resultDiv.classList.remove('hidden');
-            resultDiv.classList.add('animate-fade-in-up');
+            const [base, flavor, temp] = answers;
+            let recommendedProductId = 1; // Default
+            let customDesc = "Minuman ini sangat cocok dengan preferensimu.";
+
+            if (base === 'coffee') {
+                if (flavor === 'sweet') {
+                    recommendedProductId = 6; // Caramel Macchiato
+                    customDesc = "Kamu sepertinya menyukai kopi yang manis dan creamy. Caramel Macchiato bisa menjadi pilihan sempurna untuk harimu.";
+                } else if (flavor === 'strong') {
+                    recommendedProductId = 2; // Americano
+                    if(temp === 'hot') recommendedProductId = 4; // Hot Latte
+                    customDesc = "Karakter rasa kopi yang kuat dan berani adalah pilihanmu. Cocok untuk dorongan semangat!";
+                } else if (flavor === 'fresh') {
+                    recommendedProductId = 11; // Tropical Black
+                    customDesc = "Kamu suka petualangan rasa! Kesegaran unik kopi ala Jepang ini akan mengejutkan lidahmu.";
+                }
+            } else {
+                if (flavor === 'choco') {
+                    recommendedProductId = 7; // Ice Chocolate
+                    customDesc = "Cokelat selalu bisa memperbaiki mood. Rasa pekatnya sangat pas untukmu.";
+                } else if (flavor === 'matcha') {
+                    recommendedProductId = 8; // Ice Matcha
+                    customDesc = "Ketenangan ala Jepang ada di minuman ini. Creamy dan sangat menenangkan.";
+                } else if (flavor === 'fruity') {
+                    recommendedProductId = 10; // Lychee Tea
+                    customDesc = "Kesegaran buah asli adalah yang kamu butuhkan sekarang. Sangat fresh!";
+                }
+            }
+
+            const recProduct = products.find(p => p.id === recommendedProductId);
+            
+            document.getElementById('result-name').innerText = recProduct.name;
+            document.getElementById('result-desc').innerText = customDesc;
+            document.getElementById('result-img').src = recProduct.img;
+            document.getElementById('result-price').innerText = recProduct.price.toLocaleString('id-ID');
+            
+            document.getElementById('btn-result-add').onclick = () => {
+                addToCart(recProduct.id, 1);
+            };
         }
 
         function resetQuiz() {
+            currentQ = 0;
+            answers = [];
+            document.getElementById('quiz-container').classList.remove('hidden');
             document.getElementById('quiz-result').classList.add('hidden');
-            document.getElementById('q1').style.display = 'block';
+            renderQuiz();
         }
+
+        // Mulai kuis saat load
+        renderQuiz();
+
+        // --- SEARCH, TOAST, LIGHTBOX & UI LAINNYA ---
+        
+        // Pencarian Navbar
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            
+            if(!searchInput) return;
+
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase().trim();
+                searchResults.innerHTML = '';
+                
+                if (query.length === 0) {
+                    searchResults.classList.add('hidden');
+                    return;
+                }
+
+                const matches = products.filter(p => p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
+
+                if (matches.length > 0) {
+                    searchResults.classList.remove('hidden');
+                    matches.forEach(p => {
+                        const div = document.createElement('div');
+                        div.className = 'p-3 hover:bg-gray-50 cursor-pointer flex items-center gap-3 border-b border-gray-100 last:border-0';
+                        div.innerHTML = `
+                            <img src="${p.img}" class="w-10 h-10 rounded object-cover">
+                            <div>
+                                <div class="font-bold text-sm text-coffee-dark">${p.name}</div>
+                                <div class="text-xs text-gray-500">Rp ${p.price.toLocaleString('id-ID')}</div>
+                            </div>
+                        `;
+                        div.onclick = () => {
+                            openProductModal(p.id);
+                            searchResults.classList.add('hidden');
+                            searchInput.value = '';
+                        };
+                        searchResults.appendChild(div);
+                    });
+                } else {
+                    searchResults.classList.remove('hidden');
+                    searchResults.innerHTML = '<div class="p-4 text-center text-sm text-gray-500">Tidak ada yang cocok</div>';
+                }
+            });
+
+            // Sembunyikan jika klik di luar
+            document.addEventListener('click', (e) => {
+                if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                    searchResults.classList.add('hidden');
+                }
+            });
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            toast.className = 'bg-coffee-dark text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3 transform translate-y-10 opacity-0 transition-all duration-300';
+            toast.innerHTML = `<span class="font-medium">${message}</span>`;
+            
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-y-10', 'opacity-0');
+            }, 10);
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-10');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Lightbox Gallery
+        function openLightbox(element) {
+            const imgSrc = element.querySelector('img').src;
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            lightboxImg.src = imgSrc;
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+            
+            setTimeout(() => {
+                lightbox.classList.remove('opacity-0');
+                lightboxImg.classList.remove('scale-95');
+                lightboxImg.classList.add('scale-100');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            lightbox.classList.add('opacity-0');
+            lightboxImg.classList.remove('scale-100');
+            lightboxImg.classList.add('scale-95');
+            
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+                lightbox.classList.remove('flex');
+            }, 300);
+            document.body.style.overflow = '';
+        }
+
+        // Init Contact Links
+        function initContactInfo() {
+            // Card Buttons
+            if(document.getElementById('link-wa-card')) document.getElementById('link-wa-card').href = `https://wa.me/${CONFIG.whatsappNumber}`;
+            if(document.getElementById('link-gojek-card')) document.getElementById('link-gojek-card').href = CONFIG.gojekLink;
+            if(document.getElementById('link-grab-card')) document.getElementById('link-grab-card').href = CONFIG.grabLink;
+            
+            // Text Info
+            if(document.getElementById('info-address')) document.getElementById('info-address').innerText = CONFIG.address;
+            if(document.getElementById('info-hours')) document.getElementById('info-hours').innerText = CONFIG.hours;
+            if(document.getElementById('info-email')) document.getElementById('info-email').innerText = CONFIG.email;
+            
+            // Social Icons
+            if(document.getElementById('footer-ig')) document.getElementById('footer-ig').href = CONFIG.instagramLink;
+            if(document.getElementById('footer-wa')) document.getElementById('footer-wa').href = `https://wa.me/${CONFIG.whatsappNumber}`;
+            if(document.getElementById('footer-gojek')) document.getElementById('footer-gojek').href = CONFIG.gojekLink;
+            if(document.getElementById('footer-grab')) document.getElementById('footer-grab').href = CONFIG.grabLink;
+        }
+
+        // Scroll Logic (Navbar & Animations)
+        function initScrollReveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            function checkScroll() {
+                const windowHeight = window.innerHeight;
+                const elementVisible = 100;
+
+                reveals.forEach(reveal => {
+                    const elementTop = reveal.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveal.classList.add('active');
+                    }
+                });
+
+                // Sticky Navbar
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('py-2', 'shadow-md');
+                    navbar.classList.remove('py-4');
+                } else {
+                    navbar.classList.add('py-4');
+                    navbar.classList.remove('py-2', 'shadow-md');
+                }
+            }
+
+            window.addEventListener('scroll', checkScroll);
+            checkScroll(); // Cek langsung saat pertama load
+        }
+
+        // Mobile menu toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Tutup menu mobile ketika link diklik
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
     </script>
 </body>
 </html>
