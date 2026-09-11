@@ -343,7 +343,7 @@
 
                     <!-- Platform Cards -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 reveal">
-                        <!-- WhatsApp -->
+
                         <a href="#" id="link-wa-card" target="_blank" class="bg-white p-8 rounded-3xl shadow-sm border border-coffee-latte/20 text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group flex flex-col items-center">
                             <div class="w-16 h-16 bg-[#25D366]/10 text-[#25D366] rounded-full flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
                                 <i class="fab fa-whatsapp"></i>
@@ -353,10 +353,9 @@
                             <span class="inline-block px-6 py-2 rounded-full border border-[#25D366] text-[#25D366] font-medium group-hover:bg-[#25D366] group-hover:text-white transition-colors w-full">Chat Sekarang</span>
                         </a>
                         
-                        <!-- Gojek -->
                         <a href="#" id="link-gojek-card" target="_blank" class="bg-white p-8 rounded-3xl shadow-sm border border-coffee-latte/20 text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group flex flex-col items-center">
-                            <div class="w-16 h-16 bg-[#00AA13]/10 text-[#00AA13] rounded-full flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
-                                <i class="fas fa-motorcycle"></i>
+                            <div class="w-16 h-16 bg-[#00AA13]/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <img src="assets/images/gojek_icon.png" alt="Logo Gojek" class="w-8 h-8 object-contain">
                             </div>
                             <h3 class="text-xl font-bold text-coffee-dark mb-2">Gojek</h3>
                             <p class="text-gray-500 text-sm mb-8 flex-grow">Lagi mager? Pesan Total Kopi via GoFood sekarang juga.</p>
@@ -365,8 +364,8 @@
 
                         <!-- Grab -->
                         <a href="#" id="link-grab-card" target="_blank" class="bg-white p-8 rounded-3xl shadow-sm border border-coffee-latte/20 text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group flex flex-col items-center">
-                            <div class="w-16 h-16 bg-[#00B14F]/10 text-[#00B14F] rounded-full flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
-                                <i class="fas fa-shopping-bag"></i>
+                            <div class="w-16 h-16 bg-[#00B14F]/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <img src="assets/images/grab_icon.png" alt="Logo Grab" class="w-8 h-8 object-contain">
                             </div>
                             <h3 class="text-xl font-bold text-coffee-dark mb-2">Grab</h3>
                             <p class="text-gray-500 text-sm mb-8 flex-grow">Promo menanti! Pesan minuman favoritmu via GrabFood.</p>
@@ -428,11 +427,15 @@
                 </div>
 
                 <!-- Social Icons -->
-                <div class="flex space-x-6">
-                    <a href="#" id="footer-ig" target="_blank" class="hover:text-white transition-colors text-xl" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" id="footer-wa" target="_blank" class="hover:text-white transition-colors text-xl" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#" id="footer-gojek" target="_blank" class="hover:text-white transition-colors text-xl" title="Gojek"><i class="fas fa-motorcycle"></i></a>
-                    <a href="#" id="footer-grab" target="_blank" class="hover:text-white transition-colors text-xl" title="Grab"><i class="fas fa-shopping-bag"></i></a>
+                <div class="flex items-center space-x-6">
+                    <a href="#" id="footer-ig" target="_blank" class="text-coffee-cream/70 hover:text-white transition-colors text-xl" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" id="footer-wa" target="_blank" class="text-coffee-cream/70 hover:text-white transition-colors text-xl" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" id="footer-gojek" target="_blank" class="opacity-70 hover:opacity-100 transition-all hover:-translate-y-1 transform flex items-center" title="Gojek">
+                        <img src="assets/images/gojek_icon.png" alt="Gojek" class="w-5 h-5 object-contain grayscale hover:grayscale-0">
+                    </a>
+                    <a href="#" id="footer-grab" target="_blank" class="opacity-70 hover:opacity-100 transition-all hover:-translate-y-1 transform flex items-center" title="Grab">
+                        <img src="assets/images/grab_icon.png" alt="Grab" class="w-5 h-5 object-contain grayscale hover:grayscale-0">
+                    </a>
                 </div>
             </div>
             
@@ -1128,7 +1131,6 @@
             checkScroll(); 
         }
 
-        // Mobile menu toggle logic
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
 
