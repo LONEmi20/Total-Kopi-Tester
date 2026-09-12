@@ -11,13 +11,21 @@ const CONFIG = {
         let cart = JSON.parse(localStorage.getItem('totalKopiCart')) || [];
         let currentModalProduct = null;
         let currentModalQty = 1;
-
-        document.addEventListener('DOMContentLoaded', () => {
-            renderMenu();
+        let products = []; 
+        document.addEventListener('DOMContentLoaded', async () => {
             initContactInfo();
-            renderCart();
-            setupSearch();
             handleRouting();
+            
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/products');
+                products = await response.json(); 
+                renderMenu();
+                renderCart();
+                setupSearch();
+            } catch (error) {
+                console.error("Gagal terhubung ke database:", error);
+                showToast("Maaf, gagal memuat menu kopi.");
+            }
         });
 
         function handleRouting() {
