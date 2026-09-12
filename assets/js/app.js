@@ -1,5 +1,5 @@
 const CONFIG = {
-            whatsappNumber: "6281234567890", 
+            whatsappNumber: "6285789268613", 
             gojekLink: "https://gofood.co.id/",
             grabLink: "https://food.grab.com/",
             instagramLink: "https://instagram.com/totalkopi",
@@ -227,23 +227,31 @@ const CONFIG = {
         }
 
         function checkoutToWhatsApp() {
-            if(cart.length === 0) return;
+    if(cart.length === 0) { 
+        showToast("Keranjangmu masih kosong!"); 
+        return; 
+    }
 
-            let text = "Halo Total Kopi, saya ingin memesan:\n\n";
-            let total = 0;
-            
-            cart.forEach(item => {
-                const subtotal = item.price * item.qty;
-                total += subtotal;
-                text += `- ${item.name} x${item.qty} — Rp${subtotal.toLocaleString('id-ID')}\n`;
-            });
-            
-            text += `\n*Total: Rp${total.toLocaleString('id-ID')}*\n\nTerima kasih.`;
-            
-            const encodedText = encodeURIComponent(text);
-            const waUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodedText}`;
-            window.open(waUrl, '_blank');
-        }
+    let text = `Halo Total Kopi 👋\nSaya ingin memesan (Dari Keranjang):\n\n`;
+    let total = 0;
+    
+    cart.forEach(item => {
+        const subtotal = item.price * item.qty;
+        total += subtotal;
+        text += `• ${item.name} (${item.qty}x) = Rp ${subtotal.toLocaleString('id-ID')}\n`;
+    });
+    
+    text += `\n*Total: Rp ${total.toLocaleString('id-ID')}*\n\n`;
+    
+    text += `Nama Pelanggan: [Ketik Nama Anda]\n`;
+    text += `Alamat Pengiriman: [Ketik Alamat Lengkap]\n\n`;
+    text += `Mohon konfirmasi pesanan saya.`;
+    
+    const encodedText = encodeURIComponent(text);
+    const waUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodedText}`;
+    
+    window.open(waUrl, '_blank');
+}
 
         function openProductModal(productId) {
             const product = products.find(p => p.id === productId);
