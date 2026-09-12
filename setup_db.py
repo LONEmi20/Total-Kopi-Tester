@@ -1,10 +1,8 @@
 import sqlite3
 
-# 1. Membuat atau membuka database
 conn = sqlite3.connect('totalkopi.db')
 cursor = conn.cursor()
 
-# 2. Membuat tabel products
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS products (
     id INTEGER PRIMARY KEY,
@@ -16,10 +14,8 @@ CREATE TABLE IF NOT EXISTS products (
 )
 ''')
 
-# 3. Membersihkan data lama (jika file dijalankan ulang)
 cursor.execute('DELETE FROM products')
 
-# 4. Data 12 menu Total Kopi
 data_kopi = [
     (1, "Kopi Bahagia", 15000, "Coffee", "assets/images/TotalKopi-icon.jpg", "Signature iced coffee dengan gula aren pilihan yang pas manisnya, memberikan kebahagiaan di setiap tegukan."),
     (2, "Americano", 15000, "Coffee", "assets/images/TotalKopi-icon.jpg", "Kopi hitam pekat dari espresso berkualitas. Cocok untuk pecinta kopi sejati yang mencari tendangan kafein ekstra."),
