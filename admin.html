@@ -14,7 +14,6 @@
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased p-6 flex flex-col min-h-screen">
 
-    <!-- SCREEN 1: LOGIN FORM -->
     <div id="login-screen" class="flex-grow flex items-center justify-center">
         <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 max-w-md w-full">
             <div class="text-center mb-8">
@@ -118,7 +117,7 @@
 
     <script>
         
-        const API_URL = 'http://192.168.1.141:5000/api'; 
+        const API_URL = 'https://namakamu.pythonanywhere.com/api'; 
 
         function getAuthHeaders() {
             return { 'X-Admin-Password': sessionStorage.getItem('adminKey') || '' };
