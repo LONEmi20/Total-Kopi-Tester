@@ -234,32 +234,50 @@ const CONFIG = {
                 totalPriceEl.innerText = `Rp ${totalPrice.toLocaleString('id-ID')}`;
             }
         }
+async function checkoutToWhatsApp() {
+    if(cart.length === 0) { showToast("Keranjangmu masih kosong!"); return; }
 
-        function checkoutToWhatsApp() {
-    if(cart.length === 0) { 
-        showToast("Keranjangmu masih kosong!"); 
-        return; 
+    const custName = document.getElementById('checkout-name').value.trim();
+    const custPhone = document.getElementById('checkout-phone').value.trim();
+    const custAddress = document.getElementById('checkout-address').value.trim();
+
+    if(!custName || !custPhone || !custAddress) {
+        showToast("⚠️ Mohon isi Nama, No. WhatsApp, dan Alamat!");
+        return;
     }
 
-    let text = `Halo Total Kopi 👋\nSaya ingin memesan (Dari Keranjang):\n\n`;
     let total = 0;
-    
+    cart.forEach(item => total += (item.price * item.qty));
+
+    try {
+        await fetch('http://127.0.0.1:5000/api/orders', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                customer_name: custName,
+                phone: custPhone,
+                address: custAddress,
+                items: cart,
+                total_price: total
+            })
+        });
+    } catch (error) {
+        console.error("Gagal mencatat ke database:", error);
+    }
+
+    let text = `Halo Total Kopi 👋\nSaya ingin memesan:\n\n`;
     cart.forEach(item => {
         const subtotal = item.price * item.qty;
-        total += subtotal;
         text += `• ${item.name} (${item.qty}x) = Rp ${subtotal.toLocaleString('id-ID')}\n`;
     });
     
-    text += `\n*Total: Rp ${total.toLocaleString('id-ID')}*\n\n`;
+    text += `\n*Total: Rp ${total.toLocaleString('id-ID')}*\n\nData Pengiriman:\nNama: ${custName}\nNo. HP: ${custPhone}\nAlamat: ${custAddress}\n\nMohon konfirmasi pesanan saya.`;
     
-    text += `Nama Pelanggan: [Ketik Nama Anda]\n`;
-    text += `Alamat Pengiriman: [Ketik Alamat Lengkap]\n\n`;
-    text += `Mohon konfirmasi pesanan saya.`;
+    window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(text)}`, '_blank');
     
-    const encodedText = encodeURIComponent(text);
-    const waUrl = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodedText}`;
-    
-    window.open(waUrl, '_blank');
+    cart = [];
+    saveCart();
+    toggleCart();
 }
 
         function openProductModal(productId) {

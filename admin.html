@@ -3,55 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | TOTAL KOPI</title>
+    <title>Admin Dashboard | Total Kopi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'coffee-dark': '#2C1E16',
-                        'accent-gold': '#D4AF37'
-                    }
-                }
-            }
+            theme: { extend: { colors: { 'coffee-dark': '#2C1E16', 'accent-gold': '#D4AF37', 'coffee-espresso': '#4A3320' } } }
         }
     </script>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans antialiased p-6">
+<body class="bg-gray-50 text-gray-800 font-sans antialiased p-6 flex flex-col min-h-screen">
 
-    <div class="max-w-6xl mx-auto">
-        <header class="flex justify-between items-center bg-white p-6 rounded-2xl shadow-sm mb-8 border border-gray-100">
-            <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-coffee-dark text-white rounded-full flex items-center justify-center text-xl">
-                    <i class="fas fa-shield-alt"></i>
+    <div id="login-screen" class="flex-grow flex items-center justify-center">
+        <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 max-w-md w-full">
+            <div class="text-center mb-8">
+                <img src="assets/images/TotalKopi-icon.jpg" alt="Admin Profile" class="w-12 h-12 rounded-full object-cover shadow-sm border-2 border-coffee-dark">
+                <h2 class="text-2xl font-bold text-coffee-dark">Admin Login</h2>
+                <p class="text-sm text-gray-500">Silakan masukkan password rahasia</p>
+            </div>
+            <form id="login-form" class="space-y-6">
+                <div>
+                    <input type="password" id="admin-password" placeholder="Password..." required
+                        class="w-full px-5 py-4 rounded-xl border border-gray-200 bg-gray-50 focus:outline-none focus:border-coffee-dark transition-all text-center tracking-widest">
                 </div>
+                <button type="submit" class="w-full bg-coffee-dark hover:bg-black text-white py-4 rounded-xl font-bold transition-all shadow-md">
+                    Masuk
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="dashboard-screen" class="max-w-6xl mx-auto w-full hidden space-y-8">
+        <!-- Header -->
+        <header class="flex justify-between items-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+            <div class="flex items-center gap-4">
+                <img src="assets/images/admin.jpg" alt="Admin Profile" class="w-12 h-12 rounded-full object-cover shadow-sm border-2 border-coffee-dark">
                 <div>
                     <h1 class="text-2xl font-bold text-coffee-dark">Admin Panel</h1>
-                    <p class="text-sm text-gray-500">Moderasi Testimoni Pelanggan</p>
+                    <p class="text-sm text-gray-500">Moderasi Testimoni & Riwayat Pesanan</p>
                 </div>
             </div>
-            <a href="index.html" class="px-6 py-2 bg-gray-100 hover:bg-gray-200 rounded-full text-sm font-bold transition-colors">
-                <i class="fas fa-external-link-alt mr-2"></i> Lihat Website
-            </a>
+            <div class="flex gap-3">
+                <button onclick="logout()" class="px-6 py-2 bg-red-100 text-red-600 hover:bg-red-200 rounded-full text-sm font-bold transition-colors">
+                    Logout
+                </button>
+                <a href="index.html" class="px-6 py-2 bg-gray-100 hover:bg-gray-200 rounded-full text-sm font-bold transition-colors">
+                    <i class="fas fa-external-link-alt mr-2"></i> Web Utama
+                </a>
+            </div>
         </header>
 
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-            <div class="p-6 border-b border-gray-100 flex justify-between items-center">
-                <h2 class="text-lg font-bold">Daftar Testimoni Masuk</h2>
-                <button onclick="loadAdminTestimonials()" class="text-sm text-blue-500 hover:text-blue-700">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+                <h2 class="text-lg font-bold text-coffee-dark"><i class="fas fa-shopping-bag mr-2 text-accent-gold"></i> Riwayat Pesanan</h2>
+                <button onclick="loadAdminOrders()" class="text-sm text-blue-500 hover:text-blue-700">
                     <i class="fas fa-sync-alt"></i> Refresh Data
                 </button>
             </div>
-            
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>
                         <tr class="bg-gray-50 text-gray-500 text-sm border-b border-gray-100">
-                            <th class="p-4 font-semibold">ID</th>
+                            <th class="p-4 font-semibold w-1/6">Waktu</th>
+                            <th class="p-4 font-semibold w-1/4">Pelanggan</th>
+                            <th class="p-4 font-semibold w-1/3">Detail Pesanan</th>
+                            <th class="p-4 font-semibold w-1/6">Total Pembayaran</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-orders-body" class="divide-y divide-gray-100">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+                <h2 class="text-lg font-bold text-coffee-dark"><i class="fas fa-star mr-2 text-accent-gold"></i> Moderasi Testimoni</h2>
+                <button onclick="loadAdminTestimonials()" class="text-sm text-blue-500 hover:text-blue-700">
+                    <i class="fas fa-sync-alt"></i> Refresh Data
+                </button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-50 text-gray-500 text-sm border-b border-gray-100">
                             <th class="p-4 font-semibold">Nama</th>
-                            <th class="p-4 font-semibold">Rating</th>
                             <th class="p-4 font-semibold">Komentar</th>
                             <th class="p-4 font-semibold">Status</th>
                             <th class="p-4 font-semibold text-center">Aksi</th>
@@ -67,17 +103,94 @@
     <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
 
     <script>
+        function getAuthHeaders() {
+            return { 'X-Admin-Password': sessionStorage.getItem('adminKey') || '' };
+        }
+
+        function logout() {
+            sessionStorage.removeItem('adminKey');
+            window.location.reload();
+        }
+
+        // Login Submit
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const password = document.getElementById('admin-password').value;
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/admin/login', {
+                    method: 'POST', headers: { 'X-Admin-Password': password }
+                });
+                if (response.ok) {
+                    sessionStorage.setItem('adminKey', password);
+                    document.getElementById('login-screen').classList.add('hidden');
+                    document.getElementById('dashboard-screen').classList.remove('hidden');
+                    loadAllData(); // Load semua data saat login
+                    showToast("✓ Login Berhasil!");
+                } else {
+                    showToast("❌ Password Salah!");
+                }
+            } catch (error) {
+                showToast("Server tidak merespons.");
+            }
+        });
+
+        async function loadAdminOrders() {
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/admin/orders', { headers: getAuthHeaders() });
+                if (response.status === 401) { logout(); return; }
+
+                const data = await response.json();
+                const tbody = document.getElementById('admin-orders-body');
+                tbody.innerHTML = '';
+
+                if (data.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="4" class="text-center p-8 text-gray-500">Belum ada pesanan masuk.</td></tr>`;
+                    return;
+                }
+
+                data.forEach(order => {
+                    let itemsHtml = '';
+                    try {
+                        const items = JSON.parse(order.items);
+                        items.forEach(i => {
+                            itemsHtml += `<div class="mb-1 border-b border-gray-50 pb-1 last:border-0"><span class="font-bold">${i.qty}x</span> ${i.name}</div>`;
+                        });
+                    } catch (e) {
+                        itemsHtml = `<span class="text-red-500">Gagal memuat detail pesanan</span>`;
+                    }
+
+                    const dateObj = new Date(order.created_at.replace(' ', 'T') + 'Z');
+                    const formattedDate = dateObj.toLocaleString('id-ID', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+                    tbody.innerHTML += `
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="p-4 text-sm text-gray-500">${formattedDate} WIB</td>
+                            <td class="p-4">
+                                <div class="font-bold text-coffee-dark">${order.customer_name}</div>
+                                <div class="text-sm text-gray-600"><i class="fab fa-whatsapp text-[#25D366]"></i> ${order.phone}</div>
+                                <div class="text-xs text-gray-500 mt-1 max-w-[200px] truncate" title="${order.address}">${order.address}</div>
+                            </td>
+                            <td class="p-4 text-sm text-gray-700">${itemsHtml}</td>
+                            <td class="p-4 font-bold text-lg text-coffee-espresso">Rp ${order.total_price.toLocaleString('id-ID')}</td>
+                        </tr>
+                    `;
+                });
+            } catch (error) {
+                showToast("Gagal memuat pesanan.");
+            }
+        }
+
+// DATA: TESTIMONI
         async function loadAdminTestimonials() {
             try {
-                const response = await fetch('http://127.0.0.1:5000/api/admin/testimonials');
+                const response = await fetch('http://127.0.0.1:5000/api/admin/testimonials', { headers: getAuthHeaders() });
+                if (response.status === 401) return;
+
                 const data = await response.json();
                 const tbody = document.getElementById('admin-table-body');
                 tbody.innerHTML = '';
 
-                if (data.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="6" class="text-center p-8 text-gray-500">Belum ada testimoni.</td></tr>`;
-                    return;
-                }
+                if (data.length === 0) tbody.innerHTML = `<tr><td colspan="4" class="text-center p-8 text-gray-500">Belum ada testimoni.</td></tr>`;
 
                 data.forEach(t => {
                     const statusBadge = t.status === 'approved' 
@@ -85,63 +198,59 @@
                         : `<span class="px-3 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded-full uppercase">Pending</span>`;
 
                     const approveBtn = t.status === 'pending'
-                        ? `<button onclick="approveTesti(${t.id})" class="bg-green-500 hover:bg-green-600 text-white w-8 h-8 rounded-lg shadow-sm transition-colors" title="Setujui"><i class="fas fa-check"></i></button>`
+                        ? `<button onclick="approveTesti(${t.id})" class="bg-green-500 text-white w-8 h-8 rounded-lg shadow-sm" title="Setujui"><i class="fas fa-check"></i></button>`
                         : `<span class="w-8 h-8 inline-block"></span>`;
 
                     tbody.innerHTML += `
                         <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="p-4 text-gray-500 font-mono">#${t.id}</td>
-                            <td class="p-4 font-bold text-gray-800">${t.name}</td>
-                            <td class="p-4 text-accent-gold">${'⭐'.repeat(t.rating)}</td>
-                            <td class="p-4 text-gray-600 max-w-xs truncate" title="${t.comment}">${t.comment}</td>
+                            <td class="p-4 font-bold text-gray-800">${t.name} <br> <span class="text-accent-gold font-normal text-sm">${'⭐'.repeat(t.rating)}</span></td>
+                            <td class="p-4 text-gray-600 max-w-xs truncate">${t.comment}</td>
                             <td class="p-4">${statusBadge}</td>
                             <td class="p-4 flex gap-2 justify-center">
                                 ${approveBtn}
-                                <button onclick="deleteTesti(${t.id})" class="bg-red-500 hover:bg-red-600 text-white w-8 h-8 rounded-lg shadow-sm transition-colors" title="Hapus Permanen"><i class="fas fa-trash"></i></button>
+                                <button onclick="deleteTesti(${t.id})" class="bg-red-500 text-white w-8 h-8 rounded-lg shadow-sm"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>
                     `;
                 });
             } catch (error) {
-                showToast("Gagal terhubung ke database!");
+                showToast("Gagal memuat testimoni.");
             }
         }
 
         async function approveTesti(id) {
-            try {
-                await fetch(`http://127.0.0.1:5000/api/admin/testimonials/${id}/approve`, { method: 'POST' });
-                showToast("✓ Testimoni disetujui & tayang di web!");
-                loadAdminTestimonials();
-            } catch (error) {
-                showToast("Gagal menyetujui testimoni.");
-            }
+            await fetch(`http://127.0.0.1:5000/api/admin/testimonials/${id}/approve`, { method: 'POST', headers: getAuthHeaders() });
+            loadAdminTestimonials();
         }
 
         async function deleteTesti(id) {
-            if (!confirm("Yakin ingin menghapus testimoni ini secara permanen?")) return;
-            try {
-                await fetch(`http://127.0.0.1:5000/api/admin/testimonials/${id}`, { method: 'DELETE' });
-                showToast("✓ Testimoni berhasil dihapus!");
-                loadAdminTestimonials(); 
-            } catch (error) {
-                showToast("Gagal menghapus testimoni.");
-            }
+            if (!confirm("Hapus permanen?")) return;
+            await fetch(`http://127.0.0.1:5000/api/admin/testimonials/${id}`, { method: 'DELETE', headers: getAuthHeaders() });
+            loadAdminTestimonials();
         }
+
+        function loadAllData() {
+            loadAdminOrders();
+            loadAdminTestimonials();
+        }
+
+        // Cek login saat halaman di-refresh
+        document.addEventListener('DOMContentLoaded', () => {
+            if (sessionStorage.getItem('adminKey')) {
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('dashboard-screen').classList.remove('hidden');
+                loadAllData();
+            }
+        });
 
         function showToast(message) {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
-            toast.className = 'bg-coffee-dark text-white px-6 py-4 rounded-xl shadow-2xl flex items-center transform translate-y-10 opacity-0 transition-all duration-300';
+            toast.className = 'bg-coffee-dark text-white px-6 py-4 rounded-xl shadow-lg flex items-center transition-all duration-300';
             toast.innerHTML = `<span class="font-medium">${message}</span>`;
             container.appendChild(toast);
-            setTimeout(() => { toast.classList.remove('translate-y-10', 'opacity-0'); }, 10);
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'translate-y-10');
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
+            setTimeout(() => toast.remove(), 3000);
         }
-
-        document.addEventListener('DOMContentLoaded', loadAdminTestimonials);
     </script>
 </body>
 </html>
