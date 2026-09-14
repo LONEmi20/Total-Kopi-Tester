@@ -144,7 +144,7 @@
                 tbody.innerHTML = '';
 
                 if (data.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="4" class="text-center p-8 text-gray-500">Belum ada pesanan masuk.</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="5" class="text-center p-8 text-gray-500">Belum ada pesanan masuk.</td></tr>`;
                     return;
                 }
 
@@ -156,11 +156,19 @@
                             itemsHtml += `<div class="mb-1 border-b border-gray-50 pb-1 last:border-0"><span class="font-bold">${i.qty}x</span> ${i.name}</div>`;
                         });
                     } catch (e) {
-                        itemsHtml = `<span class="text-red-500">Gagal memuat detail pesanan</span>`;
+                        itemsHtml = `<span class="text-red-500">Gagal memuat detail</span>`;
                     }
 
                     const dateObj = new Date(order.created_at.replace(' ', 'T') + 'Z');
                     const formattedDate = dateObj.toLocaleString('id-ID', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+                    const statusBadge = order.status === 'selesai'
+                        ? `<span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full uppercase"><i class="fas fa-check-double mr-1"></i> Selesai</span>`
+                        : `<span class="px-3 py-1 bg-orange-100 text-orange-700 text-xs font-bold rounded-full uppercase"><i class="fas fa-clock mr-1"></i> Pending</span>`;
+
+                    const actionBtn = order.status === 'pending'
+                        ? `<button onclick="completeOrder(${order.id})" class="bg-blue-500 hover:bg-blue-600 text-white w-8 h-8 rounded-lg shadow-sm transition-colors mb-1" title="Tandai Selesai"><i class="fas fa-check"></i></button>`
+                        : `<span class="w-8 h-8 inline-block mb-1"></span>`;
 
                     tbody.innerHTML += `
                         <tr class="hover:bg-gray-50 transition-colors">
@@ -168,10 +176,16 @@
                             <td class="p-4">
                                 <div class="font-bold text-coffee-dark">${order.customer_name}</div>
                                 <div class="text-sm text-gray-600"><i class="fab fa-whatsapp text-[#25D366]"></i> ${order.phone}</div>
-                                <div class="text-xs text-gray-500 mt-1 max-w-[200px] truncate" title="${order.address}">${order.address}</div>
                             </td>
                             <td class="p-4 text-sm text-gray-700">${itemsHtml}</td>
-                            <td class="p-4 font-bold text-lg text-coffee-espresso">Rp ${order.total_price.toLocaleString('id-ID')}</td>
+                            <td class="p-4">
+                                <div class="font-bold text-lg text-coffee-espresso mb-2">Rp ${order.total_price.toLocaleString('id-ID')}</div>
+                                ${statusBadge}
+                            </td>
+                            <td class="p-4 flex flex-col gap-1 items-center justify-center">
+                                ${actionBtn}
+                                <button onclick="deleteOrder(${order.id})" class="bg-red-500 hover:bg-red-600 text-white w-8 h-8 rounded-lg shadow-sm transition-colors" title="Hapus Pesanan"><i class="fas fa-trash"></i></button>
+                            </td>
                         </tr>
                     `;
                 });
@@ -180,7 +194,23 @@
             }
         }
 
-// DATA: TESTIMONI
+        async function completeOrder(id) {
+            await fetch(`http://127.0.0.1:5000/api/admin/orders/${id}/complete`, { 
+                method: 'POST', headers: getAuthHeaders() 
+            });
+            showToast("✓ Pesanan ditandai selesai!");
+            loadAdminOrders();
+        }
+
+        async function deleteOrder(id) {
+            if (!confirm("Yakin hapus data pesanan ini secara permanen?")) return;
+            await fetch(`http://127.0.0.1:5000/api/admin/orders/${id}`, { 
+                method: 'DELETE', headers: getAuthHeaders() 
+            });
+            showToast("✓ Pesanan berhasil dihapus!");
+            loadAdminOrders();
+        }
+
         async function loadAdminTestimonials() {
             try {
                 const response = await fetch('http://127.0.0.1:5000/api/admin/testimonials', { headers: getAuthHeaders() });

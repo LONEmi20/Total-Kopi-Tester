@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import sqlite3
-import json 
+import json
 
 app = Flask(__name__)
 CORS(app)
@@ -24,14 +24,16 @@ def init_db():
             status TEXT DEFAULT 'pending' 
         )
     ''')
+    # UPDATE: Tambahkan kolom status di tabel orders
     conn.execute('''
         CREATE TABLE IF NOT EXISTS orders (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             customer_name TEXT NOT NULL,
             phone TEXT NOT NULL,
             address TEXT NOT NULL,
-            items TEXT NOT NULL, -- Menyimpan daftar belanjaan dalam format teks (JSON)
+            items TEXT NOT NULL,
             total_price INTEGER NOT NULL,
+            status TEXT DEFAULT 'pending',
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     ''')
@@ -41,15 +43,17 @@ def init_db():
 init_db()
 
 def check_auth():
-    token = request.headers.get('X-Admin-Password')
-    return token == ADMIN_PASSWORD
+    return request.headers.get('X-Admin-Password') == ADMIN_PASSWORD
 
+# ==========================================
+# JALUR PUBLIK
+# ==========================================
 @app.route('/api/products', methods=['GET'])
 def get_products():
     conn = get_db_connection()
-    products_db = conn.execute('SELECT * FROM products').fetchall()
+    products = conn.execute('SELECT * FROM products').fetchall()
     conn.close()
-    return jsonify([dict(p) for p in products_db])
+    return jsonify([dict(p) for p in products])
 
 @app.route('/api/testimonials', methods=['POST'])
 def add_testimonial():
@@ -59,7 +63,7 @@ def add_testimonial():
                  (data['name'], data['rating'], data['comment']))
     conn.commit()
     conn.close()
-    return jsonify({"pesan": "Testimoni berhasil dikirim dan menunggu moderasi!"})
+    return jsonify({"pesan": "Testimoni berhasil dikirim!"})
 
 @app.route('/api/testimonials', methods=['GET'])
 def get_testimonials():
@@ -72,7 +76,6 @@ def get_testimonials():
 def add_order():
     data = request.json
     items_json = json.dumps(data['items']) 
-    
     conn = get_db_connection()
     conn.execute('''
         INSERT INTO orders (customer_name, phone, address, items, total_price) 
@@ -80,12 +83,14 @@ def add_order():
     ''', (data['customer_name'], data['phone'], data['address'], items_json, data['total_price']))
     conn.commit()
     conn.close()
-    return jsonify({"pesan": "Pesanan berhasil dicatat!"})
+    return jsonify({"pesan": "Pesanan dicatat!"})
 
+# ==========================================
+# JALUR RAHASIA ADMIN
+# ==========================================
 @app.route('/api/admin/login', methods=['POST'])
 def admin_login():
-    if check_auth():
-        return jsonify({"pesan": "Login berhasil!"})
+    if check_auth(): return jsonify({"pesan": "Login berhasil!"})
     return jsonify({"pesan": "Password salah!"}), 401
 
 @app.route('/api/admin/testimonials', methods=['GET'])
@@ -103,7 +108,7 @@ def admin_approve(id):
     conn.execute("UPDATE testimonials SET status = 'approved' WHERE id = ?", (id,))
     conn.commit()
     conn.close()
-    return jsonify({"pesan": "Testimoni disetujui!"})
+    return jsonify({"pesan": "Disetujui!"})
 
 @app.route('/api/admin/testimonials/<int:id>', methods=['DELETE'])
 def admin_delete(id):
@@ -112,7 +117,7 @@ def admin_delete(id):
     conn.execute("DELETE FROM testimonials WHERE id = ?", (id,))
     conn.commit()
     conn.close()
-    return jsonify({"pesan": "Testimoni dihapus!"})
+    return jsonify({"pesan": "Dihapus!"})
 
 @app.route('/api/admin/orders', methods=['GET'])
 def admin_get_orders():
@@ -121,6 +126,26 @@ def admin_get_orders():
     orders = conn.execute('SELECT * FROM orders ORDER BY id DESC').fetchall()
     conn.close()
     return jsonify([dict(o) for o in orders])
+
+# BARU: Endpoint menyelesaikan pesanan
+@app.route('/api/admin/orders/<int:id>/complete', methods=['POST'])
+def admin_complete_order(id):
+    if not check_auth(): return jsonify({"pesan": "Akses Ditolak!"}), 401
+    conn = get_db_connection()
+    conn.execute("UPDATE orders SET status = 'selesai' WHERE id = ?", (id,))
+    conn.commit()
+    conn.close()
+    return jsonify({"pesan": "Pesanan diselesaikan!"})
+
+# BARU: Endpoint menghapus pesanan
+@app.route('/api/admin/orders/<int:id>', methods=['DELETE'])
+def admin_delete_order(id):
+    if not check_auth(): return jsonify({"pesan": "Akses Ditolak!"}), 401
+    conn = get_db_connection()
+    conn.execute("DELETE FROM orders WHERE id = ?", (id,))
+    conn.commit()
+    conn.close()
+    return jsonify({"pesan": "Pesanan dihapus!"})
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
