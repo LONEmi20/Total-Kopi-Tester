@@ -250,7 +250,7 @@ async function checkoutToWhatsApp() {
     cart.forEach(item => total += (item.price * item.qty));
 
     try {
-        await fetch('http://192.168.1.141/api/orders', {
+        await fetch('http://192.168.1.141:5000/api/orders', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -608,7 +608,7 @@ async function checkoutToWhatsApp() {
 
                 async function loadTestimonials() {
     try {
-        const response = await fetch('http://192.168.1.141/api/testimonials');
+        const response = await fetch('http://192.168.1.141:5000/api/testimonials');
         const testis = await response.json();
         const grid = document.getElementById('testimonial-grid');
         
@@ -637,7 +637,7 @@ async function checkoutToWhatsApp() {
     const comment = document.getElementById('testi-pesan').value;
     
     try {
-        await fetch('http://192.168.1.141/api/testimonials', {
+        await fetch('http://192.168.1.141:5000/api/testimonials', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, rating, comment })
