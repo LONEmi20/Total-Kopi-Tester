@@ -53,13 +53,19 @@
             </div>
         </header>
 
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
-                <h2 class="text-lg font-bold text-coffee-dark"><i class="fas fa-shopping-bag mr-2 text-accent-gold"></i> Riwayat Pesanan</h2>
-                <button onclick="loadAdminOrders()" class="text-sm text-blue-500 hover:text-blue-700">
-                    <i class="fas fa-sync-alt"></i> Refresh Data
+
+        
+<div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+            <h2 class="text-lg font-bold text-coffee-dark"><i class="fas fa-shopping-bag mr-2 text-accent-gold"></i> Riwayat Pesanan</h2>
+            <div class="flex gap-3">
+                <button onclick="exportOrdersCSV()" class="text-sm bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-bold transition-colors shadow-sm">
+                    <i class="fas fa-file-csv mr-2"></i> Ekspor CSV
+                </button>
+                <button onclick="loadAdminOrders()" class="text-sm text-blue-500 hover:text-blue-700 px-3 py-2 rounded-lg bg-white border border-gray-200">
+                    <i class="fas fa-sync-alt"></i>
                 </button>
             </div>
+        </div>
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>
@@ -209,6 +215,31 @@
             });
             showToast("✓ Pesanan berhasil dihapus!");
             loadAdminOrders();
+        }
+
+        async function exportOrdersCSV() {
+            try {
+                showToast("Sedang menyiapkan file CSV...");
+                const response = await fetch('http://192.168.1.141:5000/api/admin/orders/export', {
+                    headers: getAuthHeaders()
+                });
+                
+                if (response.status === 401) { logout(); return; }
+                
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'dataset_penjualan_totalkopi.csv';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.URL.revokeObjectURL(url);
+                
+                showToast("Berhasil! File CSV siap dibuka.");
+            } catch (error) {
+                showToast("Gagal mengunduh file.");
+            }
         }
 
         async function loadAdminTestimonials() {

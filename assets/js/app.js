@@ -17,7 +17,7 @@ const CONFIG = {
             handleRouting();
             
             try {
-                const response = await fetch('http://127.0.0.1:5000/api/products');
+                const response = await fetch('http://192.168.1.141:5000/api/products');
                 products = await response.json(); 
                 renderMenu();
                 loadTestimonials();

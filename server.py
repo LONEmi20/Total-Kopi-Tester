@@ -1,7 +1,9 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, Response
 from flask_cors import CORS
 import sqlite3
 import json
+import csv
+from io import StringIO
 
 app = Flask(__name__)
 CORS(app)
@@ -138,5 +140,43 @@ def admin_delete_order(id):
     conn.close()
     return jsonify({"pesan": "Pesanan dihapus!"})
 
+@app.route('/api/admin/orders/export', methods=['GET'])
+def admin_export_orders():
+    if not check_auth(): return jsonify({"pesan": "Akses Ditolak!"}), 401
+    
+    conn = get_db_connection()
+    orders = conn.execute('SELECT * FROM orders ORDER BY id DESC').fetchall()
+    conn.close()
+    
+    si = StringIO()
+    cw = csv.writer(si)
+    
+    cw.writerow(['ID Pesanan', 'Waktu UTC', 'Nama Pelanggan', 'No HP', 'Alamat', 'Detail Pesanan', 'Total Harga', 'Status'])
+    
+    for o in orders:
+        try:
+            items = json.loads(o['items'])
+            items_text = ", ".join([f"{item['qty']}x {item['name']}" for item in items])
+        except:
+            items_text = "Data tidak valid"
+            
+        cw.writerow([
+            o['id'],
+            o['created_at'],
+            o['customer_name'],
+            o['phone'],
+            o['address'],
+            items_text,
+            o['total_price'],
+            o['status']
+        ])
+        
+    output = si.getvalue()
+    return Response(
+        output,
+        mimetype="text/csv",
+        headers={"Content-Disposition": "attachment;filename=dataset_penjualan_totalkopi.csv"}
+    )
+
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)
