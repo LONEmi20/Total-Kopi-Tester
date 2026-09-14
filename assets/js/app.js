@@ -20,6 +20,7 @@ const CONFIG = {
                 const response = await fetch('http://127.0.0.1:5000/api/products');
                 products = await response.json(); 
                 renderMenu();
+                loadTestimonials();
                 renderCart();
                 setupSearch();
             } catch (error) {
@@ -579,6 +580,8 @@ const CONFIG = {
             checkScroll(); 
         }
 
+
+
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
 
@@ -586,3 +589,51 @@ const CONFIG = {
             menu.classList.toggle('hidden');
 
         });
+
+                async function loadTestimonials() {
+    try {
+        const response = await fetch('http://127.0.0.1:5000/api/testimonials');
+        const testis = await response.json();
+        const grid = document.getElementById('testimonial-grid');
+        
+        grid.innerHTML = '';
+        
+        testis.forEach(t => {
+            let stars = '⭐'.repeat(t.rating);
+            grid.innerHTML += `
+                <div class="bg-white rounded-2xl p-8 border border-coffee-cream shadow-sm hover:shadow-lg transition-all transform hover:-translate-y-1">
+                    <div class="text-xl mb-4">${stars}</div>
+                    <p class="text-gray-600 italic mb-6 line-clamp-4">"${t.comment}"</p>
+                    <div class="font-bold text-coffee-espresso">— ${t.name}</div>
+                </div>
+            `;
+        });
+    } catch (error) {
+        console.error("Gagal memuat testimoni:", error);
+    }
+}
+
+        document.getElementById('form-testimoni').addEventListener('submit', async (e) => {
+    e.preventDefault(); 
+    
+    // Ambil nilai dari inputan form
+    const name = document.getElementById('testi-nama').value;
+    const rating = parseInt(document.getElementById('testi-rating').value);
+    const comment = document.getElementById('testi-pesan').value;
+    
+    try {
+        // Kirim data ke Python Backend
+        await fetch('http://127.0.0.1:5000/api/testimonials', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, rating, comment })
+        });
+        
+        showToast('✓ Terima kasih atas ulasan manismu!');
+        document.getElementById('form-testimoni').reset(); 
+        loadTestimonials(); 
+        
+    } catch (error) {
+        showToast('Maaf, gagal mengirim testimoni.');
+    }
+});
