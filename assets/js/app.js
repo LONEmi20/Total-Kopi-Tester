@@ -17,7 +17,7 @@ const CONFIG = {
             handleRouting();
             
             try {
-                const response = await fetch('https://namakamu.pythonanywhere.com/api/products');
+                const response = await fetch('https://totalkopi.pythonanywhere.com/api/products');
                 products = await response.json(); 
                 renderMenu();
                 loadTestimonials();
@@ -250,7 +250,7 @@ async function checkoutToWhatsApp() {
     cart.forEach(item => total += (item.price * item.qty));
 
     try {
-        await fetch('https://namakamu.pythonanywhere.com/api/orders', {
+        await fetch('https://totalkopi.pythonanywhere.com/api/orders', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -608,7 +608,7 @@ async function checkoutToWhatsApp() {
 
                 async function loadTestimonials() {
     try {
-        const response = await fetch('https://namakamu.pythonanywhere.com/api/testimonials');
+        const response = await fetch('https://totalkopi.pythonanywhere.com/api/testimonials');
         const testis = await response.json();
         const grid = document.getElementById('testimonial-grid');
         
@@ -637,7 +637,7 @@ async function checkoutToWhatsApp() {
     const comment = document.getElementById('testi-pesan').value;
     
     try {
-        await fetch('https://namakamu.pythonanywhere.com/api/testimonials', {
+        await fetch('https://totalkopi.pythonanywhere.com/api/testimonials', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, rating, comment })
