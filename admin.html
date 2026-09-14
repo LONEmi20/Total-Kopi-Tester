@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | TOTAL KOPI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'coffee-dark': '#2C1E16',
+                        'accent-gold': '#D4AF37'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased p-6">
+
+    <div class="max-w-6xl mx-auto">
+        <header class="flex justify-between items-center bg-white p-6 rounded-2xl shadow-sm mb-8 border border-gray-100">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-coffee-dark text-white rounded-full flex items-center justify-center text-xl">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-coffee-dark">Admin Panel</h1>
+                    <p class="text-sm text-gray-500">Moderasi Testimoni Pelanggan</p>
+                </div>
+            </div>
+            <a href="index.html" class="px-6 py-2 bg-gray-100 hover:bg-gray-200 rounded-full text-sm font-bold transition-colors">
+                <i class="fas fa-external-link-alt mr-2"></i> Lihat Website
+            </a>
+        </header>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center">
+                <h2 class="text-lg font-bold">Daftar Testimoni Masuk</h2>
+                <button onclick="loadAdminTestimonials()" class="text-sm text-blue-500 hover:text-blue-700">
+                    <i class="fas fa-sync-alt"></i> Refresh Data
+                </button>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-50 text-gray-500 text-sm border-b border-gray-100">
+                            <th class="p-4 font-semibold">ID</th>
+                            <th class="p-4 font-semibold">Nama</th>
+                            <th class="p-4 font-semibold">Rating</th>
+                            <th class="p-4 font-semibold">Komentar</th>
+                            <th class="p-4 font-semibold">Status</th>
+                            <th class="p-4 font-semibold text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-table-body" class="divide-y divide-gray-100">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <script>
+        async function loadAdminTestimonials() {
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/admin/testimonials');
+                const data = await response.json();
+                const tbody = document.getElementById('admin-table-body');
+                tbody.innerHTML = '';
+
+                if (data.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="6" class="text-center p-8 text-gray-500">Belum ada testimoni.</td></tr>`;
+                    return;
+                }
+
+                data.forEach(t => {
+                    const statusBadge = t.status === 'approved' 
+                        ? `<span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full uppercase">Tayang</span>`
+                        : `<span class="px-3 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded-full uppercase">Pending</span>`;
+
+                    const approveBtn = t.status === 'pending'
+                        ? `<button onclick="approveTesti(${t.id})" class="bg-green-500 hover:bg-green-600 text-white w-8 h-8 rounded-lg shadow-sm transition-colors" title="Setujui"><i class="fas fa-check"></i></button>`
+                        : `<span class="w-8 h-8 inline-block"></span>`;
+
+                    tbody.innerHTML += `
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="p-4 text-gray-500 font-mono">#${t.id}</td>
+                            <td class="p-4 font-bold text-gray-800">${t.name}</td>
+                            <td class="p-4 text-accent-gold">${'⭐'.repeat(t.rating)}</td>
+                            <td class="p-4 text-gray-600 max-w-xs truncate" title="${t.comment}">${t.comment}</td>
+                            <td class="p-4">${statusBadge}</td>
+                            <td class="p-4 flex gap-2 justify-center">
+                                ${approveBtn}
+                                <button onclick="deleteTesti(${t.id})" class="bg-red-500 hover:bg-red-600 text-white w-8 h-8 rounded-lg shadow-sm transition-colors" title="Hapus Permanen"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } catch (error) {
+                showToast("Gagal terhubung ke database!");
+            }
+        }
+
+        async function approveTesti(id) {
+            try {
+                await fetch(`http://127.0.0.1:5000/api/admin/testimonials/${id}/approve`, { method: 'POST' });
+                showToast("✓ Testimoni disetujui & tayang di web!");
+                loadAdminTestimonials();
+            } catch (error) {
+                showToast("Gagal menyetujui testimoni.");
+            }
+        }
+
+        async function deleteTesti(id) {
+            if (!confirm("Yakin ingin menghapus testimoni ini secara permanen?")) return;
+            try {
+                await fetch(`http://127.0.0.1:5000/api/admin/testimonials/${id}`, { method: 'DELETE' });
+                showToast("✓ Testimoni berhasil dihapus!");
+                loadAdminTestimonials(); 
+            } catch (error) {
+                showToast("Gagal menghapus testimoni.");
+            }
+        }
+
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'bg-coffee-dark text-white px-6 py-4 rounded-xl shadow-2xl flex items-center transform translate-y-10 opacity-0 transition-all duration-300';
+            toast.innerHTML = `<span class="font-medium">${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => { toast.classList.remove('translate-y-10', 'opacity-0'); }, 10);
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-10');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        document.addEventListener('DOMContentLoaded', loadAdminTestimonials);
+    </script>
+</body>
+</html>

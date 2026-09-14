@@ -580,8 +580,6 @@ const CONFIG = {
             checkScroll(); 
         }
 
-
-
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
 
@@ -616,13 +614,11 @@ const CONFIG = {
         document.getElementById('form-testimoni').addEventListener('submit', async (e) => {
     e.preventDefault(); 
     
-    // Ambil nilai dari inputan form
     const name = document.getElementById('testi-nama').value;
     const rating = parseInt(document.getElementById('testi-rating').value);
     const comment = document.getElementById('testi-pesan').value;
     
     try {
-        // Kirim data ke Python Backend
         await fetch('http://127.0.0.1:5000/api/testimonials', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

@@ -17,26 +17,22 @@ def init_db():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
             rating INTEGER NOT NULL,
-            comment TEXT NOT NULL
+            comment TEXT NOT NULL,
+            status TEXT DEFAULT 'pending' 
         )
     ''')
     conn.commit()
     conn.close()
 
-init_db() 
+init_db()
 
 @app.route('/api/products', methods=['GET'])
 def get_products():
     conn = get_db_connection()
     products_db = conn.execute('SELECT * FROM products').fetchall()
     conn.close()
-    
-    products_list = []
-    for p in products_db:
-        products_list.append(dict(p))
-    return jsonify(products_list)
+    return jsonify([dict(p) for p in products_db])
 
-# 3. Endpoint Menerima Testimoni Baru (POST)
 @app.route('/api/testimonials', methods=['POST'])
 def add_testimonial():
     data = request.json
@@ -45,20 +41,38 @@ def add_testimonial():
                  (data['name'], data['rating'], data['comment']))
     conn.commit()
     conn.close()
-    return jsonify({"pesan": "Testimoni berhasil disimpan!"})
+    return jsonify({"pesan": "Testimoni berhasil dikirim dan menunggu moderasi!"})
 
-# 4. Endpoint Menampilkan Testimoni (GET)
 @app.route('/api/testimonials', methods=['GET'])
 def get_testimonials():
     conn = get_db_connection()
-    # Ambil data terbaru di urutan paling atas
+    testis = conn.execute("SELECT * FROM testimonials WHERE status = 'approved' ORDER BY id DESC").fetchall()
+    conn.close()
+    return jsonify([dict(t) for t in testis])
+
+#ADMIN
+@app.route('/api/admin/testimonials', methods=['GET'])
+def admin_get_testimonials():
+    conn = get_db_connection()
     testis = conn.execute('SELECT * FROM testimonials ORDER BY id DESC').fetchall()
     conn.close()
-    
-    testi_list = []
-    for t in testis:
-        testi_list.append(dict(t))
-    return jsonify(testi_list)
+    return jsonify([dict(t) for t in testis])
+
+@app.route('/api/admin/testimonials/<int:id>/approve', methods=['POST'])
+def admin_approve(id):
+    conn = get_db_connection()
+    conn.execute("UPDATE testimonials SET status = 'approved' WHERE id = ?", (id,))
+    conn.commit()
+    conn.close()
+    return jsonify({"pesan": "Testimoni disetujui!"})
+
+@app.route('/api/admin/testimonials/<int:id>', methods=['DELETE'])
+def admin_delete(id):
+    conn = get_db_connection()
+    conn.execute("DELETE FROM testimonials WHERE id = ?", (id,))
+    conn.commit()
+    conn.close()
+    return jsonify({"pesan": "Testimoni dihapus!"})
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

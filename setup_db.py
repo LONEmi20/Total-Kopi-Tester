@@ -31,7 +31,6 @@ data_kopi = [
     (12, "Passion Black", 25000, "Japanese Coffee", "assets/images/TotalKopi-icon.jpg", "Japanese iced coffee dengan profil rasa yang kuat, bold, namun tetap bersih di mulut (clean aftertaste).")
 ]
 
-# 5. Memasukkan data ke tabel dan menyimpannya
 cursor.executemany('''
 INSERT INTO products (id, name, price, category, img, description)
 VALUES (?, ?, ?, ?, ?, ?)
