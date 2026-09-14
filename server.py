@@ -6,7 +6,7 @@ import json
 app = Flask(__name__)
 CORS(app)
 
-ADMIN_PASSWORD = "kopi_rahasia_123"
+ADMIN_PASSWORD = "zxzczvzbznzm"
 
 def get_db_connection():
     conn = sqlite3.connect('totalkopi.db')
@@ -24,7 +24,6 @@ def init_db():
             status TEXT DEFAULT 'pending' 
         )
     ''')
-    # UPDATE: Tambahkan kolom status di tabel orders
     conn.execute('''
         CREATE TABLE IF NOT EXISTS orders (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -45,9 +44,6 @@ init_db()
 def check_auth():
     return request.headers.get('X-Admin-Password') == ADMIN_PASSWORD
 
-# ==========================================
-# JALUR PUBLIK
-# ==========================================
 @app.route('/api/products', methods=['GET'])
 def get_products():
     conn = get_db_connection()
@@ -85,9 +81,6 @@ def add_order():
     conn.close()
     return jsonify({"pesan": "Pesanan dicatat!"})
 
-# ==========================================
-# JALUR RAHASIA ADMIN
-# ==========================================
 @app.route('/api/admin/login', methods=['POST'])
 def admin_login():
     if check_auth(): return jsonify({"pesan": "Login berhasil!"})
@@ -127,7 +120,6 @@ def admin_get_orders():
     conn.close()
     return jsonify([dict(o) for o in orders])
 
-# BARU: Endpoint menyelesaikan pesanan
 @app.route('/api/admin/orders/<int:id>/complete', methods=['POST'])
 def admin_complete_order(id):
     if not check_auth(): return jsonify({"pesan": "Akses Ditolak!"}), 401
@@ -137,7 +129,6 @@ def admin_complete_order(id):
     conn.close()
     return jsonify({"pesan": "Pesanan diselesaikan!"})
 
-# BARU: Endpoint menghapus pesanan
 @app.route('/api/admin/orders/<int:id>', methods=['DELETE'])
 def admin_delete_order(id):
     if not check_auth(): return jsonify({"pesan": "Akses Ditolak!"}), 401
