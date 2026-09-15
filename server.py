@@ -6,7 +6,7 @@ import csv
 from io import StringIO
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}}, allow_headers=["Content-Type", "X-Admin-Password"], methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
 
 ADMIN_PASSWORD = "zxzczvzbznzm"
 
@@ -17,6 +17,7 @@ def get_db_connection():
 
 def init_db():
     conn = get_db_connection()
+    
     conn.execute('''
         CREATE TABLE IF NOT EXISTS testimonials (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -26,6 +27,7 @@ def init_db():
             status TEXT DEFAULT 'pending' 
         )
     ''')
+    
     conn.execute('''
         CREATE TABLE IF NOT EXISTS orders (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -38,9 +40,24 @@ def init_db():
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     ''')
+
+    conn.execute('''
+        CREATE TABLE IF NOT EXISTS products (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            price INTEGER NOT NULL,
+            image TEXT NOT NULL,
+            category TEXT DEFAULT 'Coffee'
+        )
+    ''')
+    
+    try:
+        conn.execute('ALTER TABLE products ADD COLUMN category TEXT DEFAULT "Coffee"')
+    except:
+        pass 
+        
     conn.commit()
     conn.close()
-
 init_db()
 
 def check_auth():
@@ -177,6 +194,37 @@ def admin_export_orders():
         mimetype="text/csv",
         headers={"Content-Disposition": "attachment;filename=dataset_penjualan_totalkopi.csv"}
     )
+
+@app.route('/api/admin/products', methods=['POST'])
+def admin_add_product():
+    if not check_auth(): return jsonify({"pesan": "Akses Ditolak!"}), 401
+    data = request.json
+    conn = get_db_connection()
+    conn.execute('INSERT INTO products (name, price, image, category) VALUES (?, ?, ?, ?)',
+                 (data['name'], data['price'], data['image'], data['category']))
+    conn.commit()
+    conn.close()
+    return jsonify({"pesan": "Produk berhasil ditambahkan!"})
+
+@app.route('/api/admin/products/<int:id>/edit', methods=['POST'])
+def admin_edit_product(id):
+    if not check_auth(): return jsonify({"pesan": "Akses Ditolak!"}), 401
+    data = request.json
+    conn = get_db_connection()
+    conn.execute('UPDATE products SET name=?, price=?, image=?, category=? WHERE id=?',
+                 (data['name'], data['price'], data['image'], data['category'], id))
+    conn.commit()
+    conn.close()
+    return jsonify({"pesan": "Produk berhasil diperbarui!"})
+
+@app.route('/api/admin/products/<int:id>', methods=['DELETE'])
+def admin_delete_product(id):
+    if not check_auth(): return jsonify({"pesan": "Akses Ditolak!"}), 401
+    conn = get_db_connection()
+    conn.execute('DELETE FROM products WHERE id = ?', (id,))
+    conn.commit()
+    conn.close()
+    return jsonify({"pesan": "Produk berhasil dihapus!"})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=5000)

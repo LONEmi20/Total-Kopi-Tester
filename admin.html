@@ -7,66 +7,70 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
-        tailwind.config = {
-            theme: { extend: { colors: { 'coffee-dark': '#2C1E16', 'accent-gold': '#D4AF37', 'coffee-espresso': '#4A3320' } } }
-        }
+        tailwind.config = { theme: { extend: { colors: { 'coffee-dark': '#2C1E16', 'accent-gold': '#D4AF37', 'coffee-espresso': '#4A3320' } } } }
     </script>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans antialiased p-6 flex flex-col min-h-screen">
+<body class="bg-gray-50 text-gray-800 font-sans antialiased p-6 flex flex-col min-h-screen relative">
 
     <div id="login-screen" class="flex-grow flex items-center justify-center">
         <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 max-w-md w-full">
             <div class="text-center mb-8">
-                <img src="assets/images/TotalKopi-icon.jpg" alt="Admin Profile" class="w-16 h-16 rounded-full object-cover shadow-md border-2 border-coffee-dark mx-auto mb-4">
+                <img src="assets/images/image_5100ab.png" alt="Admin Profile" class="w-16 h-16 rounded-full object-cover shadow-md border-2 border-coffee-dark mx-auto mb-4">
                 <h2 class="text-2xl font-bold text-coffee-dark">Admin Login</h2>
                 <p class="text-sm text-gray-500">Silakan masukkan password rahasia</p>
             </div>
             <form id="login-form" class="space-y-6">
-                <div>
-                    <input type="password" id="admin-password" placeholder="Password..." required
-                        class="w-full px-5 py-4 rounded-xl border border-gray-200 bg-gray-50 focus:outline-none focus:border-coffee-dark transition-all text-center tracking-widest">
-                </div>
-                <button type="submit" class="w-full bg-coffee-dark hover:bg-black text-white py-4 rounded-xl font-bold transition-all shadow-md">
-                    Masuk
-                </button>
+                <input type="password" id="admin-password" placeholder="Password..." required class="w-full px-5 py-4 rounded-xl border border-gray-200 bg-gray-50 focus:outline-none focus:border-coffee-dark text-center tracking-widest">
+                <button type="submit" class="w-full bg-coffee-dark hover:bg-black text-white py-4 rounded-xl font-bold shadow-md transition-all">Masuk</button>
             </form>
         </div>
     </div>
 
-    <!-- SCREEN 2: ADMIN DASHBOARD -->
     <div id="dashboard-screen" class="max-w-6xl mx-auto w-full hidden space-y-8">
         
-        <!-- Header -->
         <header class="flex justify-between items-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
             <div class="flex items-center gap-4">
-                <!-- Ganti nama file gambar di bawah ini dengan fotomu -->
-                <img src="assets/images/admin.jpg" alt="Admin Profile" class="w-12 h-12 rounded-full object-cover shadow-sm border-2 border-coffee-dark">
+                <img src="assets/images/image_5100ab.png" alt="Admin Profile" class="w-12 h-12 rounded-full object-cover shadow-sm border-2 border-coffee-dark">
                 <div>
                     <h1 class="text-2xl font-bold text-coffee-dark">Admin Panel</h1>
-                    <p class="text-sm text-gray-500">Moderasi Testimoni & Riwayat Pesanan</p>
+                    <p class="text-sm text-gray-500">Manajemen Kedai & Pelanggan</p>
                 </div>
             </div>
             <div class="flex gap-3">
-                <button onclick="logout()" class="px-6 py-2 bg-red-100 text-red-600 hover:bg-red-200 rounded-full text-sm font-bold transition-colors">
-                    Logout
-                </button>
-                <a href="index.html" class="px-6 py-2 bg-gray-100 hover:bg-gray-200 rounded-full text-sm font-bold transition-colors">
-                    <i class="fas fa-external-link-alt mr-2"></i> Web Utama
-                </a>
+                <button onclick="logout()" class="px-6 py-2 bg-red-100 text-red-600 hover:bg-red-200 rounded-full text-sm font-bold transition-colors">Logout</button>
+                <a href="index.html" class="px-6 py-2 bg-gray-100 hover:bg-gray-200 rounded-full text-sm font-bold transition-colors"><i class="fas fa-external-link-alt mr-2"></i> Web Utama</a>
             </div>
         </header>
 
-        <!-- BAGIAN 1: RIWAYAT PESANAN -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+                <h2 class="text-lg font-bold text-coffee-dark"><i class="fas fa-coffee mr-2 text-accent-gold"></i> Manajemen Produk</h2>
+                <button onclick="openProductModal()" class="text-sm bg-coffee-dark hover:bg-black text-white px-4 py-2 rounded-lg font-bold transition-colors shadow-sm">
+                    <i class="fas fa-plus mr-2"></i> Tambah Menu
+                </button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-50 text-gray-500 text-sm border-b border-gray-100">
+                            <th class="p-4 font-semibold w-1/12">ID</th>
+                            <th class="p-4 font-semibold w-1/3">Nama Produk</th>
+                            <th class="p-4 font-semibold w-1/4">Kategori</th>
+                            <th class="p-4 font-semibold w-1/6">Harga</th>
+                            <th class="p-4 font-semibold text-center w-1/6">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-products-body" class="divide-y divide-gray-100"></tbody>
+                </table>
+            </div>
+        </div>
+
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
             <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
                 <h2 class="text-lg font-bold text-coffee-dark"><i class="fas fa-shopping-bag mr-2 text-accent-gold"></i> Riwayat Pesanan</h2>
                 <div class="flex gap-3">
-                    <button onclick="exportOrdersCSV()" class="text-sm bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-bold transition-colors shadow-sm">
-                        <i class="fas fa-file-csv mr-2"></i> Ekspor CSV
-                    </button>
-                    <button onclick="loadAdminOrders()" class="text-sm text-blue-500 hover:text-blue-700 px-3 py-2 rounded-lg bg-white border border-gray-200">
-                        <i class="fas fa-sync-alt"></i>
-                    </button>
+                    <button onclick="exportOrdersCSV()" class="text-sm bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-bold shadow-sm"><i class="fas fa-file-csv mr-2"></i> Ekspor CSV</button>
+                    <button onclick="loadAdminOrders()" class="text-sm text-blue-500 hover:text-blue-700 px-3 py-2 rounded-lg bg-white border border-gray-200"><i class="fas fa-sync-alt"></i></button>
                 </div>
             </div>
             <div class="overflow-x-auto">
@@ -80,19 +84,14 @@
                             <th class="p-4 font-semibold text-center w-1/12">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody id="admin-orders-body" class="divide-y divide-gray-100">
-                    </tbody>
+                    <tbody id="admin-orders-body" class="divide-y divide-gray-100"></tbody>
                 </table>
             </div>
         </div>
 
-        <!-- BAGIAN 2: TESTIMONI -->
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
             <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
                 <h2 class="text-lg font-bold text-coffee-dark"><i class="fas fa-star mr-2 text-accent-gold"></i> Moderasi Testimoni</h2>
-                <button onclick="loadAdminTestimonials()" class="text-sm text-blue-500 hover:text-blue-700">
-                    <i class="fas fa-sync-alt"></i> Refresh Data
-                </button>
             </div>
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
@@ -104,10 +103,37 @@
                             <th class="p-4 font-semibold text-center">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody id="admin-table-body" class="divide-y divide-gray-100">
-                        <!-- Data dimasukkan oleh JavaScript -->
-                    </tbody>
+                    <tbody id="admin-table-body" class="divide-y divide-gray-100"></tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="product-modal" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50 backdrop-blur-sm">
+        <div class="bg-white p-8 rounded-2xl w-full max-w-md shadow-2xl transform transition-all">
+            <h3 id="modal-title" class="text-2xl font-bold text-coffee-dark mb-6">Tambah Menu</h3>
+            <input type="hidden" id="prod-id">
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Nama Kopi</label>
+                    <input type="text" id="prod-name" class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:border-coffee-dark" placeholder="Contoh: Kopi Susu Aren">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Kategori</label>
+                    <input type="text" id="prod-category" class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:border-coffee-dark" placeholder="Contoh: Signature / Espresso">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Harga (Rp)</label>
+                    <input type="number" id="prod-price" class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:border-coffee-dark" placeholder="Contoh: 15000">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Link Gambar</label>
+                    <input type="text" id="prod-image" class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:border-coffee-dark" placeholder="assets/images/kopi.jpg">
+                </div>
+            </div>
+            <div class="mt-8 flex justify-end gap-3">
+                <button onclick="closeProductModal()" class="px-5 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 rounded-lg font-bold transition-colors">Batal</button>
+                <button onclick="saveProduct()" class="px-5 py-2 bg-coffee-dark hover:bg-black text-white rounded-lg font-bold shadow-md transition-colors">Simpan Menu</button>
             </div>
         </div>
     </div>
@@ -115,210 +141,191 @@
     <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
 
     <script>
-        
         const API_URL = 'https://totalkopi.pythonanywhere.com/api'; 
 
-        function getAuthHeaders() {
-            return { 'X-Admin-Password': sessionStorage.getItem('adminKey') || '' };
+        function getAuthHeaders() { return { 'X-Admin-Password': sessionStorage.getItem('adminKey') || '', 'Content-Type': 'application/json' }; }
+        function logout() { sessionStorage.removeItem('adminKey'); window.location.reload(); }
+        function showToast(msg) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'bg-coffee-dark text-white px-6 py-4 rounded-xl shadow-lg font-medium transition-all duration-300';
+            toast.textContent = msg;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
         }
 
-        function logout() {
-            sessionStorage.removeItem('adminKey');
-            window.location.reload();
-        }
-
-        // Login Submit
         document.getElementById('login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const password = document.getElementById('admin-password').value;
             try {
-                const response = await fetch(`${API_URL}/admin/login`, {
-                    method: 'POST', headers: { 'X-Admin-Password': password }
-                });
-                if (response.ok) {
+                const res = await fetch(`${API_URL}/admin/login`, { method: 'POST', headers: { 'X-Admin-Password': password } });
+                if (res.ok) {
                     sessionStorage.setItem('adminKey', password);
                     document.getElementById('login-screen').classList.add('hidden');
                     document.getElementById('dashboard-screen').classList.remove('hidden');
                     loadAllData();
                     showToast("✓ Login Berhasil!");
-                } else {
-                    showToast("❌ Password Salah!");
-                }
-            } catch (error) {
-                showToast("Server tidak merespons.");
-            }
+                } else showToast("❌ Password Salah!");
+            } catch { showToast("Server tidak merespons."); }
         });
 
-        // =====================================
-        // DATA: RIWAYAT PESANAN
-        // =====================================
+        let currentProducts = [];
+        
+        async function loadAdminProducts() {
+            try {
+                const res = await fetch(`${API_URL}/products`);
+                currentProducts = await res.json();
+                const tbody = document.getElementById('admin-products-body');
+                tbody.innerHTML = '';
+                
+                if(currentProducts.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-gray-500">Belum ada menu produk.</td></tr>`; return;
+                }
+
+                currentProducts.forEach(p => {
+                    tbody.innerHTML += `
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 text-gray-500">#${p.id}</td>
+                            <td class="p-4 font-bold text-gray-800">${p.name}</td>
+                            <td class="p-4"><span class="px-3 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">${p.category}</span></td>
+                            <td class="p-4 font-bold text-coffee-espresso">Rp ${p.price.toLocaleString('id-ID')}</td>
+                            <td class="p-4 flex gap-2 justify-center">
+                                <button onclick="openProductModal(${p.id})" class="bg-blue-500 text-white w-8 h-8 rounded-lg shadow-sm"><i class="fas fa-edit"></i></button>
+                                <button onclick="deleteProduct(${p.id})" class="bg-red-500 text-white w-8 h-8 rounded-lg shadow-sm"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            } catch { showToast("Gagal memuat produk"); }
+        }
+
+        function openProductModal(id = null) {
+            document.getElementById('product-modal').classList.remove('hidden');
+            document.getElementById('product-modal').classList.add('flex');
+            
+            if (id) {
+                document.getElementById('modal-title').textContent = "Edit Menu";
+                const p = currentProducts.find(x => x.id === id);
+                document.getElementById('prod-id').value = p.id;
+                document.getElementById('prod-name').value = p.name;
+                document.getElementById('prod-category').value = p.category;
+                document.getElementById('prod-price').value = p.price;
+                document.getElementById('prod-image').value = p.image;
+            } else {
+                document.getElementById('modal-title').textContent = "Tambah Menu Baru";
+                document.getElementById('prod-id').value = "";
+                document.getElementById('prod-name').value = "";
+                document.getElementById('prod-category').value = "";
+                document.getElementById('prod-price').value = "";
+                document.getElementById('prod-image').value = "";
+            }
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+            document.getElementById('product-modal').classList.remove('flex');
+        }
+
+        async function saveProduct() {
+            try {
+                const id = document.getElementById('prod-id').value;
+                const data = {
+                    name: document.getElementById('prod-name').value,
+                    category: document.getElementById('prod-category').value,
+                    price: parseInt(document.getElementById('prod-price').value),
+                    image: document.getElementById('prod-image').value
+                };
+
+                const method = 'POST';
+const url = id ? `${API_URL}/admin/products/${id}/edit` : `${API_URL}/admin/products`;
+
+                const response = await fetch(url, { 
+                    method: method, 
+                    headers: getAuthHeaders(), 
+                    body: JSON.stringify(data) 
+                });
+                
+                if (!response.ok) {
+                    const errData = await response.json();
+                    throw new Error(`Ditolak Server: ${errData.pesan || response.status}`);
+                }
+
+                showToast("✓ Menu berhasil disimpan!");
+                closeProductModal();
+                loadAdminProducts();
+                
+            } catch (error) { 
+                alert("LAPORAN DETEKTIF: " + error.message); 
+                showToast("Gagal menyimpan menu!"); 
+            }
+        }
+
+        async function deleteProduct(id) {
+            if (!confirm("Yakin ingin menghapus menu ini?")) return;
+            try {
+                await fetch(`${API_URL}/admin/products/${id}`, { method: 'DELETE', headers: getAuthHeaders() });
+                showToast("✓ Menu dihapus!");
+                loadAdminProducts();
+            } catch { showToast("Gagal menghapus menu!"); }
+        }
+
         async function loadAdminOrders() {
             try {
-                const response = await fetch(`${API_URL}/admin/orders`, { headers: getAuthHeaders() });
-                if (response.status === 401) { logout(); return; }
-
-                const data = await response.json();
+                const res = await fetch(`${API_URL}/admin/orders`, { headers: getAuthHeaders() });
+                if (res.status === 401) { logout(); return; }
+                const data = await res.json();
                 const tbody = document.getElementById('admin-orders-body');
                 tbody.innerHTML = '';
-
-                if (data.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="5" class="text-center p-8 text-gray-500">Belum ada pesanan masuk.</td></tr>`;
-                    return;
-                }
-
+                if (data.length === 0) { tbody.innerHTML = `<tr><td colspan="5" class="text-center p-8 text-gray-500">Belum ada pesanan.</td></tr>`; return; }
+                
                 data.forEach(order => {
                     let itemsHtml = '';
-                    try {
-                        const items = JSON.parse(order.items);
-                        items.forEach(i => {
-                            itemsHtml += `<div class="mb-1 border-b border-gray-50 pb-1 last:border-0"><span class="font-bold">${i.qty}x</span> ${i.name}</div>`;
-                        });
-                    } catch (e) {
-                        itemsHtml = `<span class="text-red-500">Gagal memuat detail</span>`;
-                    }
-
-                    const dateObj = new Date(order.created_at.replace(' ', 'T') + 'Z');
-                    const formattedDate = dateObj.toLocaleString('id-ID', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-
-                    const statusBadge = order.status === 'selesai'
-                        ? `<span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full uppercase"><i class="fas fa-check-double mr-1"></i> Selesai</span>`
-                        : `<span class="px-3 py-1 bg-orange-100 text-orange-700 text-xs font-bold rounded-full uppercase"><i class="fas fa-clock mr-1"></i> Pending</span>`;
-
-                    const actionBtn = order.status === 'pending'
-                        ? `<button onclick="completeOrder(${order.id})" class="bg-blue-500 hover:bg-blue-600 text-white w-8 h-8 rounded-lg shadow-sm transition-colors mb-1" title="Tandai Selesai"><i class="fas fa-check"></i></button>`
-                        : `<span class="w-8 h-8 inline-block mb-1"></span>`;
-
-                    tbody.innerHTML += `
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="p-4 text-sm text-gray-500">${formattedDate} WIB</td>
-                            <td class="p-4">
-                                <div class="font-bold text-coffee-dark">${order.customer_name}</div>
-                                <div class="text-sm text-gray-600"><i class="fab fa-whatsapp text-[#25D366]"></i> ${order.phone}</div>
-                            </td>
-                            <td class="p-4 text-sm text-gray-700">${itemsHtml}</td>
-                            <td class="p-4">
-                                <div class="font-bold text-lg text-coffee-espresso mb-2">Rp ${order.total_price.toLocaleString('id-ID')}</div>
-                                ${statusBadge}
-                            </td>
-                            <td class="p-4 flex flex-col gap-1 items-center justify-center">
-                                ${actionBtn}
-                                <button onclick="deleteOrder(${order.id})" class="bg-red-500 hover:bg-red-600 text-white w-8 h-8 rounded-lg shadow-sm transition-colors" title="Hapus Pesanan"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                    `;
+                    try { JSON.parse(order.items).forEach(i => itemsHtml += `<div class="mb-1 border-b border-gray-50 pb-1 last:border-0"><span class="font-bold">${i.qty}x</span> ${i.name}</div>`); } catch { itemsHtml = `<span class="text-red-500">Gagal memuat</span>`; }
+                    const formattedDate = new Date(order.created_at.replace(' ', 'T') + 'Z').toLocaleString('id-ID', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+                    const statusBadge = order.status === 'selesai' ? `<span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full"><i class="fas fa-check-double mr-1"></i> Selesai</span>` : `<span class="px-3 py-1 bg-orange-100 text-orange-700 text-xs font-bold rounded-full"><i class="fas fa-clock mr-1"></i> Pending</span>`;
+                    const actionBtn = order.status === 'pending' ? `<button onclick="completeOrder(${order.id})" class="bg-blue-500 text-white w-8 h-8 rounded-lg mb-1"><i class="fas fa-check"></i></button>` : `<span class="w-8 h-8 inline-block mb-1"></span>`;
+                    
+                    tbody.innerHTML += `<tr><td class="p-4 text-sm text-gray-500">${formattedDate} WIB</td><td class="p-4"><div class="font-bold">${order.customer_name}</div><div class="text-sm"><i class="fab fa-whatsapp text-[#25D366]"></i> ${order.phone}</div></td><td class="p-4 text-sm">${itemsHtml}</td><td class="p-4"><div class="font-bold text-lg mb-2">Rp ${order.total_price.toLocaleString('id-ID')}</div>${statusBadge}</td><td class="p-4 flex flex-col items-center">${actionBtn}<button onclick="deleteOrder(${order.id})" class="bg-red-500 text-white w-8 h-8 rounded-lg"><i class="fas fa-trash"></i></button></td></tr>`;
                 });
-            } catch (error) {
-                showToast("Gagal memuat pesanan.");
-            }
+            } catch { showToast("Gagal memuat pesanan."); }
         }
+        async function completeOrder(id) { await fetch(`${API_URL}/admin/orders/${id}/complete`, { method: 'POST', headers: getAuthHeaders() }); loadAdminOrders(); }
+        async function deleteOrder(id) { if (confirm("Yakin hapus?")) { await fetch(`${API_URL}/admin/orders/${id}`, { method: 'DELETE', headers: getAuthHeaders() }); loadAdminOrders(); } }
 
-        async function completeOrder(id) {
-            await fetch(`${API_URL}/admin/orders/${id}/complete`, { method: 'POST', headers: getAuthHeaders() });
-            loadAdminOrders();
-        }
-
-        async function deleteOrder(id) {
-            if (!confirm("Yakin hapus pesanan ini?")) return;
-            await fetch(`${API_URL}/admin/orders/${id}`, { method: 'DELETE', headers: getAuthHeaders() });
-            loadAdminOrders();
-        }
-
-        // =====================================
-        // DATA: TESTIMONI
-        // =====================================
         async function loadAdminTestimonials() {
             try {
-                const response = await fetch(`${API_URL}/admin/testimonials`, { headers: getAuthHeaders() });
-                if (response.status === 401) return;
-
-                const data = await response.json();
+                const res = await fetch(`${API_URL}/admin/testimonials`, { headers: getAuthHeaders() });
+                if (res.status === 401) return;
+                const data = await res.json();
                 const tbody = document.getElementById('admin-table-body');
                 tbody.innerHTML = '';
-
-                if (data.length === 0) tbody.innerHTML = `<tr><td colspan="4" class="text-center p-8 text-gray-500">Belum ada testimoni.</td></tr>`;
-
+                if (data.length === 0) { tbody.innerHTML = `<tr><td colspan="4" class="text-center p-8 text-gray-500">Belum ada testimoni.</td></tr>`; return; }
+                
                 data.forEach(t => {
-                    const statusBadge = t.status === 'approved' 
-                        ? `<span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full uppercase">Tayang</span>`
-                        : `<span class="px-3 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded-full uppercase">Pending</span>`;
-
-                    const approveBtn = t.status === 'pending'
-                        ? `<button onclick="approveTesti(${t.id})" class="bg-green-500 text-white w-8 h-8 rounded-lg shadow-sm" title="Setujui"><i class="fas fa-check"></i></button>`
-                        : `<span class="w-8 h-8 inline-block"></span>`;
-
-                    tbody.innerHTML += `
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="p-4 font-bold text-gray-800">${t.name} <br> <span class="text-accent-gold font-normal text-sm">${'⭐'.repeat(t.rating)}</span></td>
-                            <td class="p-4 text-gray-600 max-w-xs truncate">${t.comment}</td>
-                            <td class="p-4">${statusBadge}</td>
-                            <td class="p-4 flex gap-2 justify-center">
-                                ${approveBtn}
-                                <button onclick="deleteTesti(${t.id})" class="bg-red-500 text-white w-8 h-8 rounded-lg shadow-sm"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                    `;
+                    const statusBadge = t.status === 'approved' ? `<span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-full">Tayang</span>` : `<span class="px-3 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded-full">Pending</span>`;
+                    const approveBtn = t.status === 'pending' ? `<button onclick="approveTesti(${t.id})" class="bg-green-500 text-white w-8 h-8 rounded-lg"><i class="fas fa-check"></i></button>` : `<span class="w-8 h-8 inline-block"></span>`;
+                    tbody.innerHTML += `<tr><td class="p-4 font-bold">${t.name} <br> <span class="text-accent-gold font-normal text-sm">${'⭐'.repeat(t.rating)}</span></td><td class="p-4 max-w-xs truncate">${t.comment}</td><td class="p-4">${statusBadge}</td><td class="p-4 flex gap-2 justify-center">${approveBtn}<button onclick="deleteTesti(${t.id})" class="bg-red-500 text-white w-8 h-8 rounded-lg"><i class="fas fa-trash"></i></button></td></tr>`;
                 });
-            } catch (error) {
-                showToast("Gagal memuat testimoni.");
-            }
+            } catch { showToast("Gagal memuat testimoni."); }
         }
+        async function approveTesti(id) { await fetch(`${API_URL}/admin/testimonials/${id}/approve`, { method: 'POST', headers: getAuthHeaders() }); loadAdminTestimonials(); }
+        async function deleteTesti(id) { if (confirm("Hapus permanen?")) { await fetch(`${API_URL}/admin/testimonials/${id}`, { method: 'DELETE', headers: getAuthHeaders() }); loadAdminTestimonials(); } }
 
-        async function approveTesti(id) {
-            await fetch(`${API_URL}/admin/testimonials/${id}/approve`, { method: 'POST', headers: getAuthHeaders() });
-            loadAdminTestimonials();
-        }
-
-        async function deleteTesti(id) {
-            if (!confirm("Hapus permanen?")) return;
-            await fetch(`${API_URL}/admin/testimonials/${id}`, { method: 'DELETE', headers: getAuthHeaders() });
-            loadAdminTestimonials();
-        }
-
-        // =====================================
-        // EKSPOR CSV
-        // =====================================
         async function exportOrdersCSV() {
             try {
-                showToast("⏳ Menyiapkan CSV...");
-                const response = await fetch(`${API_URL}/admin/orders/export`, { headers: getAuthHeaders() });
-                if (response.status === 401) { logout(); return; }
-                
-                const blob = await response.blob();
+                showToast(" Menyiapkan CSV...");
+                const res = await fetch(`${API_URL}/admin/orders/export`, { headers: getAuthHeaders() });
+                if (res.status === 401) { logout(); return; }
+                const blob = await res.blob();
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
-                a.href = url;
-                a.download = 'dataset_penjualan_totalkopi.csv';
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-                window.URL.revokeObjectURL(url);
+                a.href = url; a.download = 'dataset_penjualan_totalkopi.csv'; document.body.appendChild(a); a.click(); a.remove(); window.URL.revokeObjectURL(url);
                 showToast("✓ Berhasil! CSV siap.");
-            } catch (error) {
-                showToast("Gagal mengunduh CSV.");
-            }
+            } catch { showToast("Gagal mengunduh CSV."); }
         }
 
-        function loadAllData() {
-            loadAdminOrders();
-            loadAdminTestimonials();
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            if (sessionStorage.getItem('adminKey')) {
-                document.getElementById('login-screen').classList.add('hidden');
-                document.getElementById('dashboard-screen').classList.remove('hidden');
-                loadAllData();
-            }
-        });
-
-        function showToast(message) {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = 'bg-coffee-dark text-white px-6 py-4 rounded-xl shadow-lg flex items-center transition-all duration-300';
-            toast.innerHTML = `<span class="font-medium">${message}</span>`;
-            container.appendChild(toast);
-            setTimeout(() => toast.remove(), 3000);
-        }
+        function loadAllData() { loadAdminProducts(); loadAdminOrders(); loadAdminTestimonials(); }
+        document.addEventListener('DOMContentLoaded', () => { if (sessionStorage.getItem('adminKey')) { document.getElementById('login-screen').classList.add('hidden'); document.getElementById('dashboard-screen').classList.remove('hidden'); loadAllData(); } });
     </script>
 </body>
 </html>
