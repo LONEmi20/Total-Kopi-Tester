@@ -24,7 +24,7 @@ data_kopi = [
     (5, "Butterscotch", 18000, "Coffee", "assets/images/TotalKopi-icon.jpg", "Kopi susu dengan tambahan sirup butterscotch yang wangi dan creamy. Favorit banyak orang."),
     (6, "Caramel Macchiato", 18000, "Coffee", "assets/images/TotalKopi-icon.jpg", "Vanilla latte dengan tuangan espresso murni di atasnya, disempurnakan dengan saus karamel lezat."),
     (7, "Ice Chocolate", 18000, "Non Coffee", "assets/images/TotalKopi-icon.jpg", "Minuman cokelat belgia yang pekat dan creamy. Tidak terlalu manis, pas untuk menaikkan mood."),
-    (8, "Ice Matcha", 18000, "Non Coffee", "assets/images/TotalKopi-icon.jpg", "Matcha premium khas Jepang berpadu dengan susu segar. Cita rasa otentik yang menenangkan."),
+    (8, "Ice Matcha", 18000, "Non Coffee", "assets/images/matchatotal.jpg", "Matcha premium khas Jepang berpadu dengan susu segar. Cita rasa otentik yang menenangkan."),
     (9, "Lemon Tea", 10000, "Non Coffee", "assets/images/TotalKopi-icon.jpg", "Es teh segar dengan perasan jeruk lemon asli. Solusi dahaga di cuaca panas."),
     (10, "Lychee Tea", 15000, "Non Coffee", "assets/images/TotalKopi-icon.jpg", "Teh hitam pilihan dengan sirup leci dan buah leci asli yang segar."),
     (11, "Tropical Black", 20000, "Japanese Coffee", "assets/images/TotalKopi-icon.jpg", "Cold brew kopi bernuansa tropis dengan notes buah-buahan cerah. Disajikan dingin menyegarkan."),
