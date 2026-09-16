@@ -231,6 +231,11 @@
             }
         }
 
+        function closeProductModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+            document.getElementById('product-modal').classList.remove('flex');
+        }
+
         async function saveProduct() {
             try {
                 const id = document.getElementById('prod-id').value;
