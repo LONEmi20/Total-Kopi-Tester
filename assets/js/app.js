@@ -148,7 +148,7 @@ const CONFIG = {
                     id: product.id,
                     name: product.name,
                     price: product.price,
-                    img: product.image,
+                    image: product.image,
                     qty: qty
                 });
             }
