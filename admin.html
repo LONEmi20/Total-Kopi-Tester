@@ -238,11 +238,18 @@
 
         async function saveProduct() {
             try {
+                const priceValue = parseInt(document.getElementById('prod-price').value);
+                
+                if (isNaN(priceValue)) {
+                    showToast("⚠️ Harga wajib diisi dengan angka!");
+                    return;
+                }
+
                 const id = document.getElementById('prod-id').value;
                 const data = {
                     name: document.getElementById('prod-name').value,
                     category: document.getElementById('prod-category').value,
-                    price: parseInt(document.getElementById('prod-price').value),
+                    price: priceValue, 
                     image: document.getElementById('prod-image').value,
                     description: document.getElementById('prod-desc').value
                 };
