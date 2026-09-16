@@ -333,124 +333,145 @@ async function checkoutToWhatsApp() {
             document.getElementById('modal-qty').innerText = currentModalQty;
         }
 
-        const quizQuestions = [
-            {
-                q: "Kamu ingin minuman dengan kopi atau tanpa kopi?",
-                options: [
-                    { text: "Dengan Kopi", value: "coffee" },
-                    { text: "Tanpa Kopi", value: "non-coffee" }
-                ]
-            },
-            {
-                q: "Kamu lebih suka rasa kopi seperti apa?",
-                options: [
-                    { text: "Manis & Creamy", value: "sweet" },
-                    { text: "Strong & Bold", value: "strong" },
-                    { text: "Segar & Unik", value: "fresh" }
-                ]
-            },
-            {
-                q: "Kamu lebih suka rasa seperti apa?",
-                options: [
-                    { text: "Cokelat", value: "choco" },
-                    { text: "Creamy & Matcha", value: "matcha" },
-                    { text: "Segar & Fruity", value: "fruity" }
-                ]
-            },
-            {
-                q: "Kamu ingin menikmatinya seperti apa?",
-                options: [
-                    { text: "Dingin", value: "cold" },
-                    { text: "Hangat", value: "hot" },
-                    { text: "Bebas atur aja", value: "any" }
-                ]
-            }
-        ];
+        // ==========================================
+        // MESIN KUIS BERBASIS DECISION TREE (SPK)
+        // ==========================================
+        let quizState = null;
+        let stepNum = 1;
 
-        let currentQ = 0;
-        let answers = [];
+        const quizTree = {
+            q: "Bahan dasar apa yang lagi pengen kamu minum?",
+            options: [
+                {
+                    text: "☕ Berbasis Kopi",
+                    next: {
+                        q: "Karakter rasa kopi seperti apa yang kamu cari?",
+                        options: [
+                            {
+                                text: "Manis & Nyaman",
+                                next: {
+                                    q: "Sensasi manis apa yang paling pas di lidahmu?",
+                                    options: [
+                                        { text: "Creamy & Lembut", result: "Kopi Bahagia", desc: "Perpaduan kopi dan creamy yang pas untuk bikin harimu bahagia." },
+                                        { text: "Gurih Butterscotch", result: "Butterscotch", desc: "Sensasi manis gurih dari butterscotch yang meleleh di mulut." },
+                                        { text: "Manis Karamel", result: "Caramel Macchiato", desc: "Kopi dengan sentuhan karamel manis yang klasik dan elegan." }
+                                    ]
+                                }
+                            },
+                            {
+                                text: "Strong & Bold",
+                                next: {
+                                    q: "Kopi strong kamu enaknya disajikan seperti apa?",
+                                    options: [
+                                        { text: "Hitam & Dingin", result: "Americano", desc: "Kopi hitam pekat yang strong dan dingin. Bikin melek seharian!" },
+                                        { text: "Creamy Susu", result: "Kopi Sanger", desc: "Kopi strong yang diimbangi dengan creamy-nya susu. Kombinasi maut!" },
+                                        { text: "Unik khas Jepang", result: "Passion Black", desc: "Kopi strong dengan sentuhan teknik ala Jepang yang menghasilkan rasa unik." }
+                                    ]
+                                }
+                            },
+                            {
+                                text: "Segar & Ringan",
+                                next: {
+                                    q: "Pilih sensasi kesegaran kopimu:",
+                                    options: [
+                                        { text: "Dingin dengan Susu", result: "Ice Latte", desc: "Kopi susu segar dan dingin, cocok untuk mendinginkan suasana." },
+                                        { text: "Hangat dengan Susu", result: "Hot Latte", desc: "Kopi susu hangat yang pas untuk menenangkan pikiran." },
+                                        { text: "Unik & Fruity", result: "Tropical Black", desc: "Kopi segar dengan sentuhan buah tropis unik ala Japanese Ice Coffee." }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    text: "🍵 Tanpa Kopi (Non Coffee)",
+                    next: {
+                        q: "Pilih rasa dominan yang kamu mau:",
+                        options: [
+                            {
+                                text: "Cokelat / Matcha",
+                                next: {
+                                    q: "Lebih tim rasa apa nih hari ini?",
+                                    options: [
+                                        { text: "Cokelat Dingin", result: "Ice Chocolate", desc: "Cokelat dingin yang pekat dan manis. Auto balikin mood!" },
+                                        { text: "Matcha Dingin", result: "Ice Matcha", desc: "Kesegaran matcha otentik yang creamy dan menenangkan." }
+                                    ]
+                                }
+                            },
+                            {
+                                text: "Segar Berbuah (Teh)",
+                                next: {
+                                    q: "Buah apa yang lagi pengen kamu rasain?",
+                                    options: [
+                                        { text: "Asam Manis Lemon", result: "Lemon Tea", desc: "Perpaduan teh dan lemon yang asam manis menyegarkan." },
+                                        { text: "Manis Lychee", result: "Lychee Tea", desc: "Teh segar dengan kelembutan rasa buah lychee yang khas." }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        };
 
         function renderQuiz() {
-            const qObj = quizQuestions[currentQ];
-            document.getElementById('quiz-question').innerText = qObj.q;
+            if (!quizState) quizState = quizTree;
             
-            let stepNum = answers.length + 1;
+            document.getElementById('quiz-question').innerText = quizState.q;
             document.getElementById('quiz-progress').innerText = `Pertanyaan ${stepNum} dari 3`;
 
             const optionsContainer = document.getElementById('quiz-options');
             optionsContainer.innerHTML = '';
             
-            qObj.options.forEach(opt => {
+            quizState.options.forEach(opt => {
                 const btn = document.createElement('button');
                 btn.className = 'bg-white border-2 border-coffee-cream hover:border-accent-gold text-coffee-dark font-medium py-4 px-6 rounded-2xl transition-all duration-300 hover:shadow-md';
                 btn.innerText = opt.text;
-                btn.onclick = () => handleAnswer(opt.value);
+                btn.onclick = () => handleAnswer(opt);
                 optionsContainer.appendChild(btn);
             });
         }
 
-        function handleAnswer(val) {
-            answers.push(val);
-            if (answers.length === 1) {
-                currentQ = (val === 'coffee') ? 1 : 2;
-            } else if (answers.length === 2) {
-                currentQ = 3;
-            } else if (answers.length === 3) {
-                showResult();
-                return;
+        function handleAnswer(selectedOption) {
+            if (selectedOption.result) {
+                // Jika node memiliki 'result', berarti ini adalah ujung pohon (Keputusan Final)
+                showResult(selectedOption.result, selectedOption.desc);
+            } else {
+                // Lanjut ke cabang pertanyaan berikutnya
+                quizState = selectedOption.next;
+                stepNum++;
+                renderQuiz();
             }
-            renderQuiz();
         }
 
-        function showResult() {
+        function showResult(resultName, customDesc) {
             document.getElementById('quiz-container').classList.add('hidden');
             document.getElementById('quiz-result').classList.remove('hidden');
             
-            const [base, flavor, temp] = answers;
-            let recommendedProductId = 1;
-            let customDesc = "Minuman ini sangat cocok dengan preferensimu.";
-
-            if (base === 'coffee') {
-                if (flavor === 'sweet') {
-                    recommendedProductId = 6;
-                    customDesc = "Kamu sepertinya menyukai kopi yang manis dan creamy. Caramel Macchiato bisa menjadi pilihan yang cocok untukmu.";
-                } else if (flavor === 'strong') {
-                    recommendedProductId = 2;
-                    if(temp === 'hot') recommendedProductId = 4;
-                    customDesc = "Karakter rasa kopi yang kuat dan berani adalah pilihanmu. Cocok untuk dorongan semangat!";
-                } else if (flavor === 'fresh') {
-                    recommendedProductId = 11;
-                    customDesc = "Kamu suka petualangan rasa! Kesegaran unik kopi ala Jepang ini akan mengejutkan lidahmu.";
-                }
+            // Mencari produk berdasarkan NAMA, bukan ID agar kebal terhadap reset database
+            const recProduct = products.find(p => p.name.toLowerCase() === resultName.toLowerCase());
+            
+            if (recProduct) {
+                document.getElementById('result-id').value = recProduct.id;
+                document.getElementById('result-name').innerText = recProduct.name;
+                document.getElementById('result-desc').innerText = customDesc;
+                document.getElementById('result-img').src = recProduct.image;
+                document.getElementById('result-price').innerText = recProduct.price.toLocaleString('id-ID');
+                
+                document.getElementById('btn-result-add').onclick = () => {
+                    addToCart(recProduct.id, 1);
+                };
             } else {
-                if (flavor === 'choco') {
-                    recommendedProductId = 7;
-                    customDesc = "Cokelat selalu bisa memperbaiki mood. Rasa pekatnya sangat pas untukmu.";
-                } else if (flavor === 'matcha') {
-                    recommendedProductId = 8;
-                    customDesc = "Ketenangan ala Jepang ada di minuman ini. Creamy dan sangat menenangkan.";
-                } else if (flavor === 'fruity') {
-                    recommendedProductId = 10;
-                    customDesc = "Kesegaran buah asli adalah yang kamu butuhkan sekarang. Sangat fresh!";
-                }
+                document.getElementById('result-name').innerText = resultName;
+                document.getElementById('result-desc').innerText = "Varian ini sedang tidak tersedia di menu saat ini.";
+                document.getElementById('result-price').innerText = "0";
+                document.getElementById('result-img').src = "assets/images/TotalKopi-icon.jpg"; 
             }
-
-            const recProduct = products.find(p => p.id === recommendedProductId);
-            
-            document.getElementById('result-id').value = recProduct.id;
-            document.getElementById('result-name').innerText = recProduct.name;
-            document.getElementById('result-desc').innerText = customDesc;
-            document.getElementById('result-img').src = recproduct.image;
-            document.getElementById('result-price').innerText = recProduct.price.toLocaleString('id-ID');
-            
-            document.getElementById('btn-result-add').onclick = () => {
-                addToCart(recProduct.id, 1);
-            };
         }
 
         function resetQuiz() {
-            currentQ = 0;
-            answers = [];
+            quizState = quizTree;
+            stepNum = 1;
             document.getElementById('quiz-container').classList.remove('hidden');
             document.getElementById('quiz-result').classList.add('hidden');
             renderQuiz();
