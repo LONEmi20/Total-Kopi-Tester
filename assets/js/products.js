@@ -60,7 +60,7 @@ const products = [
         name: "Ice Matcha", 
         price: 18000, 
         category: "Non Coffee", 
-        img: "assets/images/TotalKopi-icon.jpg", 
+        img: "assets/images/matchatotal.jpg", 
         desc: "Matcha premium khas Jepang berpadu dengan susu segar. Cita rasa otentik yang menenangkan." 
     },
     { 

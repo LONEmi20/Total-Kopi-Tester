@@ -87,7 +87,7 @@ const CONFIG = {
                             ${categoryProducts.map(p => `
                                 <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group border border-gray-100 reveal cursor-pointer flex flex-col transform hover:-translate-y-2" onclick="openProductModal(${p.id})">
                                     <div class="relative h-64 overflow-hidden">
-                                        <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                                         <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold text-coffee-mocha rounded-full uppercase tracking-wider shadow-sm">
                                             ${p.category}
                                         </div>
@@ -97,7 +97,7 @@ const CONFIG = {
                                             <h4 class="text-xl font-bold text-coffee-dark group-hover:text-coffee-mocha transition-colors">${p.name}</h4>
                                         </div>
                                         <div class="text-lg font-bold text-coffee-espresso mb-3">Rp ${p.price.toLocaleString('id-ID')}</div>
-                                        <p class="text-gray-500 text-sm mb-6 flex-grow line-clamp-2">${p.desc}</p>
+                                        <p class="text-gray-500 text-sm mb-6 flex-grow line-clamp-2">${p.description}</p>
                                         
                                         <div class="w-full h-px bg-gray-100 mb-4"></div>
                                         
@@ -148,7 +148,7 @@ const CONFIG = {
                     id: product.id,
                     name: product.name,
                     price: product.price,
-                    img: product.img,
+                    img: product.image,
                     qty: qty
                 });
             }
@@ -211,7 +211,7 @@ const CONFIG = {
                     const div = document.createElement('div');
                     div.className = 'flex gap-4 items-center bg-white p-4 rounded-2xl border border-gray-100 shadow-sm relative group transition-all hover:shadow-md';
                     div.innerHTML = `
-                        <img src="${item.img}" alt="${item.name}" class="w-20 h-20 object-cover rounded-xl border border-gray-100 shadow-sm">
+                        <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded-xl border border-gray-100 shadow-sm">
                         <div class="flex-grow">
                             <h4 class="font-bold text-coffee-dark leading-tight">${item.name}</h4>
                             <div class="text-sm text-gray-500 mb-3">Rp ${item.price.toLocaleString('id-ID')}</div>
@@ -288,11 +288,11 @@ async function checkoutToWhatsApp() {
             currentModalQty = 1;
             document.getElementById('modal-qty').innerText = 1;
 
-            document.getElementById('modal-img').src = product.img;
+            document.getElementById('modal-img').src = product.image;
             document.getElementById('modal-category').innerText = product.category;
             document.getElementById('modal-title').innerText = product.name;
             document.getElementById('modal-price').innerText = `Rp ${product.price.toLocaleString('id-ID')}`;
-            document.getElementById('modal-desc').innerText = product.desc;
+            document.getElementById('modal-desc').innerText = product.description;
             
             document.getElementById('modal-add-btn').onclick = () => {
                 addToCart(product.id, currentModalQty);
@@ -440,7 +440,7 @@ async function checkoutToWhatsApp() {
             document.getElementById('result-id').value = recProduct.id;
             document.getElementById('result-name').innerText = recProduct.name;
             document.getElementById('result-desc').innerText = customDesc;
-            document.getElementById('result-img').src = recProduct.img;
+            document.getElementById('result-img').src = recproduct.image;
             document.getElementById('result-price').innerText = recProduct.price.toLocaleString('id-ID');
             
             document.getElementById('btn-result-add').onclick = () => {
@@ -481,7 +481,7 @@ async function checkoutToWhatsApp() {
                         const div = document.createElement('div');
                         div.className = 'p-3 hover:bg-gray-50 cursor-pointer flex items-center gap-3 border-b border-gray-100 last:border-0';
                         div.innerHTML = `
-                            <img src="${p.img}" class="w-10 h-10 rounded object-cover">
+                            <img src="${p.image}" class="w-10 h-10 rounded object-cover">
                             <div>
                                 <div class="font-bold text-sm text-coffee-dark">${p.name}</div>
                                 <div class="text-xs text-gray-500">Rp ${p.price.toLocaleString('id-ID')}</div>

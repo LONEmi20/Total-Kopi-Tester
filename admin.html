@@ -15,7 +15,7 @@
     <div id="login-screen" class="flex-grow flex items-center justify-center">
         <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 max-w-md w-full">
             <div class="text-center mb-8">
-                <img src="assets/images/image_5100ab.png" alt="Admin Profile" class="w-16 h-16 rounded-full object-cover shadow-md border-2 border-coffee-dark mx-auto mb-4">
+                <img src="assets/images/TotalKopi-icon.jpg" alt="Admin Profile" class="w-16 h-16 rounded-full object-cover shadow-md border-2 border-coffee-dark mx-auto mb-4">
                 <h2 class="text-2xl font-bold text-coffee-dark">Admin Login</h2>
                 <p class="text-sm text-gray-500">Silakan masukkan password rahasia</p>
             </div>
@@ -30,7 +30,7 @@
         
         <header class="flex justify-between items-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
             <div class="flex items-center gap-4">
-                <img src="assets/images/image_5100ab.png" alt="Admin Profile" class="w-12 h-12 rounded-full object-cover shadow-sm border-2 border-coffee-dark">
+                <img src="assets/images/admin.jpg" alt="Admin Profile" class="w-12 h-12 rounded-full object-cover shadow-sm border-2 border-coffee-dark">
                 <div>
                     <h1 class="text-2xl font-bold text-coffee-dark">Admin Panel</h1>
                     <p class="text-sm text-gray-500">Manajemen Kedai & Pelanggan</p>
@@ -120,7 +120,11 @@
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Kategori</label>
-                    <input type="text" id="prod-category" class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:border-coffee-dark" placeholder="Contoh: Signature / Espresso">
+                    <select id="prod-category" class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:border-coffee-dark bg-white cursor-pointer">
+                        <option value="Coffee">Coffee</option>
+                        <option value="Non Coffee">Non Coffee</option>
+                        <option value="Japanese Coffee">Japanese Coffee</option>
+                    </select>
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Harga (Rp)</label>
@@ -129,6 +133,10 @@
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Link Gambar</label>
                     <input type="text" id="prod-image" class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:border-coffee-dark" placeholder="assets/images/kopi.jpg">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Deskripsi Produk</label>
+                    <textarea id="prod-desc" rows="2" class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:border-coffee-dark" placeholder="Contoh: Kopi susu khas dengan gula aren asli..."></textarea>
                 </div>
             </div>
             <div class="mt-8 flex justify-end gap-3">
@@ -211,19 +219,16 @@
                 document.getElementById('prod-category').value = p.category;
                 document.getElementById('prod-price').value = p.price;
                 document.getElementById('prod-image').value = p.image;
+                document.getElementById('prod-desc').value = p.description; 
             } else {
                 document.getElementById('modal-title').textContent = "Tambah Menu Baru";
                 document.getElementById('prod-id').value = "";
                 document.getElementById('prod-name').value = "";
-                document.getElementById('prod-category').value = "";
+                document.getElementById('prod-category').value = "Coffee"; 
                 document.getElementById('prod-price').value = "";
                 document.getElementById('prod-image').value = "";
+                document.getElementById('prod-desc').value = "";
             }
-        }
-
-        function closeProductModal() {
-            document.getElementById('product-modal').classList.add('hidden');
-            document.getElementById('product-modal').classList.remove('flex');
         }
 
         async function saveProduct() {
@@ -233,11 +238,12 @@
                     name: document.getElementById('prod-name').value,
                     category: document.getElementById('prod-category').value,
                     price: parseInt(document.getElementById('prod-price').value),
-                    image: document.getElementById('prod-image').value
+                    image: document.getElementById('prod-image').value,
+                    description: document.getElementById('prod-desc').value
                 };
 
                 const method = 'POST';
-const url = id ? `${API_URL}/admin/products/${id}/edit` : `${API_URL}/admin/products`;
+                const url = id ? `${API_URL}/admin/products/${id}/edit` : `${API_URL}/admin/products`;
 
                 const response = await fetch(url, { 
                     method: method, 

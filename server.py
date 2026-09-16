@@ -47,12 +47,18 @@ def init_db():
             name TEXT NOT NULL,
             price INTEGER NOT NULL,
             image TEXT NOT NULL,
-            category TEXT DEFAULT 'Coffee'
+            category TEXT DEFAULT 'Coffee',
+            description TEXT DEFAULT 'Pilihan minuman spesial racikan khas kami.'
         )
     ''')
-    
     try:
         conn.execute('ALTER TABLE products ADD COLUMN category TEXT DEFAULT "Coffee"')
+    except:
+        pass 
+        
+    # 2. Pastikan kolom description ada (INI KUNCI UTAMANYA)
+    try:
+        conn.execute('ALTER TABLE products ADD COLUMN description TEXT DEFAULT "Pilihan minuman spesial racikan khas kami."')
     except:
         pass 
         
@@ -75,7 +81,7 @@ def add_testimonial():
     data = request.json
     conn = get_db_connection()
     conn.execute('INSERT INTO testimonials (name, rating, comment) VALUES (?, ?, ?)',
-                 (data['name'], data['rating'], data['comment']))
+                (data['name'], data['rating'], data['comment']))
     conn.commit()
     conn.close()
     return jsonify({"pesan": "Testimoni berhasil dikirim!"})
@@ -200,8 +206,8 @@ def admin_add_product():
     if not check_auth(): return jsonify({"pesan": "Akses Ditolak!"}), 401
     data = request.json
     conn = get_db_connection()
-    conn.execute('INSERT INTO products (name, price, image, category) VALUES (?, ?, ?, ?)',
-                 (data['name'], data['price'], data['image'], data['category']))
+    conn.execute('INSERT INTO products (name, price, image, category, description) VALUES (?, ?, ?, ?, ?)',
+                 (data['name'], data['price'], data['image'], data['category'], data['description']))
     conn.commit()
     conn.close()
     return jsonify({"pesan": "Produk berhasil ditambahkan!"})
@@ -211,8 +217,8 @@ def admin_edit_product(id):
     if not check_auth(): return jsonify({"pesan": "Akses Ditolak!"}), 401
     data = request.json
     conn = get_db_connection()
-    conn.execute('UPDATE products SET name=?, price=?, image=?, category=? WHERE id=?',
-                 (data['name'], data['price'], data['image'], data['category'], id))
+    conn.execute('UPDATE products SET name=?, price=?, image=?, category=?, description=? WHERE id=?',
+                 (data['name'], data['price'], data['image'], data['category'], data['description'], id))
     conn.commit()
     conn.close()
     return jsonify({"pesan": "Produk berhasil diperbarui!"})
