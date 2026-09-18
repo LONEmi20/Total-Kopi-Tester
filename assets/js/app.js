@@ -70,16 +70,15 @@ const CONFIG = {
             container.innerHTML = ''; 
 
             const categories = ['Coffee', 'Non Coffee', 'Japanese Coffee'];
-            const icons = {'Coffee': '😃', 'Non Coffee': '😃', 'Japanese Coffee': '😃'};
 
             categories.forEach((cat, index) => {
                 const categoryProducts = products.filter(p => p.category === cat);
                 if (categoryProducts.length > 0) {
                     const catSection = document.createElement('div');
                     catSection.className = 'mb-12';
+                    
                     catSection.innerHTML = `
                         <div class="flex items-center gap-4 mb-8 reveal">
-                            <span class="text-3xl">${icons[cat]}</span>
                             <h3 class="text-3xl font-serif font-bold text-coffee-espresso uppercase tracking-wider">${cat}</h3>
                             <div class="h-px bg-coffee-latte/50 flex-grow"></div>
                         </div>
