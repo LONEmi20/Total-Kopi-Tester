@@ -70,6 +70,8 @@ const CONFIG = {
             container.innerHTML = ''; 
 
             const categories = ['Coffee', 'Non Coffee', 'Japanese Coffee'];
+            const icons = {'Coffee': '😃', 'Non Coffee': '😃', 'Japanese Coffee': '😃'};
+
             categories.forEach((cat, index) => {
                 const categoryProducts = products.filter(p => p.category === cat);
                 if (categoryProducts.length > 0) {
