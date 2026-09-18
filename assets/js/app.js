@@ -265,7 +265,7 @@ async function checkoutToWhatsApp() {
         console.error("Gagal mencatat ke database:", error);
     }
 
-    let text = `Halo Total Kopi 👋\nSaya ingin memesan:\n\n`;
+    let text = `Halo Total Kopi \nSaya ingin memesan:\n\n`;
     cart.forEach(item => {
         const subtotal = item.price * item.qty;
         text += `• ${item.name} (${item.qty}x) = Rp ${subtotal.toLocaleString('id-ID')}\n`;
@@ -333,9 +333,6 @@ async function checkoutToWhatsApp() {
             document.getElementById('modal-qty').innerText = currentModalQty;
         }
 
-        // ==========================================
-        // MESIN KUIS BERBASIS DECISION TREE (SPK)
-        // ==========================================
         let quizState = null;
         let stepNum = 1;
 
@@ -343,7 +340,7 @@ async function checkoutToWhatsApp() {
             q: "Bahan dasar apa yang lagi pengen kamu minum?",
             options: [
                 {
-                    text: "☕ Berbasis Kopi",
+                    text: "Berbasis Kopi",
                     next: {
                         q: "Karakter rasa kopi seperti apa yang kamu cari?",
                         options: [
@@ -384,7 +381,7 @@ async function checkoutToWhatsApp() {
                     }
                 },
                 {
-                    text: "🍵 Tanpa Kopi (Non Coffee)",
+                    text: "Tanpa Kopi (Non Coffee)",
                     next: {
                         q: "Pilih rasa dominan yang kamu mau:",
                         options: [
@@ -434,10 +431,8 @@ async function checkoutToWhatsApp() {
 
         function handleAnswer(selectedOption) {
             if (selectedOption.result) {
-                // Jika node memiliki 'result', berarti ini adalah ujung pohon (Keputusan Final)
                 showResult(selectedOption.result, selectedOption.desc);
             } else {
-                // Lanjut ke cabang pertanyaan berikutnya
                 quizState = selectedOption.next;
                 stepNum++;
                 renderQuiz();
@@ -448,7 +443,6 @@ async function checkoutToWhatsApp() {
             document.getElementById('quiz-container').classList.add('hidden');
             document.getElementById('quiz-result').classList.remove('hidden');
             
-            // Mencari produk berdasarkan NAMA, bukan ID agar kebal terhadap reset database
             const recProduct = products.find(p => p.name.toLowerCase() === resultName.toLowerCase());
             
             if (recProduct) {
