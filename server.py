@@ -1,11 +1,11 @@
 from flask import Flask, jsonify, request, Response
 from flask_cors import CORS
-from flask_limiter import Limiter
-from flask_limiter.util import get_remote_address
 import sqlite3
 import json
 import csv
 from io import StringIO
+import os
+import time
 
 app = Flask(__name__)
 
@@ -13,12 +13,22 @@ CORS(app, resources={r"/*": {"origins": "https://lonemi20.github.io"}}, allow_he
 
 ADMIN_PASSWORD = "zxzczvzbznzm"
 
-limiter = Limiter(
-    get_remote_address,
-    app=app,
-    default_limits=["200 per day", "50 per hour"], 
-    storage_uri="memory://"
-)
+request_logs = {}
+
+def simple_rate_limit(max_requests=5, window_seconds=60):
+    ip = request.remote_addr
+    now = time.time()
+    
+    if ip not in request_logs:
+        request_logs[ip] = []
+    
+    request_logs[ip] = [t for t in request_logs[ip] if now - t < window_seconds]
+    
+    if len(request_logs[ip]) >= max_requests:
+        return False 
+    
+    request_logs[ip].append(now)
+    return True
 
 def get_db_connection():
     conn = sqlite3.connect('totalkopi.db')
@@ -86,8 +96,10 @@ def get_products():
     return jsonify([dict(p) for p in products])
 
 @app.route('/api/testimonials', methods=['POST'])
-@limiter.limit("3 per minute") 
 def add_testimonial():
+    if not simple_rate_limit(max_requests=3, window_seconds=60):
+        return jsonify({"pesan": "Terlalu banyak permintaan. Coba lagi nanti."}), 429
+        
     data = request.json
     conn = get_db_connection()
     conn.execute('INSERT INTO testimonials (name, rating, comment) VALUES (?, ?, ?)',
@@ -104,8 +116,10 @@ def get_testimonials():
     return jsonify([dict(t) for t in testis])
 
 @app.route('/api/orders', methods=['POST'])
-@limiter.limit("4 per minute")
 def create_order():
+    if not simple_rate_limit(max_requests=5, window_seconds=60):
+        return jsonify({"pesan": "Terlalu banyak permintaan. Coba lagi nanti."}), 429
+        
     data = request.json
     items_json = json.dumps(data['items']) 
     conn = get_db_connection()
