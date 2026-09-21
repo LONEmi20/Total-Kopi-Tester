@@ -1,14 +1,24 @@
 from flask import Flask, jsonify, request, Response
 from flask_cors import CORS
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 import sqlite3
 import json
 import csv
 from io import StringIO
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}}, allow_headers=["Content-Type", "X-Admin-Password"], methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
+
+CORS(app, resources={r"/*": {"origins": "https://lonemi20.github.io"}}, allow_headers=["Content-Type", "X-Admin-Password"], methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
 
 ADMIN_PASSWORD = "zxzczvzbznzm"
+
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=["200 per day", "50 per hour"], 
+    storage_uri="memory://"
+)
 
 def get_db_connection():
     conn = sqlite3.connect('totalkopi.db')
@@ -17,7 +27,6 @@ def get_db_connection():
 
 def init_db():
     conn = get_db_connection()
-    
     conn.execute('''
         CREATE TABLE IF NOT EXISTS testimonials (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -77,6 +86,7 @@ def get_products():
     return jsonify([dict(p) for p in products])
 
 @app.route('/api/testimonials', methods=['POST'])
+@limiter.limit("3 per minute") 
 def add_testimonial():
     data = request.json
     conn = get_db_connection()
@@ -94,7 +104,8 @@ def get_testimonials():
     return jsonify([dict(t) for t in testis])
 
 @app.route('/api/orders', methods=['POST'])
-def add_order():
+@limiter.limit("4 per minute")
+def create_order():
     data = request.json
     items_json = json.dumps(data['items']) 
     conn = get_db_connection()
