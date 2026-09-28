@@ -38,7 +38,7 @@ const CONFIG = {
             });
             
             document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
-                link.classList.remove('text-accent-gold', 'font-bold');
+                link.classList.remove('text-coffee-dark', 'font-bold');
             });
 
             const targetPage = document.getElementById(targetPageId);
@@ -50,9 +50,9 @@ const CONFIG = {
             }
 
             document.querySelectorAll(`a[href="${hash}"]`).forEach(link => {
-                if(link.classList.contains('nav-link') || link.classList.contains('mobile-nav-link')) {
-                    link.classList.add('text-accent-gold', 'font-bold');
-                }
+            if(link.classList.contains('nav-link') || link.classList.contains('mobile-nav-link')) {
+                link.classList.add('text-coffee-dark', 'font-bold');
+            }
             });
 
             window.scrollTo(0, 0);
